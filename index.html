@@ -2,7 +2,10 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>TiDB Compass</title>
     <link rel="stylesheet" href="./assets/app.css" />
   </head>
@@ -12,34 +15,48 @@
         <div class="brand">
           <div class="brand-mark">TC</div>
           <div>
-            <p class="eyebrow">Sales Enablement App</p>
+            <p class="eyebrow" data-i18n="shell.badge">iOS Sales Enablement</p>
             <h1>TiDB Compass</h1>
           </div>
         </div>
 
         <section class="panel">
-          <p class="panel-label">页面入口</p>
+          <p class="panel-label" data-i18n="shell.languageLabel">Language</p>
+          <div class="language-list" id="language-list">
+            <button class="language-pill is-active" type="button" data-lang="zh-CN">中文</button>
+            <button class="language-pill" type="button" data-lang="ja-JP">日本語</button>
+            <button class="language-pill" type="button" data-lang="en-US">English</button>
+            <button class="language-pill" type="button" data-lang="pt-BR">Português</button>
+            <button class="language-pill" type="button" data-lang="es-ES">Español</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <p class="panel-label" data-i18n="shell.navLabel">Pages</p>
           <div class="nav-list">
-            <button class="nav-item is-active" data-page="./content/tidb-sales-kit.html">
-              TiDB 介绍主页
+            <button
+              class="nav-item is-active"
+              data-page="./content/tidb-sales-kit.html"
+              data-i18n="shell.homePage"
+            >
+              TiDB Overview
             </button>
           </div>
         </section>
 
         <section class="panel">
-          <p class="panel-label">推荐使用方式</p>
+          <p class="panel-label" data-i18n="shell.useCasesLabel">Recommended Use</p>
           <ul class="hint-list">
-            <li>面向销售：快速讲清 TiDB 的业务价值与差异化。</li>
-            <li>面向售前：按客户诉求筛选能力，减少无效介绍。</li>
-            <li>面向伙伴：统一对外话术和方案框架。</li>
+            <li data-i18n="shell.useCase1">For sellers: explain TiDB's business value fast.</li>
+            <li data-i18n="shell.useCase2">For presales: filter by customer priorities.</li>
+            <li data-i18n="shell.useCase3">For partners: keep a consistent story.</li>
           </ul>
         </section>
 
         <section class="panel">
-          <p class="panel-label">内容更新方式</p>
-          <p class="muted">
-            APP 壳固定不动，介绍内容独立在
-            <code>content/tidb-sales-kit.html</code> 中，后续可由后台流水线直接替换更新。
+          <p class="panel-label" data-i18n="shell.updateLabel">Content Update</p>
+          <p class="muted" data-i18n="shell.updateBody">
+            Keep the iOS app shell stable and update only the embedded static HTML page.
           </p>
         </section>
       </aside>
@@ -47,23 +64,33 @@
       <main class="main-stage">
         <header class="topbar">
           <div>
-            <p class="eyebrow">客户沟通模式</p>
-            <h2>一个 APP 壳，承载可持续更新的 TiDB 介绍页</h2>
+            <p class="eyebrow" data-i18n="shell.modeLabel">Customer Mode</p>
+            <h2 data-i18n="shell.title">An iOS app shell for a continuously updated TiDB story</h2>
           </div>
-          <button id="reload-page" class="ghost-button" type="button">刷新内容</button>
+          <div class="topbar-actions">
+            <div class="status-chip">
+              <span class="status-dot"></span>
+              <span data-i18n="shell.status">Localized content ready</span>
+            </div>
+            <button id="reload-page" class="ghost-button" type="button" data-i18n="shell.reload">
+              Reload
+            </button>
+          </div>
         </header>
 
-        <section class="device-frame">
-          <div class="device-header">
-            <span></span>
-            <span></span>
-            <span></span>
+        <section class="phone-stage">
+          <div class="phone-device">
+            <div class="dynamic-island"></div>
+            <div class="device-meta">
+              <span id="device-language">中文</span>
+              <span>TiDB Compass</span>
+            </div>
+            <iframe
+              id="content-frame"
+              title="TiDB content"
+              src="./content/tidb-sales-kit.html?lang=zh-CN"
+            ></iframe>
           </div>
-          <iframe
-            id="content-frame"
-            title="TiDB content"
-            src="./content/tidb-sales-kit.html"
-          ></iframe>
         </section>
       </main>
     </div>

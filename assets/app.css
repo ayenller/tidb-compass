@@ -1,14 +1,14 @@
 :root {
-  --bg: #eef3ea;
+  --bg: #eff4fb;
   --surface: rgba(255, 255, 255, 0.72);
-  --surface-strong: #ffffff;
-  --ink: #183029;
-  --muted: #5c716b;
-  --line: rgba(24, 48, 41, 0.12);
-  --accent: #1f7a5a;
-  --accent-strong: #145741;
-  --accent-soft: #d7efe2;
-  --shadow: 0 20px 50px rgba(24, 48, 41, 0.12);
+  --surface-strong: rgba(255, 255, 255, 0.9);
+  --ink: #10233e;
+  --muted: #627188;
+  --line: rgba(16, 35, 62, 0.1);
+  --accent: #0d8a67;
+  --accent-strong: #0a6e52;
+  --accent-soft: rgba(13, 138, 103, 0.12);
+  --shadow: 0 24px 60px rgba(40, 73, 112, 0.14);
 }
 
 * {
@@ -19,10 +19,11 @@ body {
   margin: 0;
   min-height: 100vh;
   color: var(--ink);
-  font-family: "Avenir Next", "PingFang SC", "Helvetica Neue", sans-serif;
+  font-family: "SF Pro Display", "PingFang SC", "Hiragino Sans", "Helvetica Neue", sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(54, 138, 103, 0.18), transparent 28%),
-    linear-gradient(135deg, #edf5ef 0%, #e7efe8 100%);
+    radial-gradient(circle at top left, rgba(13, 138, 103, 0.16), transparent 24%),
+    radial-gradient(circle at bottom right, rgba(102, 145, 255, 0.14), transparent 26%),
+    linear-gradient(180deg, #eef5ff 0%, #f6f9fd 100%);
 }
 
 button {
@@ -40,9 +41,9 @@ button {
 .sidebar,
 .main-stage {
   border: 1px solid var(--line);
-  border-radius: 28px;
-  backdrop-filter: blur(18px);
+  border-radius: 32px;
   background: var(--surface);
+  backdrop-filter: blur(22px);
   box-shadow: var(--shadow);
 }
 
@@ -61,13 +62,15 @@ button {
 
 .brand-mark {
   display: grid;
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   place-items: center;
-  border-radius: 16px;
-  color: white;
+  border-radius: 18px;
+  color: #fff;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--accent) 0%, #46a878 100%);
+  letter-spacing: 0.04em;
+  background: linear-gradient(135deg, #10a97e 0%, #0a6e52 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.36);
 }
 
 .eyebrow,
@@ -82,46 +85,54 @@ button {
 .brand h1,
 .topbar h2 {
   margin: 0;
+  line-height: 1.05;
+}
+
+.brand h1 {
   font-size: 28px;
-  line-height: 1.1;
+}
+
+.topbar h2 {
+  max-width: 620px;
+  font-size: 30px;
 }
 
 .panel {
   padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.64);
+  border-radius: 24px;
+  background: var(--surface-strong);
 }
 
+.language-list,
 .nav-list {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
+.language-pill,
 .nav-item,
 .ghost-button {
   border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 12px 14px;
+  border-radius: 16px;
+  padding: 11px 14px;
   cursor: pointer;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.86);
   transition: 160ms ease;
 }
 
-.nav-item {
-  text-align: left;
-  color: var(--ink);
-  background: white;
-}
-
+.language-pill:hover,
 .nav-item:hover,
 .ghost-button:hover {
   transform: translateY(-1px);
-  border-color: rgba(31, 122, 90, 0.28);
+  border-color: rgba(13, 138, 103, 0.28);
 }
 
+.language-pill.is-active,
 .nav-item.is-active {
-  color: white;
+  color: #fff;
   border-color: transparent;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
 }
@@ -142,61 +153,104 @@ button {
 .main-stage {
   display: flex;
   flex-direction: column;
-  padding: 22px;
+  padding: 24px;
 }
 
 .topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 18px;
+  gap: 18px;
+  margin-bottom: 20px;
 }
 
-.ghost-button {
-  background: rgba(255, 255, 255, 0.8);
-}
-
-.device-frame {
+.topbar-actions {
   display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-soft);
+}
+
+.phone-stage {
+  display: grid;
   flex: 1;
-  flex-direction: column;
+  place-items: center;
   overflow: hidden;
   border: 1px solid var(--line);
-  border-radius: 28px;
-  background: var(--surface-strong);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at top, rgba(13, 138, 103, 0.1), transparent 30%),
+    linear-gradient(180deg, #ebf2fd 0%, #f9fbff 100%);
 }
 
-.device-header {
+.phone-device {
+  position: relative;
+  width: min(430px, calc(100vw - 72px));
+  height: min(860px, calc(100vh - 120px));
+  padding: 56px 10px 12px;
+  border-radius: 46px;
+  background: #111317;
+  box-shadow:
+    0 40px 80px rgba(17, 19, 23, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.dynamic-island {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: 128px;
+  height: 32px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #020304;
+}
+
+.device-meta {
+  position: absolute;
+  top: 22px;
+  left: 24px;
+  right: 24px;
   display: flex;
-  gap: 8px;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--line);
-  background: #f5f8f5;
-}
-
-.device-header span {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #d2dcd4;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 12px;
+  font-weight: 600;
 }
 
 #content-frame {
   width: 100%;
   height: 100%;
-  min-height: 760px;
   border: 0;
-  background: white;
+  border-radius: 36px;
+  background: #fff;
 }
 
 code {
   padding: 2px 6px;
   border-radius: 8px;
-  background: rgba(31, 122, 90, 0.08);
+  background: var(--accent-soft);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1120px) {
   .app-shell {
     grid-template-columns: 1fr;
   }
@@ -216,15 +270,21 @@ code {
   .sidebar,
   .main-stage {
     padding: 16px;
-    border-radius: 22px;
+    border-radius: 24px;
   }
 
   .brand h1,
   .topbar h2 {
-    font-size: 22px;
+    font-size: 24px;
   }
 
-  #content-frame {
-    min-height: 680px;
+  .topbar-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .phone-device {
+    width: min(100%, 430px);
+    height: 720px;
   }
 }

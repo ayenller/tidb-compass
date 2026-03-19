@@ -2,22 +2,23 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>TiDB Sales Kit</title>
     <style>
       :root {
-        --bg: #fbfcf8;
-        --card: #ffffff;
-        --ink: #17342b;
-        --muted: #5b6e66;
-        --line: rgba(23, 52, 43, 0.1);
-        --accent: #17845f;
-        --accent-soft: #dcf5ea;
-        --sand: #f4efe1;
-        --gold: #a77b27;
-        --danger-soft: #f8e7de;
-        --danger: #9c532f;
-        --shadow: 0 18px 40px rgba(23, 52, 43, 0.08);
+        --bg: #f7fbff;
+        --card: rgba(255, 255, 255, 0.96);
+        --ink: #12253f;
+        --muted: #627188;
+        --line: rgba(18, 37, 63, 0.1);
+        --accent: #0d8a67;
+        --accent-strong: #0a6e52;
+        --accent-soft: rgba(13, 138, 103, 0.12);
+        --alt-soft: rgba(88, 122, 255, 0.1);
+        --shadow: 0 20px 40px rgba(18, 37, 63, 0.08);
       }
 
       * {
@@ -27,46 +28,43 @@
       body {
         margin: 0;
         color: var(--ink);
-        font-family: "Avenir Next", "PingFang SC", "Helvetica Neue", sans-serif;
+        font-family: "SF Pro Display", "PingFang SC", "Hiragino Sans", "Helvetica Neue", sans-serif;
         background:
-          radial-gradient(circle at top right, rgba(23, 132, 95, 0.1), transparent 22%),
-          linear-gradient(180deg, #f8fbf7 0%, #fbfcf8 100%);
+          radial-gradient(circle at top, rgba(13, 138, 103, 0.08), transparent 24%),
+          linear-gradient(180deg, #f7fbff 0%, #fbfdff 100%);
       }
 
       .page {
-        width: min(1200px, calc(100% - 32px));
+        width: min(100%, 980px);
         margin: 0 auto;
-        padding: 24px 0 48px;
+        padding: 20px 16px 36px;
       }
 
-      .hero {
-        position: relative;
-        overflow: hidden;
-        padding: 32px;
+      .hero,
+      .section,
+      .card,
+      .story,
+      .compare-table,
+      .faq-item {
         border: 1px solid var(--line);
-        border-radius: 30px;
-        background:
-          linear-gradient(135deg, rgba(220, 245, 234, 0.9) 0%, rgba(255, 255, 255, 0.98) 54%),
-          var(--card);
+        border-radius: 28px;
+        background: var(--card);
         box-shadow: var(--shadow);
       }
 
-      .hero::after {
-        content: "";
-        position: absolute;
-        inset: auto -40px -60px auto;
-        width: 240px;
-        height: 240px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(23, 132, 95, 0.18), transparent 65%);
+      .hero {
+        padding: 24px;
+        background:
+          linear-gradient(135deg, rgba(13, 138, 103, 0.12) 0%, rgba(255, 255, 255, 0.98) 54%),
+          var(--card);
       }
 
       .eyebrow {
-        margin: 0 0 10px;
+        margin: 0 0 8px;
+        color: var(--muted);
         font-size: 12px;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--muted);
       }
 
       h1,
@@ -77,170 +75,128 @@
       }
 
       h1 {
-        max-width: 760px;
         margin-bottom: 14px;
-        font-size: clamp(34px, 6vw, 58px);
-        line-height: 1.02;
+        font-size: clamp(30px, 8vw, 48px);
+        line-height: 1.04;
       }
 
-      .hero-copy {
-        max-width: 720px;
-        font-size: 18px;
-        line-height: 1.7;
+      h2 {
+        margin-bottom: 10px;
+        font-size: 28px;
+      }
+
+      .hero-copy,
+      .section-head p,
+      .card p,
+      .story p,
+      .faq-item p,
+      .note {
         color: var(--muted);
+        line-height: 1.7;
       }
 
-      .hero-grid {
+      .hero-grid,
+      .story-grid,
+      .compare-layout,
+      .faq-grid,
+      .next-grid,
+      .card-grid {
         display: grid;
-        grid-template-columns: 1.35fr 0.9fr;
-        gap: 18px;
-        margin-top: 28px;
-      }
-
-      .hero-panel,
-      .section,
-      .card,
-      .compare-table,
-      .faq-item {
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        background: var(--card);
-        box-shadow: var(--shadow);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
       }
 
       .hero-panel {
-        padding: 22px;
+        padding: 18px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(255, 255, 255, 0.8);
       }
 
       .stat-row {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
       }
 
       .stat {
-        padding: 16px;
+        padding: 14px;
         border-radius: 18px;
-        background: #f6faf7;
+        background: #f5f9ff;
       }
 
       .stat strong {
         display: block;
         margin-bottom: 6px;
-        font-size: 28px;
-      }
-
-      .stat span {
-        color: var(--muted);
-        line-height: 1.6;
-      }
-
-      .bullet-list {
-        margin: 0;
-        padding-left: 18px;
-        color: var(--muted);
-        line-height: 1.8;
+        font-size: 24px;
       }
 
       .section {
-        margin-top: 22px;
-        padding: 24px;
+        margin-top: 18px;
+        padding: 22px;
       }
 
       .section-head {
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 16px;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
       }
 
-      .section-head p {
-        max-width: 760px;
-        color: var(--muted);
-        line-height: 1.7;
-      }
-
-      .chip-row {
+      .chip-row,
+      .tag-list {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
       }
 
+      .chip,
+      .tag {
+        border-radius: 999px;
+      }
+
       .chip {
         padding: 10px 14px;
         border: 1px solid var(--line);
-        border-radius: 999px;
         color: var(--ink);
         background: #fff;
         cursor: pointer;
-        transition: 160ms ease;
       }
 
-      .chip.is-active,
-      .chip:hover {
-        color: white;
+      .chip.is-active {
+        color: #fff;
         border-color: transparent;
-        background: linear-gradient(135deg, var(--accent) 0%, #0f6848 100%);
-      }
-
-      .card-grid {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .card {
-        padding: 22px;
-      }
-
-      .tag-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 16px;
+        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
       }
 
       .tag {
         padding: 6px 10px;
-        border-radius: 999px;
         font-size: 12px;
-        background: var(--accent-soft);
         color: var(--accent);
+        background: var(--accent-soft);
       }
 
-      .card p,
-      .compare-table td,
-      .faq-item p,
-      .story p {
-        color: var(--muted);
-        line-height: 1.75;
+      .card-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
-      .story-grid,
-      .compare-layout,
-      .faq-grid,
-      .cta-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .story {
-        padding: 22px;
-        border-radius: 24px;
-        background: linear-gradient(180deg, #fff 0%, #f7faf8 100%);
-        border: 1px solid var(--line);
+      .card,
+      .story,
+      .faq-item {
+        padding: 20px;
       }
 
       .story.highlight {
-        background: linear-gradient(135deg, #18342b 0%, #215845 100%);
+        background: linear-gradient(135deg, #0f2b4a 0%, #173c66 100%);
       }
 
       .story.highlight h3,
       .story.highlight p,
       .story.highlight li {
-        color: white;
+        color: #fff;
+      }
+
+      .bullet-list {
+        margin: 0;
+        padding-left: 18px;
+        line-height: 1.7;
       }
 
       .compare-table {
@@ -251,14 +207,14 @@
 
       .compare-table th,
       .compare-table td {
-        padding: 16px;
+        padding: 14px;
         text-align: left;
-        border-bottom: 1px solid var(--line);
         vertical-align: top;
+        border-bottom: 1px solid var(--line);
       }
 
       .compare-table th {
-        background: #f7faf8;
+        background: #f5f9ff;
       }
 
       .good {
@@ -267,51 +223,41 @@
       }
 
       .warning {
-        color: var(--gold);
+        color: #a77411;
         font-weight: 700;
       }
 
       .risk {
-        color: var(--danger);
+        color: #a54322;
         font-weight: 700;
-      }
-
-      .faq-item {
-        padding: 22px;
-      }
-
-      .cta-grid .card {
-        background: linear-gradient(180deg, #ffffff 0%, #f7fbf8 100%);
       }
 
       .note {
         padding: 16px 18px;
         border-radius: 18px;
-        color: var(--danger);
-        background: var(--danger-soft);
-        line-height: 1.7;
+        background: var(--alt-soft);
       }
 
       .empty-state {
         display: none;
-        margin-top: 16px;
-        padding: 20px;
+        margin-top: 14px;
+        padding: 18px;
+        border: 1px dashed var(--line);
         border-radius: 18px;
         color: var(--muted);
-        border: 1px dashed var(--line);
-        background: #f7faf8;
+        background: #f7fbff;
       }
 
       .filtered-out {
         display: none;
       }
 
-      @media (max-width: 960px) {
+      @media (max-width: 900px) {
         .hero-grid,
         .story-grid,
         .compare-layout,
         .faq-grid,
-        .cta-grid,
+        .next-grid,
         .card-grid {
           grid-template-columns: 1fr;
         }
@@ -320,360 +266,765 @@
           grid-template-columns: 1fr;
         }
       }
-
-      @media (max-width: 640px) {
-        .page {
-          width: min(100% - 20px, 1200px);
-          padding: 12px 0 28px;
-        }
-
-        .hero,
-        .section {
-          padding: 18px;
-          border-radius: 22px;
-        }
-
-        h2 {
-          font-size: 24px;
-        }
-      }
     </style>
   </head>
   <body>
-    <div class="page">
-      <section class="hero">
-        <p class="eyebrow">TiDB 产品介绍主页</p>
-        <h1>一页讲清 TiDB 为什么适合现代核心业务系统</h1>
-        <p class="hero-copy">
-          TiDB 可被包装成一个既适合销售快速介绍、又适合售前按客户诉求深入展开的产品介绍页。
-          这版结构以业务价值为前台、技术能力为后台，帮助你在更短时间里匹配客户关注点。
-        </p>
-
-        <div class="hero-grid">
-          <div class="hero-panel">
-            <h3>30 秒开场话术</h3>
-            <p class="hero-copy">
-              TiDB 是面向现代应用的分布式 SQL 数据库，兼顾事务处理与实时分析能力，
-              能在保留 SQL/MySQL 生态习惯的同时，提供弹性扩展、高可用与更低的架构复杂度。
-            </p>
-            <div class="tag-list">
-              <span class="tag">Distributed SQL</span>
-              <span class="tag">HTAP</span>
-              <span class="tag">MySQL Compatible</span>
-              <span class="tag">Cloud Native</span>
-            </div>
-          </div>
-
-          <div class="hero-panel">
-            <h3>优先呈现的 3 个核心价值</h3>
-            <div class="stat-row">
-              <div class="stat">
-                <strong>快</strong>
-                <span>同一平台兼顾在线交易与近实时分析，减少数据搬运。</span>
-              </div>
-              <div class="stat">
-                <strong>稳</strong>
-                <span>分布式架构面向高可用与故障隔离设计。</span>
-              </div>
-              <div class="stat">
-                <strong>省</strong>
-                <span>减少分库分表、中间件、同步链路与多套系统叠加。</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">需求筛选器</p>
-            <h2>按客户诉求筛出最 relevant 的 TiDB 优势</h2>
-            <p>
-              适合在客户沟通现场快速切换。点击下方标签后，页面会只保留和该诉求强相关的模块与卡片。
-            </p>
-          </div>
-        </div>
-
-        <div class="chip-row" id="filters">
-          <button class="chip is-active" data-filter="all">全部</button>
-          <button class="chip" data-filter="scaling">扩展瓶颈</button>
-          <button class="chip" data-filter="realtime">实时分析</button>
-          <button class="chip" data-filter="ha">高可用容灾</button>
-          <button class="chip" data-filter="mysql">MySQL 兼容迁移</button>
-          <button class="chip" data-filter="cost">架构复杂度/成本</button>
-          <button class="chip" data-filter="global">多地域部署</button>
-        </div>
-
-        <div class="empty-state" id="empty-state">
-          当前没有完全匹配的卡片，可以切回“全部”或改用相邻需求标签继续讲解。
-        </div>
-      </section>
-
-      <section class="section" data-topics="all scaling realtime ha mysql cost global">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">模块 1</p>
-            <h2>客户价值总览</h2>
-            <p>第一屏建议永远先讲业务结果，再引出 TiDB 的架构原因。</p>
-          </div>
-        </div>
-
-        <div class="card-grid">
-          <article class="card" data-topics="scaling cost">
-            <h3>应对业务增长，不再被单机上限卡住</h3>
-            <p>适合订单、支付、账户、交易、库存、营销等持续增长业务，强调水平扩展能力与架构演进空间。</p>
-            <div class="tag-list">
-              <span class="tag">扩展瓶颈</span>
-              <span class="tag">业务增长</span>
-            </div>
-          </article>
-
-          <article class="card" data-topics="realtime cost">
-            <h3>交易和分析靠得更近，洞察更及时</h3>
-            <p>将“在线业务库 + 分析链路”的割裂叙事改成“一份数据更快形成业务洞察”。</p>
-            <div class="tag-list">
-              <span class="tag">实时分析</span>
-              <span class="tag">HTAP</span>
-            </div>
-          </article>
-
-          <article class="card" data-topics="ha global">
-            <h3>关键业务更稳，故障影响面更小</h3>
-            <p>强调高可用、故障隔离和跨可用区/地域部署思路，适合面向核心系统客户讲稳定性。</p>
-            <div class="tag-list">
-              <span class="tag">高可用</span>
-              <span class="tag">连续性</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" data-topics="all scaling realtime ha mysql cost">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">模块 2</p>
-            <h2>TiDB 核心能力应该如何分组展示</h2>
-            <p>建议不要平铺 feature 列表，而是按客户容易理解的“问题 -> 能力 -> 结果”来呈现。</p>
-          </div>
-        </div>
-
-        <div class="card-grid">
-          <article class="card" data-topics="mysql scaling">
-            <h3>SQL 与 MySQL 协议兼容</h3>
-            <p>降低应用迁移和团队学习门槛，让客户把重点放在扩展性和架构升级，而不是重写业务逻辑。</p>
-          </article>
-
-          <article class="card" data-topics="scaling cost">
-            <h3>计算与存储解耦的分布式架构</h3>
-            <p>更适合向客户解释“为什么它能平滑扩容”，而不只是说“它是分布式数据库”。</p>
-          </article>
-
-          <article class="card" data-topics="realtime">
-            <h3>HTAP 能力</h3>
-            <p>适合展示“实时交易数据直接服务分析和运营决策”的价值，避免多链路同步延迟话题。</p>
-          </article>
-
-          <article class="card" data-topics="ha">
-            <h3>高可用与故障恢复能力</h3>
-            <p>适合金融、零售、互联网平台等关键业务系统，重点讲持续服务能力，而不是只讲备份。</p>
-          </article>
-
-          <article class="card" data-topics="cost">
-            <h3>减少中间件与多套系统叠加</h3>
-            <p>当客户已经有分库分表、数据同步、分析库等复杂拼接架构时，这一块会很有说服力。</p>
-          </article>
-
-          <article class="card" data-topics="realtime global">
-            <h3>云原生与现代数据应用适配</h3>
-            <p>适合从平台化、弹性、全球业务支持、AI/实时应用数据底座等角度展开下一步讨论。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" data-topics="all realtime scaling cost global">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">模块 3</p>
-            <h2>典型客户场景怎么讲</h2>
-            <p>这一块建议作为“客户代入区”，让销售或伙伴按行业现场切换案例话术。</p>
-          </div>
-        </div>
-
-        <div class="story-grid">
-          <article class="story" data-topics="realtime scaling cost">
-            <h3>互联网平台 / 电商</h3>
-            <p>高峰期并发上升、实时推荐和运营分析需求并存，适合重点讲扩展性、HTAP 和架构简化。</p>
-          </article>
-
-          <article class="story" data-topics="ha mysql">
-            <h3>金融核心周边 / 交易类系统</h3>
-            <p>关注连续性和数据一致性时，建议把 TiDB 放在“关键业务的现代化升级”叙事中。</p>
-          </article>
-
-          <article class="story" data-topics="global ha">
-            <h3>出海业务 / 多地域业务</h3>
-            <p>适合介绍多地域部署、业务连续性和统一数据平台价值，避免客户把问题拆成多套本地数据库。</p>
-          </article>
-
-          <article class="story highlight" data-topics="realtime cost">
-            <h3>实时经营分析</h3>
-            <ul class="bullet-list">
-              <li>客户不想再等待夜间 ETL 或长链路同步。</li>
-              <li>希望交易数据更快转化成运营动作。</li>
-              <li>需要一套更适合“边跑业务边看分析”的平台。</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" data-topics="all scaling realtime ha mysql cost">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">模块 4</p>
-            <h2>竞品对比建议用“架构路径”而不是只列厂商 Logo</h2>
-            <p>这样更适合伙伴和售前在不同客户现场复用，也更方便后续根据市场变化更新内容。</p>
-          </div>
-        </div>
-
-        <div class="compare-layout">
-          <table class="compare-table">
-            <thead>
-              <tr>
-                <th>对比维度</th>
-                <th>TiDB</th>
-                <th>单机/主从 MySQL</th>
-                <th>分库分表 + 中间件</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr data-topics="scaling">
-                <td>扩展方式</td>
-                <td class="good">面向水平扩展设计</td>
-                <td class="risk">容易遇到单机瓶颈</td>
-                <td class="warning">可扩，但治理复杂</td>
-              </tr>
-              <tr data-topics="mysql">
-                <td>开发习惯</td>
-                <td class="good">保留 SQL / MySQL 生态习惯</td>
-                <td class="good">原生熟悉</td>
-                <td class="warning">跨库逻辑与路由复杂</td>
-              </tr>
-              <tr data-topics="realtime cost">
-                <td>交易 + 实时分析</td>
-                <td class="good">更适合统一平台叙事</td>
-                <td class="risk">通常需要额外分析链路</td>
-                <td class="risk">链路更多，实时性与运维更复杂</td>
-              </tr>
-              <tr data-topics="ha">
-                <td>高可用设计</td>
-                <td class="good">分布式架构更利于故障隔离</td>
-                <td class="warning">依赖主备切换与单点治理</td>
-                <td class="warning">组件多，故障面更广</td>
-              </tr>
-              <tr data-topics="cost">
-                <td>长期运维复杂度</td>
-                <td class="good">平台化空间更大</td>
-                <td class="warning">前期简单，后期容易补丁式演进</td>
-                <td class="risk">团队成本与系统复杂度持续上升</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <article class="story">
-            <h3>对比模块的设计原则</h3>
-            <ul class="bullet-list">
-              <li>避免绝对化措辞，多讲“更适合解决什么问题”。</li>
-              <li>优先对比架构路径，再按行业补充具体厂商。</li>
-              <li>给销售留出“补一张行业竞品表”的扩展位置。</li>
-              <li>把重点放在客户当前痛点，而不是只堆产品 feature。</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" data-topics="all ha mysql cost realtime">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">模块 5</p>
-            <h2>常见客户疑问与页面预埋回答</h2>
-            <p>这部分适合做成可折叠 FAQ，帮助销售和伙伴统一答法。</p>
-          </div>
-        </div>
-
-        <div class="faq-grid">
-          <article class="faq-item" data-topics="mysql">
-            <h3>迁移成本会不会很高？</h3>
-            <p>建议从应用兼容性、SQL/MySQL 生态习惯、演进式迁移路径去回答，而不是承诺“零改造”。</p>
-          </article>
-
-          <article class="faq-item" data-topics="ha">
-            <h3>核心业务真的能放上来吗？</h3>
-            <p>建议用“关键业务稳定性要求高、需要高可用与持续服务能力”的框架回答，并结合 PoC 设计落地。</p>
-          </article>
-
-          <article class="faq-item" data-topics="realtime cost">
-            <h3>为什么不继续用 MySQL 加分析库？</h3>
-            <p>把讨论引导到链路延迟、系统数量、治理复杂度与实时运营需求是否值得长期承受上。</p>
-          </article>
-
-          <article class="faq-item" data-topics="cost">
-            <h3>客户现有架构已经能跑，为什么还要换？</h3>
-            <p>适合从业务增长、未来改造成本、平台化能力和团队效率角度展开，而不是只谈技术先进性。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" data-topics="all">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">模块 6</p>
-            <h2>APP 页面的落地建议</h2>
-            <p>如果你后续把它做成真正的移动端 APP，可以继续沿用这套模块结构。</p>
-          </div>
-        </div>
-
-        <div class="cta-grid">
-          <article class="card">
-            <h3>首页</h3>
-            <p>一句话价值主张 + 客户需求筛选器 + 三个关键优势，适合开场。</p>
-          </article>
-
-          <article class="card">
-            <h3>能力页</h3>
-            <p>用卡片方式呈现 TiDB 的核心能力，每张卡片都带适用客户诉求标签。</p>
-          </article>
-
-          <article class="card">
-            <h3>场景页</h3>
-            <p>按行业、系统类型、业务阶段组织客户案例和讲法，便于伙伴快速套用。</p>
-          </article>
-
-          <article class="card">
-            <h3>对比页</h3>
-            <p>维护“TiDB vs 常见架构路径”的对比模板，后台可定期更新。</p>
-          </article>
-
-          <article class="card">
-            <h3>FAQ 页</h3>
-            <p>把常见 objection 预先写好，减少介绍时的临场组织成本。</p>
-          </article>
-
-          <article class="card">
-            <h3>PoC 引导页</h3>
-            <p>最后一屏转向下一步动作，比如 PoC、架构评估、迁移评估或联合拜访。</p>
-          </article>
-        </div>
-
-        <div class="note">
-          页面中的产品表达参考了 PingCAP 官方资料中常见的能力表述，如分布式 SQL、HTAP、MySQL
-          兼容、弹性扩展与高可用；具体售前材料上线前，建议再结合你们最新版本能力与销售话术校对一次。
-        </div>
-      </section>
-    </div>
+    <div class="page" id="app"></div>
 
     <script>
-      const filterBar = document.querySelector("#filters");
+      const topicKeys = ["all", "scaling", "realtime", "ha", "mysql", "cost", "global"];
+      const labelsByTopic = {
+        "zh-CN": {
+          all: "全部",
+          scaling: "扩展瓶颈",
+          realtime: "实时分析",
+          ha: "高可用容灾",
+          mysql: "MySQL 兼容迁移",
+          cost: "架构复杂度/成本",
+          global: "多地域部署"
+        },
+        "ja-JP": {
+          all: "すべて",
+          scaling: "拡張課題",
+          realtime: "リアルタイム分析",
+          ha: "高可用性とDR",
+          mysql: "MySQL 互換移行",
+          cost: "複雑性とコスト",
+          global: "マルチリージョン"
+        },
+        "en-US": {
+          all: "All",
+          scaling: "Scale Limits",
+          realtime: "Real-Time Analytics",
+          ha: "HA and DR",
+          mysql: "MySQL Compatibility",
+          cost: "Complexity and Cost",
+          global: "Multi-Region"
+        },
+        "pt-BR": {
+          all: "Todos",
+          scaling: "Limites de escala",
+          realtime: "Analytics em tempo real",
+          ha: "Alta disponibilidade e DR",
+          mysql: "Compatibilidade MySQL",
+          cost: "Complexidade e custo",
+          global: "Multirregião"
+        },
+        "es-ES": {
+          all: "Todo",
+          scaling: "Límites de escala",
+          realtime: "Analítica en tiempo real",
+          ha: "Alta disponibilidad y DR",
+          mysql: "Compatibilidad MySQL",
+          cost: "Complejidad y costo",
+          global: "Multirregión"
+        }
+      };
+
+      const translations = {
+        "zh-CN": {
+          title: "一页讲清 TiDB 为什么适合现代核心业务系统",
+          eyebrow: "TiDB 产品介绍主页",
+          subtitle:
+            "TiDB Compass 面向销售、售前和伙伴，把业务价值、核心能力、竞品对比和客户场景放在一个 iOS 体验里，并支持按客户诉求筛选。",
+          pitchTitle: "30 秒开场话术",
+          pitchBody:
+            "TiDB 是面向现代应用的分布式 SQL 数据库，兼顾事务处理与实时分析能力，在保留 SQL 和 MySQL 生态习惯的同时，提供弹性扩展、高可用和更低的架构复杂度。",
+          valueTitle: "优先呈现的 3 个核心价值",
+          stats: [
+            ["快", "同一平台支撑在线交易与近实时分析，减少数据搬运。"],
+            ["稳", "分布式架构更适合关键业务连续服务。"],
+            ["省", "减少分库分表、中间件和多链路同步。"]
+          ],
+          filterTitle: "按客户诉求筛出最 relevant 的 TiDB 优势",
+          filterBody: "适合在客户沟通现场快速切换，保留最相关的模块与卡片。",
+          empty: "当前没有完全匹配的卡片，可以切回“全部”继续讲解。",
+          sections: {
+            overview: {
+              eyebrow: "模块 1",
+              title: "客户价值总览",
+              body: "先讲业务结果，再引出 TiDB 的架构原因。",
+              cards: [
+                ["应对业务增长，不再被单机上限卡住", "适合订单、支付、库存、营销等持续增长业务，突出水平扩展与长期演进空间。", "scaling cost"],
+                ["交易和分析靠得更近，洞察更及时", "把在线业务库与分析链路的割裂叙事，变成一份数据更快形成经营洞察。", "realtime cost"],
+                ["关键业务更稳，故障影响面更小", "适合面向核心系统客户讲稳定性、故障隔离和持续服务能力。", "ha global"]
+              ]
+            },
+            capabilities: {
+              eyebrow: "模块 2",
+              title: "TiDB 核心能力怎么讲",
+              body: "按“问题 -> 能力 -> 结果”展示，而不是平铺 feature。",
+              cards: [
+                ["SQL 与 MySQL 协议兼容", "降低迁移和学习门槛，把注意力放到架构升级。", "mysql scaling"],
+                ["计算与存储解耦的分布式架构", "帮助客户理解为什么它能更平滑地扩容。", "scaling cost"],
+                ["HTAP 能力", "适合讲实时交易数据直接服务分析与运营。", "realtime"],
+                ["高可用与故障恢复能力", "适合金融、零售、互联网平台等关键业务系统。", "ha"],
+                ["减少中间件与多套系统叠加", "当客户已有复杂拼接架构时，这一块很有说服力。", "cost"],
+                ["云原生与现代数据应用适配", "适合从平台化、弹性和全球业务支持角度展开。", "realtime global"]
+              ]
+            },
+            scenarios: {
+              eyebrow: "模块 3",
+              title: "典型客户场景",
+              body: "让销售和伙伴按行业快速代入。",
+              stories: [
+                ["互联网平台 / 电商", "高峰并发、实时推荐和运营分析并存，适合重点讲扩展性、HTAP 和架构简化。", "realtime scaling cost", false],
+                ["金融核心周边 / 交易系统", "关注连续性和一致性时，可将 TiDB 放在关键业务现代化升级叙事中。", "ha mysql", false],
+                ["出海业务 / 多地域业务", "适合介绍多地域部署、业务连续性和统一数据平台价值。", "global ha", false],
+                ["实时经营分析", "客户不想再等待夜间 ETL，希望交易数据更快转化为运营动作。", "realtime cost", true]
+              ]
+            },
+            compare: {
+              eyebrow: "模块 4",
+              title: "竞品对比更适合按架构路径来讲",
+              body: "这样更容易在不同客户现场复用，也更方便后续更新。",
+              rows: [
+                ["扩展方式", ["面向水平扩展设计", "good"], ["容易遇到单机瓶颈", "risk"], ["可扩，但治理复杂", "warning"], "scaling"],
+                ["开发习惯", ["保留 SQL / MySQL 生态习惯", "good"], ["原生熟悉", "good"], ["跨库逻辑与路由复杂", "warning"], "mysql"],
+                ["交易 + 实时分析", ["更适合统一平台叙事", "good"], ["通常需要额外分析链路", "risk"], ["链路更多，实时性与运维更复杂", "risk"], "realtime cost"],
+                ["高可用设计", ["分布式架构更利于故障隔离", "good"], ["依赖主备切换与单点治理", "warning"], ["组件多，故障面更广", "warning"], "ha"],
+                ["长期运维复杂度", ["平台化空间更大", "good"], ["前期简单，后期容易补丁式演进", "warning"], ["团队成本与系统复杂度持续上升", "risk"], "cost"]
+              ],
+              sideTitle: "对比模块设计原则",
+              sideBullets: [
+                "避免绝对化措辞，多讲更适合解决什么问题。",
+                "优先对比架构路径，再按行业补充具体厂商。",
+                "给销售留出行业竞品表的扩展位置。",
+                "把重点放在客户当前痛点。"
+              ],
+              headers: ["对比维度", "TiDB", "单机/主从 MySQL", "分库分表 + 中间件"]
+            },
+            faq: {
+              eyebrow: "模块 5",
+              title: "常见客户疑问",
+              body: "适合作为统一答法的 FAQ 模块。",
+              items: [
+                ["迁移成本会不会很高？", "建议从应用兼容性、SQL/MySQL 生态习惯和演进式迁移路径来回答。", "mysql"],
+                ["核心业务真的能放上来吗？", "建议结合高可用、持续服务能力和 PoC 设计来回答。", "ha"],
+                ["为什么不继续用 MySQL 加分析库？", "把讨论引导到链路延迟、系统数量和治理复杂度。", "realtime cost"],
+                ["现有架构已经能跑，为什么还要换？", "从业务增长、未来改造成本和平台化能力角度展开。", "cost"]
+              ]
+            },
+            next: {
+              eyebrow: "模块 6",
+              title: "iOS APP 信息架构建议",
+              body: "如果后续进入原生 iOS 开发，可以继续沿用这套模块。",
+              cards: [
+                ["首页", "一句话价值主张 + 需求筛选器 + 三个关键优势。"],
+                ["能力页", "每张能力卡都带客户诉求标签。"],
+                ["场景页", "按行业、系统类型和业务阶段组织案例。"],
+                ["对比页", "维护 TiDB vs 常见架构路径的对比模板。"],
+                ["FAQ 页", "统一回答 objection，降低临场组织成本。"],
+                ["PoC 引导页", "把最后一屏转向架构评估、PoC 或联合拜访。"]
+              ],
+              note: "页面表达采用 TiDB 的典型能力框架，如分布式 SQL、HTAP、MySQL 兼容、弹性扩展和高可用。正式上线前建议再用最新销售物料校对。"
+            }
+          }
+        },
+        "ja-JP": {
+          title: "TiDB が現代の基幹業務に適する理由を 1 ページで伝える",
+          eyebrow: "TiDB 紹介ホーム",
+          subtitle:
+            "TiDB Compass は営業、プリセールス、パートナー向けに、ビジネス価値、主要機能、比較、顧客シナリオを iOS 体験としてまとめ、要件別フィルタにも対応します。",
+          pitchTitle: "30 秒ピッチ",
+          pitchBody:
+            "TiDB はモダンアプリケーション向けの分散 SQL データベースです。SQL と MySQL の習慣を維持しながら、トランザクション処理、リアルタイム分析、柔軟なスケール、高可用性、低い複雑性を両立します。",
+          valueTitle: "最初に見せたい 3 つの価値",
+          stats: [
+            ["速い", "オンライントランザクションとほぼリアルタイム分析を同じ基盤で支援。"],
+            ["強い", "分散アーキテクチャで重要業務の継続性を高める。"],
+            ["シンプル", "シャーディングや中間層、複数同期経路を減らす。"]
+          ],
+          filterTitle: "顧客要件ごとに TiDB の強みを絞り込む",
+          filterBody: "商談の場で切り替えやすく、関係の深い情報だけを残せます。",
+          empty: "完全一致するカードがありません。'すべて' に戻して続けてください。",
+          sections: null
+        },
+        "en-US": {
+          title: "Explain why TiDB fits modern mission-critical systems in one page",
+          eyebrow: "TiDB overview",
+          subtitle:
+            "TiDB Compass helps sellers, presales teams, and partners present business value, core capabilities, comparisons, and customer scenarios in an iOS-style experience with requirement-based filtering.",
+          pitchTitle: "30-second pitch",
+          pitchBody:
+            "TiDB is a distributed SQL database for modern applications. It keeps familiar SQL and MySQL workflows while combining transactional processing, real-time analytics, elastic scale, high availability, and lower architectural complexity.",
+          valueTitle: "Three core values to show first",
+          stats: [
+            ["Fast", "Run online transactions and near real-time analytics on one platform."],
+            ["Resilient", "A distributed architecture better supports continuity for critical workloads."],
+            ["Lean", "Reduce sharding, middleware, and multi-system sync chains."]
+          ],
+          filterTitle: "Filter TiDB strengths by customer priority",
+          filterBody: "Useful in live conversations when you want only the most relevant cards and sections.",
+          empty: "No perfect match for this filter. Switch back to All to continue the story.",
+          sections: null
+        },
+        "pt-BR": {
+          title: "Explique em uma página por que o TiDB serve para sistemas críticos modernos",
+          eyebrow: "Visão geral do TiDB",
+          subtitle:
+            "O TiDB Compass ajuda vendas, pré-vendas e parceiros a apresentar valor de negócio, capacidades, comparativos e cenários de cliente em uma experiência no estilo iOS com filtro por necessidade.",
+          pitchTitle: "Pitch de 30 segundos",
+          pitchBody:
+            "TiDB é um banco de dados SQL distribuído para aplicações modernas. Ele preserva SQL e MySQL familiares enquanto combina processamento transacional, analytics em tempo real, elasticidade, alta disponibilidade e menor complexidade arquitetural.",
+          valueTitle: "Três valores centrais para mostrar primeiro",
+          stats: [
+            ["Rápido", "Une transações online e analytics quase em tempo real em uma mesma plataforma."],
+            ["Confiável", "A arquitetura distribuída apoia melhor a continuidade de workloads críticos."],
+            ["Enxuto", "Reduz sharding, middleware e cadeias de sincronização entre sistemas."]
+          ],
+          filterTitle: "Filtre os pontos fortes do TiDB pela prioridade do cliente",
+          filterBody: "Ideal para conversas ao vivo, mantendo apenas os módulos mais relevantes.",
+          empty: "Não há correspondência perfeita para este filtro. Volte para Todos para seguir.",
+          sections: null
+        },
+        "es-ES": {
+          title: "Explica en una página por qué TiDB encaja en sistemas críticos modernos",
+          eyebrow: "Visión general de TiDB",
+          subtitle:
+            "TiDB Compass ayuda a ventas, preventa y partners a presentar valor de negocio, capacidades, comparativas y escenarios de cliente en una experiencia estilo iOS con filtros por necesidad.",
+          pitchTitle: "Pitch de 30 segundos",
+          pitchBody:
+            "TiDB es una base de datos SQL distribuida para aplicaciones modernas. Mantiene SQL y MySQL familiares mientras combina procesamiento transaccional, analítica en tiempo real, escala elástica, alta disponibilidad y menor complejidad arquitectónica.",
+          valueTitle: "Tres valores clave para mostrar primero",
+          stats: [
+            ["Rápido", "Une transacciones online y analítica casi en tiempo real en una sola plataforma."],
+            ["Sólido", "La arquitectura distribuida apoya mejor la continuidad de cargas críticas."],
+            ["Simple", "Reduce sharding, middleware y cadenas de sincronización entre sistemas."]
+          ],
+          filterTitle: "Filtra las fortalezas de TiDB según la prioridad del cliente",
+          filterBody: "Útil en conversaciones en vivo para dejar solo los módulos más relevantes.",
+          empty: "No hay coincidencia perfecta para este filtro. Vuelve a Todo para continuar.",
+          sections: null
+        }
+      };
+
+      const localizedSections = {
+        "ja-JP": {
+          overview: {
+            eyebrow: "モジュール 1",
+            title: "顧客価値の全体像",
+            body: "最初にビジネス成果を示し、その後で TiDB のアーキテクチャ理由につなげます。",
+            cards: [
+              ["単一ノードの限界を超えて事業成長に対応", "受注、決済、在庫、マーケティングなど伸び続ける業務で、水平スケールと長期的な拡張余地を示します。", "scaling cost"],
+              ["トランザクションと分析を近づけ、洞察を速くする", "業務 DB と分析経路が分断された構成を、1 つのデータ基盤から素早い経営洞察を得る話に変えます。", "realtime cost"],
+              ["重要業務をより安定して継続する", "基幹システムに対して、安定性、障害分離、継続提供能力を訴求できます。", "ha global"]
+            ]
+          },
+          capabilities: {
+            eyebrow: "モジュール 2",
+            title: "TiDB の主要機能の伝え方",
+            body: "機能一覧ではなく、課題 -> 能力 -> 結果の順で見せます。",
+            cards: [
+              ["SQL と MySQL プロトコル互換", "移行と学習の負担を抑え、アーキテクチャ進化の議論に集中できます。", "mysql scaling"],
+              ["コンピュートとストレージを分離した分散構成", "なぜスムーズにスケールできるのかを説明しやすくします。", "scaling cost"],
+              ["HTAP 機能", "リアルタイム取引データを分析と運用に直接活かす話に向いています。", "realtime"],
+              ["高可用性と障害復旧", "金融、小売、インターネット基盤など重要業務向けに説明しやすい要素です。", "ha"],
+              ["ミドルウェアや複数システムの重なりを削減", "既に複雑な構成を抱える顧客ほど価値を伝えやすくなります。", "cost"],
+              ["クラウドネイティブとモダンデータアプリ対応", "プラットフォーム化、弾力性、グローバル展開の文脈で広げられます。", "realtime global"]
+            ]
+          },
+          scenarios: {
+            eyebrow: "モジュール 3",
+            title: "代表的な顧客シナリオ",
+            body: "営業やパートナーが業界別にすぐ使える構成です。",
+            stories: [
+              ["インターネット平台 / EC", "ピーク時負荷、リアルタイム推薦、運営分析が同時に必要な場面で、スケール、HTAP、簡素化を訴求できます。", "realtime scaling cost", false],
+              ["金融周辺 / 取引システム", "継続性と整合性が重要な場合、TiDB をモダナイゼーション文脈で紹介できます。", "ha mysql", false],
+              ["海外展開 / マルチリージョン業務", "マルチリージョン配置、継続運用、統一データ基盤の価値を説明しやすい場面です。", "global ha", false],
+              ["リアルタイム経営分析", "夜間 ETL を待ちたくない顧客に対し、取引データを素早く運営アクションへつなげる話ができます。", "realtime cost", true]
+            ]
+          },
+          compare: {
+            eyebrow: "モジュール 4",
+            title: "競合比較はアーキテクチャの選択肢として示す",
+            body: "顧客ごとに再利用しやすく、更新もしやすい構成です。",
+            rows: [
+              ["拡張方法", ["水平スケール前提で設計", "good"], ["単一ノード上限にぶつかりやすい", "risk"], ["拡張は可能だが運用が複雑", "warning"], "scaling"],
+              ["開発習慣", ["SQL / MySQL の習慣を維持", "good"], ["既存の慣れがある", "good"], ["クロス DB ロジックが複雑", "warning"], "mysql"],
+              ["取引 + リアルタイム分析", ["統合プラットフォームとして語りやすい", "good"], ["別の分析経路が必要になりがち", "risk"], ["経路が増え、リアルタイム性と運用が難化", "risk"], "realtime cost"],
+              ["高可用性設計", ["障害分離を設計しやすい", "good"], ["主従切替と単一障害点への依存が大きい", "warning"], ["コンポーネントが多く故障面が広い", "warning"], "ha"],
+              ["長期運用の複雑性", ["プラットフォーム化しやすい", "good"], ["初期は簡単でも後で継ぎ足しになりやすい", "warning"], ["チームコストと複雑性が上がりやすい", "risk"], "cost"]
+            ],
+            sideTitle: "比較モジュールの原則",
+            sideBullets: [
+              "断定的な表現を避け、どの課題に適するかを示す。",
+              "まずはアーキテクチャ比較、その後に業界別の具体比較へ。",
+              "営業が業界競合表を追加できる余地を残す。",
+              "製品機能よりも顧客課題を中心に置く。"
+            ],
+            headers: ["比較軸", "TiDB", "単体 / 主従 MySQL", "分庫分表 + ミドルウェア"]
+          },
+          faq: {
+            eyebrow: "モジュール 5",
+            title: "よくある顧客の質問",
+            body: "共通回答として使いやすい FAQ モジュールです。",
+            items: [
+              ["移行コストは高いですか？", "アプリ互換性、SQL/MySQL の習慣、段階的移行の観点で答えるのが有効です。", "mysql"],
+              ["本当に重要業務で使えますか？", "高可用性、継続運用能力、PoC 設計と合わせて答えるのが有効です。", "ha"],
+              ["なぜ MySQL と分析 DB の組み合わせを続けないのですか？", "遅延、システム数、運用複雑性の議論へ導きます。", "realtime cost"],
+              ["現状の構成で動いているのに、なぜ変えるのですか？", "事業成長、将来改修コスト、プラットフォーム化の視点で整理します。", "cost"]
+            ]
+          },
+          next: {
+            eyebrow: "モジュール 6",
+            title: "iOS アプリ情報設計の提案",
+            body: "ネイティブ iOS に進む場合も、このモジュール構成を継続できます。",
+            cards: [
+              ["ホーム", "価値訴求 1 文、要件フィルタ、3 つの重要な強み。"],
+              ["機能ページ", "各機能カードに顧客要件タグを付与。"],
+              ["シナリオページ", "業界、システム種別、成長段階で事例を整理。"],
+              ["比較ページ", "TiDB と代表的アーキテクチャの比較テンプレート。"],
+              ["FAQ", "反論対応を統一し、その場の負荷を下げる。"],
+              ["PoC 導線", "最後の画面から評価、PoC、共同訪問へつなぐ。"]
+            ],
+            note: "内容は TiDB の代表的な価値軸に基づいています。正式利用前に最新の営業資料で再確認してください。"
+          }
+        },
+        "en-US": {
+          overview: {
+            eyebrow: "Module 1",
+            title: "Customer value overview",
+            body: "Lead with business outcomes, then connect them to the TiDB architecture story.",
+            cards: [
+              ["Handle growth without hitting a single-node ceiling", "Useful for orders, payments, inventory, and marketing workloads that keep growing and need room to scale over time.", "scaling cost"],
+              ["Bring transactions and analytics closer together", "Turn the story from fragmented OLTP plus analytics pipelines into faster insight from the same operational data.", "realtime cost"],
+              ["Keep critical workloads more stable", "A strong way to talk about continuity, fault isolation, and resilience for mission-critical systems.", "ha global"]
+            ]
+          },
+          capabilities: {
+            eyebrow: "Module 2",
+            title: "How to present TiDB capabilities",
+            body: "Show problem -> capability -> outcome instead of a flat feature list.",
+            cards: [
+              ["SQL and MySQL protocol compatibility", "Reduce migration and learning friction so the discussion stays focused on architecture evolution.", "mysql scaling"],
+              ["Distributed architecture with decoupled compute and storage", "Makes it easier to explain why scale-out can be smoother over time.", "scaling cost"],
+              ["HTAP capability", "Good for showing how real-time transactional data can directly support analytics and operations.", "realtime"],
+              ["High availability and recovery", "Relevant for financial services, retail, and internet platforms that need continuous service.", "ha"],
+              ["Less middleware and fewer stitched-together systems", "Especially persuasive when the customer already operates a complex data stack.", "cost"],
+              ["Cloud-native fit for modern data applications", "Useful when expanding the story toward platform strategy, elasticity, and global support.", "realtime global"]
+            ]
+          },
+          scenarios: {
+            eyebrow: "Module 3",
+            title: "Typical customer scenarios",
+            body: "Give sellers and partners industry-shaped stories they can reuse quickly.",
+            stories: [
+              ["Internet platform / e-commerce", "When peak traffic, real-time recommendations, and operational analytics coexist, focus on scale, HTAP, and simplification.", "realtime scaling cost", false],
+              ["Financial adjacent / transaction systems", "When continuity and consistency matter, position TiDB as part of a modernization path for critical workloads.", "ha mysql", false],
+              ["Global business / multi-region deployment", "A strong place to discuss multi-region deployment, continuity, and a unified data platform.", "global ha", false],
+              ["Real-time business analytics", "For customers that no longer want to wait for overnight ETL and want data to drive faster action.", "realtime cost", true]
+            ]
+          },
+          compare: {
+            eyebrow: "Module 4",
+            title: "Present competition as architecture paths",
+            body: "This is easier to reuse across accounts and easier to update over time.",
+            rows: [
+              ["Scaling approach", ["Designed for horizontal scale", "good"], ["Often constrained by single-node limits", "risk"], ["Can scale, but governance becomes complex", "warning"], "scaling"],
+              ["Developer familiarity", ["Keeps SQL / MySQL habits", "good"], ["Already familiar", "good"], ["Cross-shard logic and routing get harder", "warning"], "mysql"],
+              ["Transactions plus real-time analytics", ["Better fit for a unified platform story", "good"], ["Usually needs a separate analytics path", "risk"], ["More pipelines mean more latency and ops complexity", "risk"], "realtime cost"],
+              ["HA design", ["Better aligned with fault isolation", "good"], ["Depends heavily on failover and single-point controls", "warning"], ["More components mean a wider failure surface", "warning"], "ha"],
+              ["Long-term operational complexity", ["Stronger path toward platform standardization", "good"], ["Looks simple early, but patches accumulate later", "warning"], ["Team cost and complexity keep rising", "risk"], "cost"]
+            ],
+            sideTitle: "Principles for the comparison module",
+            sideBullets: [
+              "Avoid absolute claims and focus on what each path is better suited for.",
+              "Compare architecture paths first, then add vendor-specific detail by industry.",
+              "Leave room for sellers to add an industry competitor sheet.",
+              "Keep the discussion anchored in the customer's pain points."
+            ],
+            headers: ["Dimension", "TiDB", "Single / primary-replica MySQL", "Sharding + middleware"]
+          },
+          faq: {
+            eyebrow: "Module 5",
+            title: "Common customer questions",
+            body: "A reusable FAQ block for a more consistent field narrative.",
+            items: [
+              ["Will migration cost be high?", "Answer from the angle of application compatibility, SQL/MySQL familiarity, and phased migration paths.", "mysql"],
+              ["Can we really run critical workloads on it?", "Tie the answer to HA, service continuity, and a well-scoped PoC plan.", "ha"],
+              ["Why not stay with MySQL plus an analytics database?", "Shift the conversation toward latency, system sprawl, and governance overhead.", "realtime cost"],
+              ["If the current architecture works, why change?", "Anchor the answer in business growth, future change cost, and platform efficiency.", "cost"]
+            ]
+          },
+          next: {
+            eyebrow: "Module 6",
+            title: "Recommended iOS app information architecture",
+            body: "This same structure can carry forward into a native iOS app.",
+            cards: [
+              ["Home", "One-line value proposition, requirement filters, and three priority advantages."],
+              ["Capabilities", "Each capability card carries customer-priority tags."],
+              ["Scenarios", "Organize stories by industry, workload type, and business stage."],
+              ["Comparison", "Maintain reusable TiDB vs architecture-path templates."],
+              ["FAQ", "Pre-answer objections and reduce live explanation overhead."],
+              ["PoC next step", "Turn the last screen into architecture review, PoC, or joint customer follow-up."]
+            ],
+            note: "The messaging follows TiDB's common value pillars such as distributed SQL, HTAP, MySQL compatibility, elasticity, and high availability. Validate against the latest field material before launch."
+          }
+        },
+        "pt-BR": {
+          overview: {
+            eyebrow: "Módulo 1",
+            title: "Visão geral de valor para o cliente",
+            body: "Comece pelo resultado de negócio e depois conecte com a arquitetura do TiDB.",
+            cards: [
+              ["Cresça sem bater no teto de um único nó", "Útil para pedidos, pagamentos, estoque e marketing, onde a carga cresce continuamente e exige escala ao longo do tempo.", "scaling cost"],
+              ["Aproxime transações e analytics", "Troque a narrativa de pipelines fragmentados por insights mais rápidos a partir do mesmo dado operacional.", "realtime cost"],
+              ["Mantenha workloads críticos mais estáveis", "Boa forma de falar sobre continuidade, isolamento de falhas e resiliência em sistemas críticos.", "ha global"]
+            ]
+          },
+          capabilities: {
+            eyebrow: "Módulo 2",
+            title: "Como apresentar as capacidades do TiDB",
+            body: "Mostre problema -> capacidade -> resultado, em vez de uma lista plana de features.",
+            cards: [
+              ["Compatibilidade com SQL e protocolo MySQL", "Reduz fricção de migração e aprendizado, mantendo o foco na evolução da arquitetura.", "mysql scaling"],
+              ["Arquitetura distribuída com compute e storage desacoplados", "Ajuda a explicar por que a expansão horizontal pode ser mais suave.", "scaling cost"],
+              ["Capacidade HTAP", "Boa para mostrar como dados transacionais em tempo real podem apoiar analytics e operação.", "realtime"],
+              ["Alta disponibilidade e recuperação", "Relevante para finanças, varejo e plataformas digitais que exigem continuidade.", "ha"],
+              ["Menos middleware e menos sistemas costurados", "Especialmente convincente quando o cliente já opera uma pilha complexa.", "cost"],
+              ["Aderência cloud-native para apps modernos de dados", "Útil para ampliar a conversa para plataforma, elasticidade e suporte global.", "realtime global"]
+            ]
+          },
+          scenarios: {
+            eyebrow: "Módulo 3",
+            title: "Cenários típicos de cliente",
+            body: "Dá a vendas e parceiros histórias prontas para reutilizar por setor.",
+            stories: [
+              ["Plataforma digital / e-commerce", "Quando coexistem pico de tráfego, recomendação em tempo real e analytics operacional, foque em escala, HTAP e simplificação.", "realtime scaling cost", false],
+              ["Sistemas transacionais / financeiro adjacente", "Quando continuidade e consistência importam, posicione o TiDB como parte da modernização.", "ha mysql", false],
+              ["Negócio global / implantação multirregião", "Bom momento para discutir multirregião, continuidade e plataforma de dados unificada.", "global ha", false],
+              ["Analytics operacional em tempo real", "Para clientes que não querem mais esperar ETL noturno e querem agir mais rápido com os dados.", "realtime cost", true]
+            ]
+          },
+          compare: {
+            eyebrow: "Módulo 4",
+            title: "Apresente a concorrência como caminhos de arquitetura",
+            body: "Assim fica mais fácil reutilizar entre contas e atualizar ao longo do tempo.",
+            rows: [
+              ["Abordagem de escala", ["Projetado para escala horizontal", "good"], ["Frequentemente limitado por um único nó", "risk"], ["Escala é possível, mas a governança complica", "warning"], "scaling"],
+              ["Familiaridade do desenvolvimento", ["Mantém hábitos de SQL / MySQL", "good"], ["Já é familiar", "good"], ["Lógica e roteamento entre shards ficam mais difíceis", "warning"], "mysql"],
+              ["Transações + analytics em tempo real", ["Melhor para uma narrativa de plataforma unificada", "good"], ["Normalmente exige caminho analítico separado", "risk"], ["Mais pipelines trazem mais latência e complexidade operacional", "risk"], "realtime cost"],
+              ["Desenho de HA", ["Mais alinhado a isolamento de falhas", "good"], ["Depende muito de failover e controles pontuais", "warning"], ["Mais componentes ampliam a superfície de falha", "warning"], "ha"],
+              ["Complexidade operacional no longo prazo", ["Melhor caminho para padronização em plataforma", "good"], ["Parece simples no início, mas acumula remendos", "warning"], ["Custo de equipe e complexidade continuam subindo", "risk"], "cost"]
+            ],
+            sideTitle: "Princípios do módulo comparativo",
+            sideBullets: [
+              "Evite afirmações absolutas e foque no problema que cada caminho resolve melhor.",
+              "Compare primeiro caminhos de arquitetura e depois detalhe fornecedores por setor.",
+              "Deixe espaço para vendas adicionar uma folha de concorrentes do setor.",
+              "Mantenha a conversa ancorada na dor real do cliente."
+            ],
+            headers: ["Dimensão", "TiDB", "MySQL único / primário-réplica", "Sharding + middleware"]
+          },
+          faq: {
+            eyebrow: "Módulo 5",
+            title: "Perguntas frequentes do cliente",
+            body: "Um bloco reutilizável para manter a narrativa de campo consistente.",
+            items: [
+              ["O custo de migração será alto?", "Responda sob a ótica de compatibilidade da aplicação, familiaridade com SQL/MySQL e migração em fases.", "mysql"],
+              ["Dá mesmo para rodar workloads críticos?", "Conecte a resposta a HA, continuidade de serviço e um PoC bem delimitado.", "ha"],
+              ["Por que não seguir com MySQL e um banco analítico?", "Leve a conversa para latência, proliferação de sistemas e custo de governança.", "realtime cost"],
+              ["Se a arquitetura atual funciona, por que mudar?", "Baseie a resposta em crescimento de negócio, custo futuro de mudança e eficiência de plataforma.", "cost"]
+            ]
+          },
+          next: {
+            eyebrow: "Módulo 6",
+            title: "Arquitetura de informação recomendada para o app iOS",
+            body: "A mesma estrutura pode evoluir para um app iOS nativo.",
+            cards: [
+              ["Home", "Proposta de valor em uma linha, filtros por necessidade e três vantagens prioritárias."],
+              ["Capacidades", "Cada card de capacidade traz tags de prioridade do cliente."],
+              ["Cenários", "Organize histórias por setor, tipo de workload e estágio do negócio."],
+              ["Comparativo", "Mantenha templates reutilizáveis de TiDB vs caminhos de arquitetura."],
+              ["FAQ", "Antecipe objeções e reduza o esforço de explicação ao vivo."],
+              ["Próximo passo de PoC", "Transforme a última tela em revisão de arquitetura, PoC ou follow-up conjunto."]
+            ],
+            note: "A mensagem segue pilares comuns do TiDB, como distributed SQL, HTAP, compatibilidade MySQL, elasticidade e alta disponibilidade. Valide com o material comercial mais recente antes do lançamento."
+          }
+        },
+        "es-ES": {
+          overview: {
+            eyebrow: "Módulo 1",
+            title: "Visión de valor para el cliente",
+            body: "Empieza por el resultado de negocio y luego enlázalo con la arquitectura de TiDB.",
+            cards: [
+              ["Crece sin chocar con el límite de un solo nodo", "Útil para pedidos, pagos, inventario y marketing cuando la carga sigue creciendo y exige escala sostenida.", "scaling cost"],
+              ["Acerca transacciones y analítica", "Cambia la narrativa de pipelines fragmentados por insights más rápidos desde los mismos datos operativos.", "realtime cost"],
+              ["Mantén más estables las cargas críticas", "Una buena forma de hablar de continuidad, aislamiento de fallos y resiliencia en sistemas críticos.", "ha global"]
+            ]
+          },
+          capabilities: {
+            eyebrow: "Módulo 2",
+            title: "Cómo presentar las capacidades de TiDB",
+            body: "Muestra problema -> capacidad -> resultado en lugar de una lista plana de features.",
+            cards: [
+              ["Compatibilidad con SQL y protocolo MySQL", "Reduce la fricción de migración y aprendizaje para centrar la conversación en la evolución arquitectónica.", "mysql scaling"],
+              ["Arquitectura distribuida con cómputo y almacenamiento desacoplados", "Ayuda a explicar por qué la expansión horizontal puede ser más fluida.", "scaling cost"],
+              ["Capacidad HTAP", "Buena para mostrar cómo los datos transaccionales en tiempo real apoyan analítica y operación.", "realtime"],
+              ["Alta disponibilidad y recuperación", "Relevante para finanzas, retail y plataformas digitales que necesitan continuidad.", "ha"],
+              ["Menos middleware y menos sistemas ensamblados", "Especialmente convincente cuando el cliente ya opera una pila compleja.", "cost"],
+              ["Ajuste cloud-native para aplicaciones modernas de datos", "Útil para ampliar la historia hacia plataforma, elasticidad y soporte global.", "realtime global"]
+            ]
+          },
+          scenarios: {
+            eyebrow: "Módulo 3",
+            title: "Escenarios típicos de cliente",
+            body: "Da a ventas y partners historias reutilizables según industria.",
+            stories: [
+              ["Plataforma digital / e-commerce", "Cuando conviven picos de tráfico, recomendaciones en tiempo real y analítica operativa, enfoca en escala, HTAP y simplificación.", "realtime scaling cost", false],
+              ["Sistemas transaccionales / entorno financiero", "Cuando importan continuidad y consistencia, posiciona TiDB como parte de la modernización.", "ha mysql", false],
+              ["Negocio global / despliegue multirregión", "Buen espacio para hablar de multirregión, continuidad y plataforma de datos unificada.", "global ha", false],
+              ["Analítica operativa en tiempo real", "Para clientes que no quieren esperar al ETL nocturno y quieren actuar antes con sus datos.", "realtime cost", true]
+            ]
+          },
+          compare: {
+            eyebrow: "Módulo 4",
+            title: "Presenta la competencia como rutas de arquitectura",
+            body: "Así es más fácil reutilizarlo entre cuentas y mantenerlo actualizado.",
+            rows: [
+              ["Enfoque de escalado", ["Diseñado para escalar horizontalmente", "good"], ["Suele quedar limitado por un solo nodo", "risk"], ["Puede escalar, pero la gobernanza se complica", "warning"], "scaling"],
+              ["Familiaridad de desarrollo", ["Mantiene hábitos de SQL / MySQL", "good"], ["Ya es familiar", "good"], ["La lógica y el enrutamiento entre shards se complican", "warning"], "mysql"],
+              ["Transacciones + analítica en tiempo real", ["Mejor encaje para una plataforma unificada", "good"], ["Normalmente requiere una vía analítica separada", "risk"], ["Más pipelines implican más latencia y complejidad operativa", "risk"], "realtime cost"],
+              ["Diseño de HA", ["Mejor alineado con aislamiento de fallos", "good"], ["Depende mucho del failover y controles puntuales", "warning"], ["Más componentes amplían la superficie de fallo", "warning"], "ha"],
+              ["Complejidad operativa a largo plazo", ["Mejor camino hacia estandarización de plataforma", "good"], ["Parece simple al inicio, pero luego acumula parches", "warning"], ["El coste del equipo y la complejidad siguen creciendo", "risk"], "cost"]
+            ],
+            sideTitle: "Principios del módulo comparativo",
+            sideBullets: [
+              "Evita afirmaciones absolutas y enfócate en qué problema resuelve mejor cada camino.",
+              "Compara primero rutas de arquitectura y luego añade detalle por proveedor e industria.",
+              "Deja espacio para que ventas agregue una hoja de competidores del sector.",
+              "Mantén la conversación anclada en el dolor real del cliente."
+            ],
+            headers: ["Dimensión", "TiDB", "MySQL único / primario-réplica", "Sharding + middleware"]
+          },
+          faq: {
+            eyebrow: "Módulo 5",
+            title: "Preguntas frecuentes del cliente",
+            body: "Un bloque reutilizable para mantener una narrativa de campo consistente.",
+            items: [
+              ["¿Será alto el coste de migración?", "Responde desde compatibilidad de la aplicación, familiaridad con SQL/MySQL y migración por fases.", "mysql"],
+              ["¿De verdad puede soportar cargas críticas?", "Relaciona la respuesta con HA, continuidad de servicio y un PoC bien acotado.", "ha"],
+              ["¿Por qué no seguir con MySQL y una base analítica?", "Lleva la conversación hacia latencia, proliferación de sistemas y coste de gobernanza.", "realtime cost"],
+              ["Si la arquitectura actual funciona, ¿por qué cambiar?", "Apóyate en crecimiento del negocio, coste futuro de cambio y eficiencia de plataforma.", "cost"]
+            ]
+          },
+          next: {
+            eyebrow: "Módulo 6",
+            title: "Arquitectura de información recomendada para la app iOS",
+            body: "La misma estructura puede evolucionar a una app iOS nativa.",
+            cards: [
+              ["Inicio", "Propuesta de valor en una línea, filtros por necesidad y tres ventajas prioritarias."],
+              ["Capacidades", "Cada tarjeta de capacidad lleva etiquetas de prioridad del cliente."],
+              ["Escenarios", "Organiza historias por industria, tipo de carga y etapa del negocio."],
+              ["Comparativa", "Mantén plantillas reutilizables de TiDB frente a rutas de arquitectura."],
+              ["FAQ", "Anticipa objeciones y reduce el esfuerzo en vivo."],
+              ["Siguiente paso de PoC", "Convierte la última pantalla en revisión de arquitectura, PoC o seguimiento conjunto."]
+            ],
+            note: "El mensaje sigue pilares habituales de TiDB como distributed SQL, HTAP, compatibilidad MySQL, elasticidad y alta disponibilidad. Valídalo con el material comercial más reciente antes del lanzamiento."
+          }
+        }
+      };
+
+      ["ja-JP", "en-US", "pt-BR", "es-ES"].forEach((locale) => {
+        translations[locale].sections = localizedSections[locale];
+      });
+
+      const params = new URLSearchParams(window.location.search);
+      const locale = translations[params.get("lang")] ? params.get("lang") : "zh-CN";
+      const labels = labelsByTopic[locale];
+      const content = translations[locale];
+      document.documentElement.lang = locale;
+
+      function renderCard(card) {
+        return `
+          <article class="card" data-topics="${card[2]}">
+            <h3>${card[0]}</h3>
+            <p>${card[1]}</p>
+            <div class="tag-list">
+              ${card[2]
+                .split(" ")
+                .map((topic) => `<span class="tag">${labels[topic]}</span>`)
+                .join("")}
+            </div>
+          </article>
+        `;
+      }
+
+      function renderStory(story) {
+        const highlightClass = story[3] ? "story highlight" : "story";
+        return `
+          <article class="${highlightClass}" data-topics="${story[2]}">
+            <h3>${story[0]}</h3>
+            <p>${story[1]}</p>
+          </article>
+        `;
+      }
+
+      const app = document.querySelector("#app");
+      app.innerHTML = `
+        <section class="hero">
+          <p class="eyebrow">${content.eyebrow}</p>
+          <h1>${content.title}</h1>
+          <p class="hero-copy">${content.subtitle}</p>
+          <div class="hero-grid">
+            <div class="hero-panel">
+              <h3>${content.pitchTitle}</h3>
+              <p class="hero-copy">${content.pitchBody}</p>
+              <div class="tag-list">
+                <span class="tag">Distributed SQL</span>
+                <span class="tag">HTAP</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">iOS-ready</span>
+              </div>
+            </div>
+            <div class="hero-panel">
+              <h3>${content.valueTitle}</h3>
+              <div class="stat-row">
+                ${content.stats
+                  .map(
+                    (stat) => `
+                      <div class="stat">
+                        <strong>${stat[0]}</strong>
+                        <span>${stat[1]}</span>
+                      </div>
+                    `
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <p class="eyebrow">Filters</p>
+            <h2>${content.filterTitle}</h2>
+            <p>${content.filterBody}</p>
+          </div>
+          <div class="chip-row" id="filters">
+            ${topicKeys
+              .map(
+                (key, index) =>
+                  `<button class="chip ${index === 0 ? "is-active" : ""}" type="button" data-filter="${key}">${labels[key]}</button>`
+              )
+              .join("")}
+          </div>
+          <div class="empty-state" id="empty-state">${content.empty}</div>
+        </section>
+
+        <section class="section" data-topics="all scaling realtime ha mysql cost global">
+          <div class="section-head">
+            <p class="eyebrow">${content.sections.overview.eyebrow}</p>
+            <h2>${content.sections.overview.title}</h2>
+            <p>${content.sections.overview.body}</p>
+          </div>
+          <div class="card-grid">
+            ${content.sections.overview.cards.map(renderCard).join("")}
+          </div>
+        </section>
+
+        <section class="section" data-topics="all scaling realtime ha mysql cost">
+          <div class="section-head">
+            <p class="eyebrow">${content.sections.capabilities.eyebrow}</p>
+            <h2>${content.sections.capabilities.title}</h2>
+            <p>${content.sections.capabilities.body}</p>
+          </div>
+          <div class="card-grid">
+            ${content.sections.capabilities.cards.map(renderCard).join("")}
+          </div>
+        </section>
+
+        <section class="section" data-topics="all realtime scaling cost global">
+          <div class="section-head">
+            <p class="eyebrow">${content.sections.scenarios.eyebrow}</p>
+            <h2>${content.sections.scenarios.title}</h2>
+            <p>${content.sections.scenarios.body}</p>
+          </div>
+          <div class="story-grid">
+            ${content.sections.scenarios.stories.map(renderStory).join("")}
+          </div>
+        </section>
+
+        <section class="section" data-topics="all scaling realtime ha mysql cost">
+          <div class="section-head">
+            <p class="eyebrow">${content.sections.compare.eyebrow}</p>
+            <h2>${content.sections.compare.title}</h2>
+            <p>${content.sections.compare.body}</p>
+          </div>
+          <div class="compare-layout">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  ${content.sections.compare.headers.map((header) => `<th>${header}</th>`).join("")}
+                </tr>
+              </thead>
+              <tbody>
+                ${content.sections.compare.rows
+                  .map(
+                    (row) => `
+                      <tr data-topics="${row[4]}">
+                        <td>${row[0]}</td>
+                        <td class="${row[1][1]}">${row[1][0]}</td>
+                        <td class="${row[2][1]}">${row[2][0]}</td>
+                        <td class="${row[3][1]}">${row[3][0]}</td>
+                      </tr>
+                    `
+                  )
+                  .join("")}
+              </tbody>
+            </table>
+            <article class="story">
+              <h3>${content.sections.compare.sideTitle}</h3>
+              <ul class="bullet-list">
+                ${content.sections.compare.sideBullets.map((item) => `<li>${item}</li>`).join("")}
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" data-topics="all ha mysql cost realtime">
+          <div class="section-head">
+            <p class="eyebrow">${content.sections.faq.eyebrow}</p>
+            <h2>${content.sections.faq.title}</h2>
+            <p>${content.sections.faq.body}</p>
+          </div>
+          <div class="faq-grid">
+            ${content.sections.faq.items
+              .map(
+                (item) => `
+                  <article class="faq-item" data-topics="${item[2]}">
+                    <h3>${item[0]}</h3>
+                    <p>${item[1]}</p>
+                  </article>
+                `
+              )
+              .join("")}
+          </div>
+        </section>
+
+        <section class="section" data-topics="all">
+          <div class="section-head">
+            <p class="eyebrow">${content.sections.next.eyebrow}</p>
+            <h2>${content.sections.next.title}</h2>
+            <p>${content.sections.next.body}</p>
+          </div>
+          <div class="next-grid">
+            ${content.sections.next.cards
+              .map(
+                (item) => `
+                  <article class="card">
+                    <h3>${item[0]}</h3>
+                    <p>${item[1]}</p>
+                  </article>
+                `
+              )
+              .join("")}
+          </div>
+          <div class="note">${content.sections.next.note}</div>
+        </section>
+      `;
+
       const chips = Array.from(document.querySelectorAll(".chip"));
       const filterables = Array.from(document.querySelectorAll("[data-topics]"));
       const emptyState = document.querySelector("#empty-state");
@@ -685,19 +1036,17 @@
 
       function applyFilter(topic) {
         let visibleCount = 0;
-
         filterables.forEach((element) => {
           const visible = matchesTopic(element, topic);
           element.classList.toggle("filtered-out", !visible);
-          if (visible && !element.classList.contains("chip")) {
+          if (visible) {
             visibleCount += 1;
           }
         });
-
         emptyState.style.display = visibleCount > 1 ? "none" : "block";
       }
 
-      filterBar.addEventListener("click", (event) => {
+      document.querySelector("#filters").addEventListener("click", (event) => {
         const button = event.target.closest(".chip");
         if (!button) {
           return;
