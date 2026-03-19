@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TiDB Sales Kit</title>
+    <style>
+      :root {
+        --bg: #fbfcf8;
+        --card: #ffffff;
+        --ink: #17342b;
+        --muted: #5b6e66;
+        --line: rgba(23, 52, 43, 0.1);
+        --accent: #17845f;
+        --accent-soft: #dcf5ea;
+        --sand: #f4efe1;
+        --gold: #a77b27;
+        --danger-soft: #f8e7de;
+        --danger: #9c532f;
+        --shadow: 0 18px 40px rgba(23, 52, 43, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: "Avenir Next", "PingFang SC", "Helvetica Neue", sans-serif;
+        background:
+          radial-gradient(circle at top right, rgba(23, 132, 95, 0.1), transparent 22%),
+          linear-gradient(180deg, #f8fbf7 0%, #fbfcf8 100%);
+      }
+
+      .page {
+        width: min(1200px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 24px 0 48px;
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+        padding: 32px;
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        background:
+          linear-gradient(135deg, rgba(220, 245, 234, 0.9) 0%, rgba(255, 255, 255, 0.98) 54%),
+          var(--card);
+        box-shadow: var(--shadow);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: auto -40px -60px auto;
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(23, 132, 95, 0.18), transparent 65%);
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin-bottom: 14px;
+        font-size: clamp(34px, 6vw, 58px);
+        line-height: 1.02;
+      }
+
+      .hero-copy {
+        max-width: 720px;
+        font-size: 18px;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.35fr 0.9fr;
+        gap: 18px;
+        margin-top: 28px;
+      }
+
+      .hero-panel,
+      .section,
+      .card,
+      .compare-table,
+      .faq-item {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--card);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-panel {
+        padding: 22px;
+      }
+
+      .stat-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+
+      .stat {
+        padding: 16px;
+        border-radius: 18px;
+        background: #f6faf7;
+      }
+
+      .stat strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 28px;
+      }
+
+      .stat span {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .bullet-list {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .section {
+        margin-top: 22px;
+        padding: 24px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .section-head p {
+        max-width: 760px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .chip {
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--ink);
+        background: #fff;
+        cursor: pointer;
+        transition: 160ms ease;
+      }
+
+      .chip.is-active,
+      .chip:hover {
+        color: white;
+        border-color: transparent;
+        background: linear-gradient(135deg, var(--accent) 0%, #0f6848 100%);
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .tag {
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+
+      .card p,
+      .compare-table td,
+      .faq-item p,
+      .story p {
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .story-grid,
+      .compare-layout,
+      .faq-grid,
+      .cta-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .story {
+        padding: 22px;
+        border-radius: 24px;
+        background: linear-gradient(180deg, #fff 0%, #f7faf8 100%);
+        border: 1px solid var(--line);
+      }
+
+      .story.highlight {
+        background: linear-gradient(135deg, #18342b 0%, #215845 100%);
+      }
+
+      .story.highlight h3,
+      .story.highlight p,
+      .story.highlight li {
+        color: white;
+      }
+
+      .compare-table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+      }
+
+      .compare-table th,
+      .compare-table td {
+        padding: 16px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+
+      .compare-table th {
+        background: #f7faf8;
+      }
+
+      .good {
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .warning {
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      .risk {
+        color: var(--danger);
+        font-weight: 700;
+      }
+
+      .faq-item {
+        padding: 22px;
+      }
+
+      .cta-grid .card {
+        background: linear-gradient(180deg, #ffffff 0%, #f7fbf8 100%);
+      }
+
+      .note {
+        padding: 16px 18px;
+        border-radius: 18px;
+        color: var(--danger);
+        background: var(--danger-soft);
+        line-height: 1.7;
+      }
+
+      .empty-state {
+        display: none;
+        margin-top: 16px;
+        padding: 20px;
+        border-radius: 18px;
+        color: var(--muted);
+        border: 1px dashed var(--line);
+        background: #f7faf8;
+      }
+
+      .filtered-out {
+        display: none;
+      }
+
+      @media (max-width: 960px) {
+        .hero-grid,
+        .story-grid,
+        .compare-layout,
+        .faq-grid,
+        .cta-grid,
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .stat-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          width: min(100% - 20px, 1200px);
+          padding: 12px 0 28px;
+        }
+
+        .hero,
+        .section {
+          padding: 18px;
+          border-radius: 22px;
+        }
+
+        h2 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="hero">
+        <p class="eyebrow">TiDB 产品介绍主页</p>
+        <h1>一页讲清 TiDB 为什么适合现代核心业务系统</h1>
+        <p class="hero-copy">
+          TiDB 可被包装成一个既适合销售快速介绍、又适合售前按客户诉求深入展开的产品介绍页。
+          这版结构以业务价值为前台、技术能力为后台，帮助你在更短时间里匹配客户关注点。
+        </p>
+
+        <div class="hero-grid">
+          <div class="hero-panel">
+            <h3>30 秒开场话术</h3>
+            <p class="hero-copy">
+              TiDB 是面向现代应用的分布式 SQL 数据库，兼顾事务处理与实时分析能力，
+              能在保留 SQL/MySQL 生态习惯的同时，提供弹性扩展、高可用与更低的架构复杂度。
+            </p>
+            <div class="tag-list">
+              <span class="tag">Distributed SQL</span>
+              <span class="tag">HTAP</span>
+              <span class="tag">MySQL Compatible</span>
+              <span class="tag">Cloud Native</span>
+            </div>
+          </div>
+
+          <div class="hero-panel">
+            <h3>优先呈现的 3 个核心价值</h3>
+            <div class="stat-row">
+              <div class="stat">
+                <strong>快</strong>
+                <span>同一平台兼顾在线交易与近实时分析，减少数据搬运。</span>
+              </div>
+              <div class="stat">
+                <strong>稳</strong>
+                <span>分布式架构面向高可用与故障隔离设计。</span>
+              </div>
+              <div class="stat">
+                <strong>省</strong>
+                <span>减少分库分表、中间件、同步链路与多套系统叠加。</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">需求筛选器</p>
+            <h2>按客户诉求筛出最 relevant 的 TiDB 优势</h2>
+            <p>
+              适合在客户沟通现场快速切换。点击下方标签后，页面会只保留和该诉求强相关的模块与卡片。
+            </p>
+          </div>
+        </div>
+
+        <div class="chip-row" id="filters">
+          <button class="chip is-active" data-filter="all">全部</button>
+          <button class="chip" data-filter="scaling">扩展瓶颈</button>
+          <button class="chip" data-filter="realtime">实时分析</button>
+          <button class="chip" data-filter="ha">高可用容灾</button>
+          <button class="chip" data-filter="mysql">MySQL 兼容迁移</button>
+          <button class="chip" data-filter="cost">架构复杂度/成本</button>
+          <button class="chip" data-filter="global">多地域部署</button>
+        </div>
+
+        <div class="empty-state" id="empty-state">
+          当前没有完全匹配的卡片，可以切回“全部”或改用相邻需求标签继续讲解。
+        </div>
+      </section>
+
+      <section class="section" data-topics="all scaling realtime ha mysql cost global">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">模块 1</p>
+            <h2>客户价值总览</h2>
+            <p>第一屏建议永远先讲业务结果，再引出 TiDB 的架构原因。</p>
+          </div>
+        </div>
+
+        <div class="card-grid">
+          <article class="card" data-topics="scaling cost">
+            <h3>应对业务增长，不再被单机上限卡住</h3>
+            <p>适合订单、支付、账户、交易、库存、营销等持续增长业务，强调水平扩展能力与架构演进空间。</p>
+            <div class="tag-list">
+              <span class="tag">扩展瓶颈</span>
+              <span class="tag">业务增长</span>
+            </div>
+          </article>
+
+          <article class="card" data-topics="realtime cost">
+            <h3>交易和分析靠得更近，洞察更及时</h3>
+            <p>将“在线业务库 + 分析链路”的割裂叙事改成“一份数据更快形成业务洞察”。</p>
+            <div class="tag-list">
+              <span class="tag">实时分析</span>
+              <span class="tag">HTAP</span>
+            </div>
+          </article>
+
+          <article class="card" data-topics="ha global">
+            <h3>关键业务更稳，故障影响面更小</h3>
+            <p>强调高可用、故障隔离和跨可用区/地域部署思路，适合面向核心系统客户讲稳定性。</p>
+            <div class="tag-list">
+              <span class="tag">高可用</span>
+              <span class="tag">连续性</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" data-topics="all scaling realtime ha mysql cost">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">模块 2</p>
+            <h2>TiDB 核心能力应该如何分组展示</h2>
+            <p>建议不要平铺 feature 列表，而是按客户容易理解的“问题 -> 能力 -> 结果”来呈现。</p>
+          </div>
+        </div>
+
+        <div class="card-grid">
+          <article class="card" data-topics="mysql scaling">
+            <h3>SQL 与 MySQL 协议兼容</h3>
+            <p>降低应用迁移和团队学习门槛，让客户把重点放在扩展性和架构升级，而不是重写业务逻辑。</p>
+          </article>
+
+          <article class="card" data-topics="scaling cost">
+            <h3>计算与存储解耦的分布式架构</h3>
+            <p>更适合向客户解释“为什么它能平滑扩容”，而不只是说“它是分布式数据库”。</p>
+          </article>
+
+          <article class="card" data-topics="realtime">
+            <h3>HTAP 能力</h3>
+            <p>适合展示“实时交易数据直接服务分析和运营决策”的价值，避免多链路同步延迟话题。</p>
+          </article>
+
+          <article class="card" data-topics="ha">
+            <h3>高可用与故障恢复能力</h3>
+            <p>适合金融、零售、互联网平台等关键业务系统，重点讲持续服务能力，而不是只讲备份。</p>
+          </article>
+
+          <article class="card" data-topics="cost">
+            <h3>减少中间件与多套系统叠加</h3>
+            <p>当客户已经有分库分表、数据同步、分析库等复杂拼接架构时，这一块会很有说服力。</p>
+          </article>
+
+          <article class="card" data-topics="realtime global">
+            <h3>云原生与现代数据应用适配</h3>
+            <p>适合从平台化、弹性、全球业务支持、AI/实时应用数据底座等角度展开下一步讨论。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" data-topics="all realtime scaling cost global">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">模块 3</p>
+            <h2>典型客户场景怎么讲</h2>
+            <p>这一块建议作为“客户代入区”，让销售或伙伴按行业现场切换案例话术。</p>
+          </div>
+        </div>
+
+        <div class="story-grid">
+          <article class="story" data-topics="realtime scaling cost">
+            <h3>互联网平台 / 电商</h3>
+            <p>高峰期并发上升、实时推荐和运营分析需求并存，适合重点讲扩展性、HTAP 和架构简化。</p>
+          </article>
+
+          <article class="story" data-topics="ha mysql">
+            <h3>金融核心周边 / 交易类系统</h3>
+            <p>关注连续性和数据一致性时，建议把 TiDB 放在“关键业务的现代化升级”叙事中。</p>
+          </article>
+
+          <article class="story" data-topics="global ha">
+            <h3>出海业务 / 多地域业务</h3>
+            <p>适合介绍多地域部署、业务连续性和统一数据平台价值，避免客户把问题拆成多套本地数据库。</p>
+          </article>
+
+          <article class="story highlight" data-topics="realtime cost">
+            <h3>实时经营分析</h3>
+            <ul class="bullet-list">
+              <li>客户不想再等待夜间 ETL 或长链路同步。</li>
+              <li>希望交易数据更快转化成运营动作。</li>
+              <li>需要一套更适合“边跑业务边看分析”的平台。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" data-topics="all scaling realtime ha mysql cost">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">模块 4</p>
+            <h2>竞品对比建议用“架构路径”而不是只列厂商 Logo</h2>
+            <p>这样更适合伙伴和售前在不同客户现场复用，也更方便后续根据市场变化更新内容。</p>
+          </div>
+        </div>
+
+        <div class="compare-layout">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>对比维度</th>
+                <th>TiDB</th>
+                <th>单机/主从 MySQL</th>
+                <th>分库分表 + 中间件</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-topics="scaling">
+                <td>扩展方式</td>
+                <td class="good">面向水平扩展设计</td>
+                <td class="risk">容易遇到单机瓶颈</td>
+                <td class="warning">可扩，但治理复杂</td>
+              </tr>
+              <tr data-topics="mysql">
+                <td>开发习惯</td>
+                <td class="good">保留 SQL / MySQL 生态习惯</td>
+                <td class="good">原生熟悉</td>
+                <td class="warning">跨库逻辑与路由复杂</td>
+              </tr>
+              <tr data-topics="realtime cost">
+                <td>交易 + 实时分析</td>
+                <td class="good">更适合统一平台叙事</td>
+                <td class="risk">通常需要额外分析链路</td>
+                <td class="risk">链路更多，实时性与运维更复杂</td>
+              </tr>
+              <tr data-topics="ha">
+                <td>高可用设计</td>
+                <td class="good">分布式架构更利于故障隔离</td>
+                <td class="warning">依赖主备切换与单点治理</td>
+                <td class="warning">组件多，故障面更广</td>
+              </tr>
+              <tr data-topics="cost">
+                <td>长期运维复杂度</td>
+                <td class="good">平台化空间更大</td>
+                <td class="warning">前期简单，后期容易补丁式演进</td>
+                <td class="risk">团队成本与系统复杂度持续上升</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <article class="story">
+            <h3>对比模块的设计原则</h3>
+            <ul class="bullet-list">
+              <li>避免绝对化措辞，多讲“更适合解决什么问题”。</li>
+              <li>优先对比架构路径，再按行业补充具体厂商。</li>
+              <li>给销售留出“补一张行业竞品表”的扩展位置。</li>
+              <li>把重点放在客户当前痛点，而不是只堆产品 feature。</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" data-topics="all ha mysql cost realtime">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">模块 5</p>
+            <h2>常见客户疑问与页面预埋回答</h2>
+            <p>这部分适合做成可折叠 FAQ，帮助销售和伙伴统一答法。</p>
+          </div>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-item" data-topics="mysql">
+            <h3>迁移成本会不会很高？</h3>
+            <p>建议从应用兼容性、SQL/MySQL 生态习惯、演进式迁移路径去回答，而不是承诺“零改造”。</p>
+          </article>
+
+          <article class="faq-item" data-topics="ha">
+            <h3>核心业务真的能放上来吗？</h3>
+            <p>建议用“关键业务稳定性要求高、需要高可用与持续服务能力”的框架回答，并结合 PoC 设计落地。</p>
+          </article>
+
+          <article class="faq-item" data-topics="realtime cost">
+            <h3>为什么不继续用 MySQL 加分析库？</h3>
+            <p>把讨论引导到链路延迟、系统数量、治理复杂度与实时运营需求是否值得长期承受上。</p>
+          </article>
+
+          <article class="faq-item" data-topics="cost">
+            <h3>客户现有架构已经能跑，为什么还要换？</h3>
+            <p>适合从业务增长、未来改造成本、平台化能力和团队效率角度展开，而不是只谈技术先进性。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" data-topics="all">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">模块 6</p>
+            <h2>APP 页面的落地建议</h2>
+            <p>如果你后续把它做成真正的移动端 APP，可以继续沿用这套模块结构。</p>
+          </div>
+        </div>
+
+        <div class="cta-grid">
+          <article class="card">
+            <h3>首页</h3>
+            <p>一句话价值主张 + 客户需求筛选器 + 三个关键优势，适合开场。</p>
+          </article>
+
+          <article class="card">
+            <h3>能力页</h3>
+            <p>用卡片方式呈现 TiDB 的核心能力，每张卡片都带适用客户诉求标签。</p>
+          </article>
+
+          <article class="card">
+            <h3>场景页</h3>
+            <p>按行业、系统类型、业务阶段组织客户案例和讲法，便于伙伴快速套用。</p>
+          </article>
+
+          <article class="card">
+            <h3>对比页</h3>
+            <p>维护“TiDB vs 常见架构路径”的对比模板，后台可定期更新。</p>
+          </article>
+
+          <article class="card">
+            <h3>FAQ 页</h3>
+            <p>把常见 objection 预先写好，减少介绍时的临场组织成本。</p>
+          </article>
+
+          <article class="card">
+            <h3>PoC 引导页</h3>
+            <p>最后一屏转向下一步动作，比如 PoC、架构评估、迁移评估或联合拜访。</p>
+          </article>
+        </div>
+
+        <div class="note">
+          页面中的产品表达参考了 PingCAP 官方资料中常见的能力表述，如分布式 SQL、HTAP、MySQL
+          兼容、弹性扩展与高可用；具体售前材料上线前，建议再结合你们最新版本能力与销售话术校对一次。
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const filterBar = document.querySelector("#filters");
+      const chips = Array.from(document.querySelectorAll(".chip"));
+      const filterables = Array.from(document.querySelectorAll("[data-topics]"));
+      const emptyState = document.querySelector("#empty-state");
+
+      function matchesTopic(element, topic) {
+        const topics = (element.dataset.topics || "").split(/\s+/).filter(Boolean);
+        return topic === "all" || topics.includes("all") || topics.includes(topic);
+      }
+
+      function applyFilter(topic) {
+        let visibleCount = 0;
+
+        filterables.forEach((element) => {
+          const visible = matchesTopic(element, topic);
+          element.classList.toggle("filtered-out", !visible);
+          if (visible && !element.classList.contains("chip")) {
+            visibleCount += 1;
+          }
+        });
+
+        emptyState.style.display = visibleCount > 1 ? "none" : "block";
+      }
+
+      filterBar.addEventListener("click", (event) => {
+        const button = event.target.closest(".chip");
+        if (!button) {
+          return;
+        }
+
+        chips.forEach((chip) => chip.classList.remove("is-active"));
+        button.classList.add("is-active");
+        applyFilter(button.dataset.filter || "all");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TiDB Compass</title>
+    <link rel="stylesheet" href="./assets/app.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">TC</div>
+          <div>
+            <p class="eyebrow">Sales Enablement App</p>
+            <h1>TiDB Compass</h1>
+          </div>
+        </div>
+
+        <section class="panel">
+          <p class="panel-label">页面入口</p>
+          <div class="nav-list">
+            <button class="nav-item is-active" data-page="./content/tidb-sales-kit.html">
+              TiDB 介绍主页
+            </button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <p class="panel-label">推荐使用方式</p>
+          <ul class="hint-list">
+            <li>面向销售：快速讲清 TiDB 的业务价值与差异化。</li>
+            <li>面向售前：按客户诉求筛选能力，减少无效介绍。</li>
+            <li>面向伙伴：统一对外话术和方案框架。</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <p class="panel-label">内容更新方式</p>
+          <p class="muted">
+            APP 壳固定不动，介绍内容独立在
+            <code>content/tidb-sales-kit.html</code> 中，后续可由后台流水线直接替换更新。
+          </p>
+        </section>
+      </aside>
+
+      <main class="main-stage">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">客户沟通模式</p>
+            <h2>一个 APP 壳，承载可持续更新的 TiDB 介绍页</h2>
+          </div>
+          <button id="reload-page" class="ghost-button" type="button">刷新内容</button>
+        </header>
+
+        <section class="device-frame">
+          <div class="device-header">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <iframe
+            id="content-frame"
+            title="TiDB content"
+            src="./content/tidb-sales-kit.html"
+          ></iframe>
+        </section>
+      </main>
+    </div>
+
+    <script src="./assets/app.js"></script>
+  </body>
+</html>
