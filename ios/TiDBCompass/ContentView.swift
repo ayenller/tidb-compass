@@ -5,7 +5,6 @@ struct ContentView: View {
     @AppStorage("tidb_compass_language") private var selectedLanguage = LanguageOption.simplifiedChinese.rawValue
     @State private var reloadKey = UUID()
     @State private var showingSettings = false
-    @State private var selectedTab: RootTab = .preview
 
     var body: some View {
         GeometryReader { proxy in
@@ -15,25 +14,11 @@ struct ContentView: View {
                 orientation: proxy.size.width > proxy.size.height ? "landscape" : "portrait"
             )
 
-            TabView(selection: $selectedTab) {
-                previewScreen(context: context, width: proxy.size.width)
-                    .tabItem {
-                        Label(languageCopy.previewTab, systemImage: "safari")
-                    }
-                    .tag(RootTab.preview)
-
-                AboutView(language: languageCopy, context: context)
-                    .tabItem {
-                        Label(languageCopy.aboutTab, systemImage: "info.circle")
-                    }
-                    .tag(RootTab.about)
-            }
-            .tint(.accentColor)
+            previewScreen(context: context, width: proxy.size.width)
             .sheet(isPresented: $showingSettings) {
                 SettingsView(
                     selectedLanguage: $selectedLanguage,
-                    reloadAction: { reloadKey = UUID() },
-                    currentContext: context
+                    reloadAction: { reloadKey = UUID() }
                 )
             }
         }
@@ -56,7 +41,7 @@ struct ContentView: View {
     private func header(context: PreviewContext, width: CGFloat) -> some View {
         let compact = width < 720
 
-        VStack(alignment: .leading, spacing: 14) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .top, spacing: 12) {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("TiDB Compass")
@@ -75,20 +60,10 @@ struct ContentView: View {
                     regularActions
                 }
             }
-
-            if compact {
-                statusRow(context: context)
-            } else {
-                HStack(spacing: 12) {
-                    statusPill(title: languageCopy.deviceTitle, value: context.deviceLabel)
-                    statusPill(title: languageCopy.orientationTitle, value: context.orientationLabel)
-                    statusPill(title: languageCopy.languageTitle, value: languageCopy.name)
-                }
-            }
         }
         .padding(.horizontal, compact ? 18 : 24)
         .padding(.top, compact ? 14 : 18)
-        .padding(.bottom, 14)
+        .padding(.bottom, 12)
         .background(.ultraThinMaterial)
     }
 
@@ -151,34 +126,9 @@ struct ContentView: View {
         .buttonStyle(.plain)
     }
 
-    private func statusRow(context: PreviewContext) -> some View {
-        HStack(spacing: 10) {
-            statusPill(title: languageCopy.deviceTitle, value: context.deviceLabel)
-            statusPill(title: languageCopy.orientationTitle, value: context.orientationLabel)
-        }
-    }
-
-    private func statusPill(title: String, value: String) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(title.uppercased())
-                .font(.system(size: 10, weight: .bold))
-                .foregroundStyle(.secondary)
-            Text(value)
-                .font(.system(size: 14, weight: .semibold))
-        }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 10)
-        .background(Color.white.opacity(0.82), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-    }
-
     private var languageCopy: LanguageOption {
         LanguageOption(rawValue: selectedLanguage) ?? .simplifiedChinese
     }
-}
-
-enum RootTab {
-    case preview
-    case about
 }
 
 struct PreviewContext {
@@ -235,26 +185,6 @@ enum LanguageOption: String, CaseIterable, Identifiable {
         case .english: return "Settings"
         case .portuguese: return "Ajustes"
         case .spanish: return "Ajustes"
-        }
-    }
-
-    var previewTab: String {
-        switch self {
-        case .simplifiedChinese: return "预览"
-        case .japanese: return "プレビュー"
-        case .english: return "Preview"
-        case .portuguese: return "Preview"
-        case .spanish: return "Preview"
-        }
-    }
-
-    var aboutTab: String {
-        switch self {
-        case .simplifiedChinese: return "关于"
-        case .japanese: return "情報"
-        case .english: return "About"
-        case .portuguese: return "Sobre"
-        case .spanish: return "Acerca"
         }
     }
 
