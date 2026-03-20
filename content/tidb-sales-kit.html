@@ -44,6 +44,18 @@
         font: inherit;
       }
 
+      @keyframes fadeSlideUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
       .app {
         display: flex;
         flex-direction: column;
@@ -142,6 +154,7 @@
 
       .screen.is-active {
         display: block;
+        animation: fadeSlideUp 280ms ease;
       }
 
       .hero,
@@ -300,6 +313,18 @@
       .compare-card,
       .faq-item {
         padding: 18px;
+        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      }
+
+      .card:hover,
+      .compare-card:hover,
+      .faq-item:hover,
+      .journey-card:hover,
+      .projection-tile:hover,
+      .stage-tile:hover {
+        transform: translateY(-2px);
+        border-color: rgba(13, 138, 103, 0.16);
+        box-shadow: 0 22px 42px rgba(29, 56, 88, 0.12);
       }
 
       .metrics {
@@ -360,6 +385,7 @@
         color: var(--ink);
         background: #fff;
         cursor: pointer;
+        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
       }
 
       .chip.is-active,
@@ -478,12 +504,21 @@
         cursor: pointer;
         color: #fff;
         background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+        transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
       }
 
       .cta.secondary {
         color: var(--ink);
         background: #fff;
         border: 1px solid var(--line);
+      }
+
+      .cta:hover,
+      .cta.secondary:hover,
+      .chip:hover,
+      .segment-button:hover,
+      .tab-button:hover {
+        transform: translateY(-1px);
       }
 
       .section {
@@ -656,6 +691,7 @@
         color: var(--muted);
         background: transparent;
         border-radius: 20px;
+        transition: transform 160ms ease, background 160ms ease, color 160ms ease;
       }
 
       .tab-button strong {
@@ -693,6 +729,39 @@
         border-radius: 20px;
         background: var(--blue-soft);
         color: var(--muted);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .screen.is-active {
+          animation: none;
+        }
+
+        .card,
+        .compare-card,
+        .faq-item,
+        .journey-card,
+        .projection-tile,
+        .stage-tile,
+        .cta,
+        .chip,
+        .segment-button,
+        .tab-button {
+          transition: none;
+        }
+
+        .card:hover,
+        .compare-card:hover,
+        .faq-item:hover,
+        .journey-card:hover,
+        .projection-tile:hover,
+        .stage-tile:hover,
+        .cta:hover,
+        .cta.secondary:hover,
+        .chip:hover,
+        .segment-button:hover,
+        .tab-button:hover {
+          transform: none;
+        }
       }
 
       @media (max-width: 767px) {

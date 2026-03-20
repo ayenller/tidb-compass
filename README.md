@@ -28,6 +28,8 @@ TiDB Compass 是一个面向销售、售前和伙伴介绍场景的 iOS 风格�
 - 中文、日文、英文、葡萄牙语、西班牙语切换
 - 底部 Tab Bar 的 iOS 应用式页面预览
 
+当前版本已收敛到设计定稿预览，可作为后续转 SwiftUI、React Native 或 WebView 壳实现的视觉基线。
+
 ## 更新内容
 
 后续如果需要由后台持续更新介绍内容，优先更新 `content/tidb-sales-kit.html` 的语言内容数据。
