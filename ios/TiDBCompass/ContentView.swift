@@ -4,6 +4,7 @@ import UIKit
 struct ContentView: View {
     @AppStorage("tidb_compass_language") private var selectedLanguage = LanguageOption.simplifiedChinese.rawValue
     @State private var reloadKey = UUID()
+    @State private var showingSettings = false
 
     var body: some View {
         GeometryReader { proxy in
@@ -21,6 +22,13 @@ struct ContentView: View {
                 }
                 .background(Color(uiColor: .systemGroupedBackground))
                 .navigationBarHidden(true)
+                .sheet(isPresented: $showingSettings) {
+                    SettingsView(
+                        selectedLanguage: $selectedLanguage,
+                        reloadAction: { reloadKey = UUID() },
+                        currentContext: context
+                    )
+                }
             }
         }
     }
@@ -68,6 +76,7 @@ struct ContentView: View {
     private var compactActions: some View {
         HStack(spacing: 10) {
             languageMenu
+            settingsButton
             reloadButton
         }
     }
@@ -75,6 +84,7 @@ struct ContentView: View {
     private var regularActions: some View {
         HStack(spacing: 12) {
             languageMenu
+            settingsButton
             reloadButton
         }
     }
@@ -105,6 +115,19 @@ struct ContentView: View {
                 .padding(.horizontal, 14)
                 .padding(.vertical, 10)
                 .background(Color.accentColor.opacity(0.12), in: Capsule())
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var settingsButton: some View {
+        Button {
+            showingSettings = true
+        } label: {
+            Label(languageCopy.settings, systemImage: "slider.horizontal.3")
+                .font(.system(size: 14, weight: .semibold))
+                .padding(.horizontal, 14)
+                .padding(.vertical, 10)
+                .background(Color.white.opacity(0.9), in: Capsule())
         }
         .buttonStyle(.plain)
     }
@@ -148,7 +171,7 @@ struct PreviewContext {
     }
 }
 
-private enum LanguageOption: String, CaseIterable, Identifiable {
+enum LanguageOption: String, CaseIterable, Identifiable {
     case simplifiedChinese = "zh-CN"
     case japanese = "ja-JP"
     case english = "en-US"
@@ -186,6 +209,16 @@ private enum LanguageOption: String, CaseIterable, Identifiable {
         case .english: return "Reload"
         case .portuguese: return "Recarregar"
         case .spanish: return "Recargar"
+        }
+    }
+
+    var settings: String {
+        switch self {
+        case .simplifiedChinese: return "设置"
+        case .japanese: return "設定"
+        case .english: return "Settings"
+        case .portuguese: return "Ajustes"
+        case .spanish: return "Ajustes"
         }
     }
 
