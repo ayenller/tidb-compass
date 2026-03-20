@@ -1,6 +1,6 @@
 :root {
-  --bg: #eff4fb;
-  --surface: rgba(255, 255, 255, 0.72);
+  --bg: #eef4fb;
+  --surface: rgba(255, 255, 255, 0.76);
   --surface-strong: rgba(255, 255, 255, 0.9);
   --ink: #10233e;
   --muted: #627188;
@@ -8,7 +8,7 @@
   --accent: #0d8a67;
   --accent-strong: #0a6e52;
   --accent-soft: rgba(13, 138, 103, 0.12);
-  --shadow: 0 24px 60px rgba(40, 73, 112, 0.14);
+  --shadow: 0 26px 64px rgba(35, 66, 104, 0.14);
 }
 
 * {
@@ -22,7 +22,7 @@ body {
   font-family: "SF Pro Display", "PingFang SC", "Hiragino Sans", "Helvetica Neue", sans-serif;
   background:
     radial-gradient(circle at top left, rgba(13, 138, 103, 0.16), transparent 24%),
-    radial-gradient(circle at bottom right, rgba(102, 145, 255, 0.14), transparent 26%),
+    radial-gradient(circle at bottom right, rgba(102, 145, 255, 0.15), transparent 28%),
     linear-gradient(180deg, #eef5ff 0%, #f6f9fd 100%);
 }
 
@@ -32,7 +32,7 @@ button {
 
 .app-shell {
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: 330px 1fr;
   min-height: 100vh;
   gap: 24px;
   padding: 24px;
@@ -62,13 +62,13 @@ button {
 
 .brand-mark {
   display: grid;
-  width: 56px;
-  height: 56px;
+  width: 58px;
+  height: 58px;
   place-items: center;
   border-radius: 18px;
   color: #fff;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   background: linear-gradient(135deg, #10a97e 0%, #0a6e52 100%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.36);
 }
@@ -89,49 +89,49 @@ button {
 }
 
 .brand h1 {
-  font-size: 28px;
+  font-size: 30px;
 }
 
 .topbar h2 {
-  max-width: 620px;
-  font-size: 30px;
+  max-width: 720px;
+  font-size: 32px;
 }
 
 .panel {
   padding: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.64);
+  border: 1px solid rgba(255, 255, 255, 0.68);
   border-radius: 24px;
   background: var(--surface-strong);
 }
 
 .language-list,
-.nav-list {
+.selector-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
 
 .language-pill,
-.nav-item,
+.selector-chip,
 .ghost-button {
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 11px 14px;
   cursor: pointer;
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.9);
   transition: 160ms ease;
 }
 
 .language-pill:hover,
-.nav-item:hover,
+.selector-chip:hover,
 .ghost-button:hover {
   transform: translateY(-1px);
-  border-color: rgba(13, 138, 103, 0.28);
+  border-color: rgba(13, 138, 103, 0.3);
 }
 
 .language-pill.is-active,
-.nav-item.is-active {
+.selector-chip.is-active {
   color: #fff;
   border-color: transparent;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
@@ -141,13 +141,13 @@ button {
   margin: 0;
   padding-left: 18px;
   color: var(--muted);
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 .muted {
   margin: 0;
   color: var(--muted);
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 .main-stage {
@@ -158,7 +158,7 @@ button {
 
 .topbar {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 18px;
   margin-bottom: 20px;
@@ -178,7 +178,7 @@ button {
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--muted);
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .status-dot {
@@ -189,7 +189,7 @@ button {
   box-shadow: 0 0 0 6px var(--accent-soft);
 }
 
-.phone-stage {
+.preview-stage {
   display: grid;
   flex: 1;
   place-items: center;
@@ -198,24 +198,58 @@ button {
   border-radius: 32px;
   background:
     radial-gradient(circle at top, rgba(13, 138, 103, 0.1), transparent 30%),
-    linear-gradient(180deg, #ebf2fd 0%, #f9fbff 100%);
+    linear-gradient(180deg, #eaf1ff 0%, #f7f9fd 100%);
 }
 
-.phone-device {
+.device-wrap {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  padding: 24px;
+}
+
+.device-shell {
+  --device-width: 430px;
+  --device-height: 932px;
   position: relative;
-  width: min(430px, calc(100vw - 72px));
-  height: min(860px, calc(100vh - 120px));
-  padding: 56px 10px 12px;
+  width: min(var(--device-width), 100%);
+  height: min(var(--device-height), 100%);
+  padding: 52px 10px 12px;
   border-radius: 46px;
   background: #111317;
   box-shadow:
-    0 40px 80px rgba(17, 19, 23, 0.26),
+    0 38px 82px rgba(17, 19, 23, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-.dynamic-island {
+.device-shell.is-iphone.is-portrait {
+  --device-width: 430px;
+  --device-height: 932px;
+}
+
+.device-shell.is-iphone.is-landscape {
+  --device-width: 932px;
+  --device-height: 430px;
+  border-radius: 40px;
+  padding: 12px 10px 12px 54px;
+}
+
+.device-shell.is-ipad.is-portrait {
+  --device-width: 834px;
+  --device-height: 1194px;
+  border-radius: 38px;
+}
+
+.device-shell.is-ipad.is-landscape {
+  --device-width: 1194px;
+  --device-height: 834px;
+  border-radius: 34px;
+}
+
+.device-camera {
   position: absolute;
-  top: 16px;
+  top: 14px;
   left: 50%;
   width: 128px;
   height: 32px;
@@ -224,9 +258,17 @@ button {
   background: #020304;
 }
 
+.device-shell.is-iphone.is-landscape .device-camera {
+  top: 50%;
+  left: 16px;
+  width: 32px;
+  height: 128px;
+  transform: translateY(-50%);
+}
+
 .device-meta {
   position: absolute;
-  top: 22px;
+  top: 21px;
   left: 24px;
   right: 24px;
   display: flex;
@@ -234,6 +276,11 @@ button {
   color: rgba(255, 255, 255, 0.82);
   font-size: 12px;
   font-weight: 600;
+}
+
+.device-shell.is-iphone.is-landscape .device-meta {
+  top: 24px;
+  left: 64px;
 }
 
 #content-frame {
@@ -244,24 +291,13 @@ button {
   background: #fff;
 }
 
-code {
-  padding: 2px 6px;
-  border-radius: 8px;
-  background: var(--accent-soft);
-}
-
-@media (max-width: 1120px) {
+@media (max-width: 1220px) {
   .app-shell {
     grid-template-columns: 1fr;
   }
-
-  .topbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .app-shell {
     padding: 14px;
     gap: 14px;
@@ -273,18 +309,19 @@ code {
     border-radius: 24px;
   }
 
-  .brand h1,
+  .topbar {
+    flex-direction: column;
+  }
+
   .topbar h2 {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .topbar-actions {
-    width: 100%;
     flex-wrap: wrap;
   }
 
-  .phone-device {
-    width: min(100%, 430px);
-    height: 720px;
+  .device-wrap {
+    padding: 12px;
   }
 }

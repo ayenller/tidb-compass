@@ -1,116 +1,148 @@
 const frame = document.querySelector("#content-frame");
-const navItems = document.querySelectorAll(".nav-item");
 const reloadButton = document.querySelector("#reload-page");
 const languageButtons = document.querySelectorAll(".language-pill");
+const deviceButtons = document.querySelectorAll("[data-device]");
+const orientationButtons = document.querySelectorAll("[data-orientation]");
+const deviceShell = document.querySelector("#device-shell");
 const deviceLanguage = document.querySelector("#device-language");
+const previewStatus = document.querySelector("#preview-status");
+
+const previewState = {
+  language: localStorage.getItem("tidb-compass-lang") || "zh-CN",
+  device: localStorage.getItem("tidb-compass-device") || "iphone",
+  orientation: localStorage.getItem("tidb-compass-orientation") || "portrait"
+};
 
 const shellMessages = {
   "zh-CN": {
     langLabel: "中文",
+    deviceNames: { iphone: "iPhone", ipad: "iPad", portrait: "竖版", landscape: "横版" },
     strings: {
-      "shell.badge": "iOS 销售使能应用",
+      "shell.badge": "iOS 预览工作台",
       "shell.languageLabel": "语言",
-      "shell.navLabel": "页面入口",
-      "shell.homePage": "TiDB 介绍主页",
-      "shell.useCasesLabel": "推荐使用方式",
-      "shell.useCase1": "面向销售：快速讲清 TiDB 的业务价值。",
-      "shell.useCase2": "面向售前：按客户诉求筛选信息重点。",
-      "shell.useCase3": "面向伙伴：统一对外讲法与对比框架。",
-      "shell.updateLabel": "内容更新",
-      "shell.updateBody": "保持 iOS APP 壳稳定，仅更新内嵌的静态 HTML 内容页即可。",
-      "shell.modeLabel": "客户沟通模式",
-      "shell.title": "一个支持多语言的 TiDB iOS 介绍应用壳",
-      "shell.status": "多语言内容已就绪",
-      "shell.reload": "刷新内容"
+      "shell.deviceLabel": "设备",
+      "shell.orientationLabel": "方向",
+      "shell.portrait": "竖版",
+      "shell.landscape": "横版",
+      "shell.previewLabel": "预览重点",
+      "shell.useCase1": "Overview 重点展示客户需求筛选与核心价值。",
+      "shell.useCase2": "Compare 和 Scenarios 优先服务现场讲解。",
+      "shell.useCase3": "页面在 iPhone、iPad 的横竖屏下自适应排版。",
+      "shell.updateLabel": "原型说明",
+      "shell.updateBody": "这一版用于评审 iOS 应用排版、横竖屏和设备适配，不是最终开发代码。",
+      "shell.modeLabel": "设计评审模式",
+      "shell.title": "一版支持 iPhone 与 iPad 的 TiDB Compass iOS 预览",
+      "shell.status": "iPhone 竖版",
+      "shell.reload": "刷新"
     }
   },
   "ja-JP": {
     langLabel: "日本語",
+    deviceNames: { iphone: "iPhone", ipad: "iPad", portrait: "縦向き", landscape: "横向き" },
     strings: {
-      "shell.badge": "iOS セールスイネーブルメント",
+      "shell.badge": "iOS プレビュースタジオ",
       "shell.languageLabel": "言語",
-      "shell.navLabel": "ページ",
-      "shell.homePage": "TiDB 紹介ホーム",
-      "shell.useCasesLabel": "推奨用途",
-      "shell.useCase1": "営業向け: TiDB の価値を短時間で説明。",
-      "shell.useCase2": "プリセールス向け: 顧客要件で重点を絞り込み。",
-      "shell.useCase3": "パートナー向け: 一貫した対外ストーリーを維持。",
-      "shell.updateLabel": "コンテンツ更新",
-      "shell.updateBody": "iOS アプリシェルは固定し、埋め込み HTML のみ差し替えて更新できます。",
-      "shell.modeLabel": "顧客説明モード",
-      "shell.title": "多言語対応の TiDB iOS 紹介アプリシェル",
-      "shell.status": "多言語コンテンツ準備完了",
+      "shell.deviceLabel": "デバイス",
+      "shell.orientationLabel": "向き",
+      "shell.portrait": "縦向き",
+      "shell.landscape": "横向き",
+      "shell.previewLabel": "プレビューの焦点",
+      "shell.useCase1": "Overview は顧客要件フィルタと価値訴求を中心に表示します。",
+      "shell.useCase2": "Compare と Scenarios は商談デモ向けに最適化しています。",
+      "shell.useCase3": "iPhone と iPad の縦横に応じてレイアウトが変化します。",
+      "shell.updateLabel": "プロトタイプメモ",
+      "shell.updateBody": "この版は iOS アプリのレイアウト、向き、端末適応の確認用です。",
+      "shell.modeLabel": "デザインレビュー",
+      "shell.title": "iPhone と iPad に対応した TiDB Compass の iOS プレビュー",
+      "shell.status": "iPhone 縦向き",
       "shell.reload": "再読み込み"
     }
   },
   "en-US": {
     langLabel: "English",
+    deviceNames: { iphone: "iPhone", ipad: "iPad", portrait: "Portrait", landscape: "Landscape" },
     strings: {
-      "shell.badge": "iOS Sales Enablement",
+      "shell.badge": "iOS Preview Studio",
       "shell.languageLabel": "Language",
-      "shell.navLabel": "Pages",
-      "shell.homePage": "TiDB Overview",
-      "shell.useCasesLabel": "Recommended Use",
-      "shell.useCase1": "For sellers: explain TiDB's business value quickly.",
-      "shell.useCase2": "For presales: focus by customer priority.",
-      "shell.useCase3": "For partners: keep a consistent external story.",
-      "shell.updateLabel": "Content Update",
-      "shell.updateBody": "Keep the iOS app shell stable and update only the embedded static HTML page.",
-      "shell.modeLabel": "Customer Mode",
-      "shell.title": "A multilingual TiDB iOS app shell for customer storytelling",
-      "shell.status": "Localized content ready",
+      "shell.deviceLabel": "Device",
+      "shell.orientationLabel": "Orientation",
+      "shell.portrait": "Portrait",
+      "shell.landscape": "Landscape",
+      "shell.previewLabel": "Preview Focus",
+      "shell.useCase1": "Overview highlights customer-need filtering and value framing.",
+      "shell.useCase2": "Compare and Scenarios are tuned for live conversations.",
+      "shell.useCase3": "Layouts adapt across iPhone and iPad in both orientations.",
+      "shell.updateLabel": "Prototype Notes",
+      "shell.updateBody": "This version is for reviewing iOS layout, orientation, and device adaptation.",
+      "shell.modeLabel": "Design Review Mode",
+      "shell.title": "A TiDB Compass iOS preview for iPhone and iPad",
+      "shell.status": "iPhone Portrait",
       "shell.reload": "Reload"
     }
   },
   "pt-BR": {
     langLabel: "Português",
+    deviceNames: { iphone: "iPhone", ipad: "iPad", portrait: "Retrato", landscape: "Paisagem" },
     strings: {
-      "shell.badge": "Enablement de Vendas iOS",
+      "shell.badge": "Estúdio de preview iOS",
       "shell.languageLabel": "Idioma",
-      "shell.navLabel": "Páginas",
-      "shell.homePage": "Visão geral do TiDB",
-      "shell.useCasesLabel": "Uso recomendado",
-      "shell.useCase1": "Para vendas: explique rapidamente o valor do TiDB.",
-      "shell.useCase2": "Para pré-vendas: filtre pelo que o cliente mais prioriza.",
-      "shell.useCase3": "Para parceiros: mantenha uma narrativa consistente.",
-      "shell.updateLabel": "Atualização de conteúdo",
-      "shell.updateBody": "Mantenha o shell do app iOS estável e atualize apenas a página HTML incorporada.",
-      "shell.modeLabel": "Modo de conversa com cliente",
-      "shell.title": "Um shell de app iOS multilíngue para apresentar o TiDB",
-      "shell.status": "Conteúdo localizado pronto",
+      "shell.deviceLabel": "Dispositivo",
+      "shell.orientationLabel": "Orientação",
+      "shell.portrait": "Retrato",
+      "shell.landscape": "Paisagem",
+      "shell.previewLabel": "Foco do preview",
+      "shell.useCase1": "Overview destaca filtro por necessidade e proposta de valor.",
+      "shell.useCase2": "Compare e Scenarios foram ajustados para conversas ao vivo.",
+      "shell.useCase3": "Os layouts se adaptam a iPhone e iPad nas duas orientações.",
+      "shell.updateLabel": "Notas do protótipo",
+      "shell.updateBody": "Esta versão serve para revisar layout iOS, orientação e adaptação entre dispositivos.",
+      "shell.modeLabel": "Modo de revisão de design",
+      "shell.title": "Um preview iOS do TiDB Compass para iPhone e iPad",
+      "shell.status": "iPhone Retrato",
       "shell.reload": "Recarregar"
     }
   },
   "es-ES": {
     langLabel: "Español",
+    deviceNames: { iphone: "iPhone", ipad: "iPad", portrait: "Vertical", landscape: "Horizontal" },
     strings: {
-      "shell.badge": "Enablement comercial para iOS",
+      "shell.badge": "Estudio de preview iOS",
       "shell.languageLabel": "Idioma",
-      "shell.navLabel": "Páginas",
-      "shell.homePage": "Visión general de TiDB",
-      "shell.useCasesLabel": "Uso recomendado",
-      "shell.useCase1": "Para ventas: explica rápido el valor de TiDB.",
-      "shell.useCase2": "Para preventa: filtra por la prioridad del cliente.",
-      "shell.useCase3": "Para partners: mantén una narrativa consistente.",
-      "shell.updateLabel": "Actualización de contenido",
-      "shell.updateBody": "Mantén estable el shell de la app iOS y actualiza solo la página HTML embebida.",
-      "shell.modeLabel": "Modo de conversación con cliente",
-      "shell.title": "Un shell de app iOS multilingüe para presentar TiDB",
-      "shell.status": "Contenido localizado listo",
+      "shell.deviceLabel": "Dispositivo",
+      "shell.orientationLabel": "Orientación",
+      "shell.portrait": "Vertical",
+      "shell.landscape": "Horizontal",
+      "shell.previewLabel": "Foco del preview",
+      "shell.useCase1": "Overview resalta filtro por necesidad y propuesta de valor.",
+      "shell.useCase2": "Compare y Scenarios están pensados para demos en vivo.",
+      "shell.useCase3": "Los layouts se adaptan a iPhone y iPad en ambas orientaciones.",
+      "shell.updateLabel": "Notas del prototipo",
+      "shell.updateBody": "Esta versión sirve para revisar layout iOS, orientación y adaptación entre dispositivos.",
+      "shell.modeLabel": "Modo de revisión de diseño",
+      "shell.title": "Un preview iOS de TiDB Compass para iPhone y iPad",
+      "shell.status": "iPhone Vertical",
       "shell.reload": "Recargar"
     }
   }
 };
 
-function updateFrameSource(language) {
-  const activeNavItem = document.querySelector(".nav-item.is-active");
-  const targetPage = activeNavItem?.dataset.page || "./content/tidb-sales-kit.html";
-  frame.src = `${targetPage}?lang=${encodeURIComponent(language)}`;
+function updatePreviewStatus() {
+  const pack = shellMessages[previewState.language] || shellMessages["en-US"];
+  const { deviceNames } = pack;
+  previewStatus.textContent = `${deviceNames[previewState.device]} ${deviceNames[previewState.orientation]}`;
 }
 
-function applyShellLanguage(language) {
-  const pack = shellMessages[language] || shellMessages["en-US"];
-  document.documentElement.lang = language;
+function updateFrameSource() {
+  frame.src = `./content/tidb-sales-kit.html?lang=${encodeURIComponent(
+    previewState.language
+  )}&device=${encodeURIComponent(previewState.device)}&orientation=${encodeURIComponent(
+    previewState.orientation
+  )}`;
+}
+
+function applyShellLanguage() {
+  const pack = shellMessages[previewState.language] || shellMessages["en-US"];
+  document.documentElement.lang = previewState.language;
   deviceLanguage.textContent = pack.langLabel;
 
   document.querySelectorAll("[data-i18n]").forEach((node) => {
@@ -122,45 +154,55 @@ function applyShellLanguage(language) {
   });
 }
 
-function setLanguage(language) {
+function applyPreviewState() {
   languageButtons.forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.lang === language);
+    button.classList.toggle("is-active", button.dataset.lang === previewState.language);
   });
 
-  localStorage.setItem("tidb-compass-lang", language);
-  applyShellLanguage(language);
-  updateFrameSource(language);
+  deviceButtons.forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.device === previewState.device);
+  });
+
+  orientationButtons.forEach((button) => {
+    button.classList.toggle("is-active", button.dataset.orientation === previewState.orientation);
+  });
+
+  deviceShell.classList.toggle("is-iphone", previewState.device === "iphone");
+  deviceShell.classList.toggle("is-ipad", previewState.device === "ipad");
+  deviceShell.classList.toggle("is-portrait", previewState.orientation === "portrait");
+  deviceShell.classList.toggle("is-landscape", previewState.orientation === "landscape");
+
+  applyShellLanguage();
+  updatePreviewStatus();
+  updateFrameSource();
 }
-
-navItems.forEach((item) => {
-  item.addEventListener("click", () => {
-    const targetPage = item.dataset.page;
-    if (!targetPage) {
-      return;
-    }
-
-    navItems.forEach((button) => button.classList.remove("is-active"));
-    item.classList.add("is-active");
-    updateFrameSource(localStorage.getItem("tidb-compass-lang") || "zh-CN");
-  });
-});
 
 languageButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const language = button.dataset.lang;
-    if (language) {
-      setLanguage(language);
-    }
+    previewState.language = button.dataset.lang;
+    localStorage.setItem("tidb-compass-lang", previewState.language);
+    applyPreviewState();
+  });
+});
+
+deviceButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    previewState.device = button.dataset.device;
+    localStorage.setItem("tidb-compass-device", previewState.device);
+    applyPreviewState();
+  });
+});
+
+orientationButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    previewState.orientation = button.dataset.orientation;
+    localStorage.setItem("tidb-compass-orientation", previewState.orientation);
+    applyPreviewState();
   });
 });
 
 reloadButton.addEventListener("click", () => {
-  if (!frame.contentWindow) {
-    updateFrameSource(localStorage.getItem("tidb-compass-lang") || "zh-CN");
-    return;
-  }
-
-  frame.contentWindow.location.reload();
+  updateFrameSource();
 });
 
-setLanguage(localStorage.getItem("tidb-compass-lang") || "zh-CN");
+applyPreviewState();

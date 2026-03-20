@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <title>TiDB Compass</title>
+    <title>TiDB Compass Preview</title>
     <link rel="stylesheet" href="./assets/app.css" />
   </head>
   <body>
@@ -15,14 +15,14 @@
         <div class="brand">
           <div class="brand-mark">TC</div>
           <div>
-            <p class="eyebrow" data-i18n="shell.badge">iOS Sales Enablement</p>
+            <p class="eyebrow" data-i18n="shell.badge">iOS Preview Studio</p>
             <h1>TiDB Compass</h1>
           </div>
         </div>
 
         <section class="panel">
           <p class="panel-label" data-i18n="shell.languageLabel">Language</p>
-          <div class="language-list" id="language-list">
+          <div class="language-list">
             <button class="language-pill is-active" type="button" data-lang="zh-CN">中文</button>
             <button class="language-pill" type="button" data-lang="ja-JP">日本語</button>
             <button class="language-pill" type="button" data-lang="en-US">English</button>
@@ -32,31 +32,40 @@
         </section>
 
         <section class="panel">
-          <p class="panel-label" data-i18n="shell.navLabel">Pages</p>
-          <div class="nav-list">
-            <button
-              class="nav-item is-active"
-              data-page="./content/tidb-sales-kit.html"
-              data-i18n="shell.homePage"
-            >
-              TiDB Overview
+          <p class="panel-label" data-i18n="shell.deviceLabel">Device</p>
+          <div class="selector-grid" id="device-selector">
+            <button class="selector-chip is-active" type="button" data-device="iphone">
+              iPhone
+            </button>
+            <button class="selector-chip" type="button" data-device="ipad">iPad</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <p class="panel-label" data-i18n="shell.orientationLabel">Orientation</p>
+          <div class="selector-grid" id="orientation-selector">
+            <button class="selector-chip is-active" type="button" data-orientation="portrait">
+              <span data-i18n="shell.portrait">Portrait</span>
+            </button>
+            <button class="selector-chip" type="button" data-orientation="landscape">
+              <span data-i18n="shell.landscape">Landscape</span>
             </button>
           </div>
         </section>
 
         <section class="panel">
-          <p class="panel-label" data-i18n="shell.useCasesLabel">Recommended Use</p>
+          <p class="panel-label" data-i18n="shell.previewLabel">Preview Focus</p>
           <ul class="hint-list">
-            <li data-i18n="shell.useCase1">For sellers: explain TiDB's business value fast.</li>
-            <li data-i18n="shell.useCase2">For presales: filter by customer priorities.</li>
-            <li data-i18n="shell.useCase3">For partners: keep a consistent story.</li>
+            <li data-i18n="shell.useCase1">Overview focuses on customer-need filtering.</li>
+            <li data-i18n="shell.useCase2">Compare and Scenarios are optimized for live demos.</li>
+            <li data-i18n="shell.useCase3">Layouts adapt across iPhone and iPad in both orientations.</li>
           </ul>
         </section>
 
         <section class="panel">
-          <p class="panel-label" data-i18n="shell.updateLabel">Content Update</p>
+          <p class="panel-label" data-i18n="shell.updateLabel">Prototype Notes</p>
           <p class="muted" data-i18n="shell.updateBody">
-            Keep the iOS app shell stable and update only the embedded static HTML page.
+            This preview simulates the iOS app shell and a full in-app page system for design review.
           </p>
         </section>
       </aside>
@@ -64,13 +73,13 @@
       <main class="main-stage">
         <header class="topbar">
           <div>
-            <p class="eyebrow" data-i18n="shell.modeLabel">Customer Mode</p>
-            <h2 data-i18n="shell.title">An iOS app shell for a continuously updated TiDB story</h2>
+            <p class="eyebrow" data-i18n="shell.modeLabel">Design Review Mode</p>
+            <h2 data-i18n="shell.title">A responsive iOS preview for iPhone and iPad</h2>
           </div>
           <div class="topbar-actions">
             <div class="status-chip">
               <span class="status-dot"></span>
-              <span data-i18n="shell.status">Localized content ready</span>
+              <span id="preview-status" data-i18n="shell.status">iPhone Portrait</span>
             </div>
             <button id="reload-page" class="ghost-button" type="button" data-i18n="shell.reload">
               Reload
@@ -78,18 +87,20 @@
           </div>
         </header>
 
-        <section class="phone-stage">
-          <div class="phone-device">
-            <div class="dynamic-island"></div>
-            <div class="device-meta">
-              <span id="device-language">中文</span>
-              <span>TiDB Compass</span>
+        <section class="preview-stage">
+          <div class="device-wrap">
+            <div class="device-shell is-iphone is-portrait" id="device-shell">
+              <div class="device-camera"></div>
+              <div class="device-meta">
+                <span id="device-language">中文</span>
+                <span>TiDB Compass</span>
+              </div>
+              <iframe
+                id="content-frame"
+                title="TiDB Compass iOS Preview"
+                src="./content/tidb-sales-kit.html?lang=zh-CN"
+              ></iframe>
             </div>
-            <iframe
-              id="content-frame"
-              title="TiDB content"
-              src="./content/tidb-sales-kit.html?lang=zh-CN"
-            ></iframe>
           </div>
         </section>
       </main>
