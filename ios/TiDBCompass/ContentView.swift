@@ -5,6 +5,7 @@ struct ContentView: View {
     @AppStorage("tidb_compass_language") private var selectedLanguage = LanguageOption.simplifiedChinese.rawValue
     @State private var reloadKey = UUID()
     @State private var showingSettings = false
+    @State private var selectedTab: RootTab = .preview
 
     var body: some View {
         GeometryReader { proxy in
@@ -14,22 +15,40 @@ struct ContentView: View {
                 orientation: proxy.size.width > proxy.size.height ? "landscape" : "portrait"
             )
 
-            NavigationStack {
-                VStack(spacing: 0) {
-                    header(context: context, width: proxy.size.width)
-                    Divider()
-                    CompassWebView(context: context, reloadKey: reloadKey)
-                }
-                .background(Color(uiColor: .systemGroupedBackground))
-                .navigationBarHidden(true)
-                .sheet(isPresented: $showingSettings) {
-                    SettingsView(
-                        selectedLanguage: $selectedLanguage,
-                        reloadAction: { reloadKey = UUID() },
-                        currentContext: context
-                    )
-                }
+            TabView(selection: $selectedTab) {
+                previewScreen(context: context, width: proxy.size.width)
+                    .tabItem {
+                        Label(languageCopy.previewTab, systemImage: "safari")
+                    }
+                    .tag(RootTab.preview)
+
+                AboutView(language: languageCopy, context: context)
+                    .tabItem {
+                        Label(languageCopy.aboutTab, systemImage: "info.circle")
+                    }
+                    .tag(RootTab.about)
             }
+            .tint(.accentColor)
+            .sheet(isPresented: $showingSettings) {
+                SettingsView(
+                    selectedLanguage: $selectedLanguage,
+                    reloadAction: { reloadKey = UUID() },
+                    currentContext: context
+                )
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func previewScreen(context: PreviewContext, width: CGFloat) -> some View {
+        NavigationStack {
+            VStack(spacing: 0) {
+                header(context: context, width: width)
+                Divider()
+                CompassWebView(context: context, reloadKey: reloadKey)
+            }
+            .background(Color(uiColor: .systemGroupedBackground))
+            .navigationBarHidden(true)
         }
     }
 
@@ -157,6 +176,11 @@ struct ContentView: View {
     }
 }
 
+enum RootTab {
+    case preview
+    case about
+}
+
 struct PreviewContext {
     let lang: String
     let device: String
@@ -192,15 +216,7 @@ enum LanguageOption: String, CaseIterable, Identifiable {
 
     var name: String { label }
 
-    var badge: String {
-        switch self {
-        case .simplifiedChinese: return "iOS Sales Storytelling"
-        case .japanese: return "iOS Sales Storytelling"
-        case .english: return "iOS Sales Storytelling"
-        case .portuguese: return "iOS Sales Storytelling"
-        case .spanish: return "iOS Sales Storytelling"
-        }
-    }
+    var badge: String { "iOS Sales Storytelling" }
 
     var reload: String {
         switch self {
@@ -219,6 +235,26 @@ enum LanguageOption: String, CaseIterable, Identifiable {
         case .english: return "Settings"
         case .portuguese: return "Ajustes"
         case .spanish: return "Ajustes"
+        }
+    }
+
+    var previewTab: String {
+        switch self {
+        case .simplifiedChinese: return "预览"
+        case .japanese: return "プレビュー"
+        case .english: return "Preview"
+        case .portuguese: return "Preview"
+        case .spanish: return "Preview"
+        }
+    }
+
+    var aboutTab: String {
+        switch self {
+        case .simplifiedChinese: return "关于"
+        case .japanese: return "情報"
+        case .english: return "About"
+        case .portuguese: return "Sobre"
+        case .spanish: return "Acerca"
         }
     }
 

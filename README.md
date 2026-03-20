@@ -39,8 +39,10 @@ TiDB Compass 是一个面向销售、售前和伙伴介绍场景的 iOS 风格�
 
 - SwiftUI 负责原生头部与语言切换
 - SwiftUI 原生设置页负责语言与预览上下文查看
+- SwiftUI 原生 Tab 已拆出 Preview / About 两个入口
 - WKWebView 负责加载设计定稿页面
 - 页面上下文会由原生层注入：语言、iPhone/iPad、横版/竖版
+- 已补基础 Launch Screen 与 App Icon 资源位，便于继续朝可发布工程推进
 
 ### 打开方式
 

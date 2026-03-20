@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LaunchScreenViewController">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="LaunchScreenScene">
+            <objects>
+                <viewController id="LaunchScreenViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LaunchScreenView">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CardContainer">
+                                <rect key="frame" x="32" y="255.5" width="329" height="341"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="TiDB Compass" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TitleLabel">
+                                        <rect key="frame" x="32" y="42" width="265" height="40.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Sales storytelling for TiDB opportunities" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SubtitleLabel">
+                                        <rect key="frame" x="32" y="94.5" width="265" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <color key="textColor" red="0.8392156863" green="0.9215686275" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BadgeView">
+                                        <rect key="frame" x="32" y="255" width="115" height="34"/>
+                                        <color key="backgroundColor" red="0.1019607843" green="0.3568627451" blue="0.3019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="34" id="badgeHeight"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="iOS Preview" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BadgeLabel">
+                                        <rect key="frame" x="47.5" y="262" width="84" height="20"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SignalView">
+                                        <rect key="frame" x="225" y="214" width="72" height="72"/>
+                                        <color key="backgroundColor" red="0.05098039216" green="0.5411764706" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="72" id="signalWidth"/>
+                                            <constraint firstAttribute="height" constant="72" id="signalHeight"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.05490196078" green="0.2" blue="0.1803921569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="BadgeView" firstAttribute="top" secondItem="SubtitleLabel" secondAttribute="bottom" constant="112.5" id="badgeTop"/>
+                                    <constraint firstItem="BadgeLabel" firstAttribute="centerX" secondItem="BadgeView" secondAttribute="centerX" id="badgeCenterX"/>
+                                    <constraint firstItem="BadgeLabel" firstAttribute="centerY" secondItem="BadgeView" secondAttribute="centerY" id="badgeCenterY"/>
+                                    <constraint firstItem="BadgeView" firstAttribute="leading" secondItem="CardContainer" secondAttribute="leading" constant="32" id="badgeLeading"/>
+                                    <constraint firstItem="BadgeView" firstAttribute="bottom" secondItem="CardContainer" secondAttribute="bottom" constant="-52" id="badgeBottom"/>
+                                    <constraint firstItem="TitleLabel" firstAttribute="top" secondItem="CardContainer" secondAttribute="top" constant="42" id="titleTop"/>
+                                    <constraint firstItem="TitleLabel" firstAttribute="leading" secondItem="CardContainer" secondAttribute="leading" constant="32" id="titleLeading"/>
+                                    <constraint firstItem="SubtitleLabel" firstAttribute="top" secondItem="TitleLabel" secondAttribute="bottom" constant="12" id="subtitleTop"/>
+                                    <constraint firstItem="SubtitleLabel" firstAttribute="leading" secondItem="CardContainer" secondAttribute="leading" constant="32" id="subtitleLeading"/>
+                                    <constraint firstItem="SubtitleLabel" firstAttribute="trailing" secondItem="CardContainer" secondAttribute="trailing" constant="-32" id="subtitleTrailing"/>
+                                    <constraint firstItem="SignalView" firstAttribute="trailing" secondItem="CardContainer" secondAttribute="trailing" constant="-32" id="signalTrailing"/>
+                                    <constraint firstItem="SignalView" firstAttribute="bottom" secondItem="CardContainer" secondAttribute="bottom" constant="-55" id="signalBottom"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="SafeArea"/>
+                        <color key="backgroundColor" red="0.9490196078" green="0.968627451" blue="0.9647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="CardContainer" firstAttribute="centerY" secondItem="SafeArea" secondAttribute="centerY" id="cardCenterY"/>
+                            <constraint firstItem="CardContainer" firstAttribute="leading" secondItem="SafeArea" secondAttribute="leading" constant="32" id="cardLeading"/>
+                            <constraint firstItem="CardContainer" firstAttribute="trailing" secondItem="SafeArea" secondAttribute="trailing" constant="-32" id="cardTrailing"/>
+                            <constraint firstItem="CardContainer" firstAttribute="centerX" secondItem="SafeArea" secondAttribute="centerX" id="cardCenterX"/>
+                            <constraint firstItem="CardContainer" firstAttribute="height" constant="341" id="cardHeight"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LaunchScreenFirstResponder" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
