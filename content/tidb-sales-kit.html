@@ -170,7 +170,10 @@
       .scenario-grid,
       .compare-grid,
       .faq-grid,
-      .detail-grid {
+      .detail-grid,
+      .signal-grid,
+      .journey-grid,
+      .summary-stack {
         display: grid;
         gap: 14px;
       }
@@ -178,6 +181,80 @@
       .hero-grid {
         grid-template-columns: 1.3fr 1fr;
         margin-top: 18px;
+      }
+
+      .hero-visual {
+        position: relative;
+        overflow: hidden;
+        min-height: 248px;
+        padding: 18px;
+        border-radius: 24px;
+        background:
+          radial-gradient(circle at top right, rgba(93, 127, 255, 0.26), transparent 36%),
+          linear-gradient(180deg, #13365d 0%, #0f2743 100%);
+        color: #fff;
+      }
+
+      .hero-visual::after {
+        content: "";
+        position: absolute;
+        right: -36px;
+        bottom: -48px;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(13, 138, 103, 0.28), transparent 68%);
+      }
+
+      .mini-kicker {
+        margin: 0 0 10px;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .hero-visual h3,
+      .hero-visual p {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-visual p {
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .signal-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 18px;
+      }
+
+      .signal-card {
+        position: relative;
+        padding: 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .signal-card strong {
+        display: block;
+        margin-bottom: 20px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .signal-bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+        height: 92px;
+      }
+
+      .signal-bars span {
+        width: 100%;
+        border-radius: 12px 12px 4px 4px;
+        background: linear-gradient(180deg, rgba(114, 180, 255, 0.92) 0%, rgba(13, 138, 103, 0.9) 100%);
       }
 
       .panel,
@@ -246,6 +323,29 @@
         margin-top: 16px;
       }
 
+      .journey-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 16px;
+      }
+
+      .journey-card {
+        padding: 16px;
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.84);
+      }
+
+      .journey-card strong {
+        display: inline-grid;
+        width: 32px;
+        height: 32px;
+        place-items: center;
+        margin-bottom: 12px;
+        border-radius: 12px;
+        color: var(--accent);
+        background: var(--accent-soft);
+      }
+
       .card h3,
       .compare-card h3,
       .faq-item h3 {
@@ -295,6 +395,38 @@
 
       .compare-grid {
         grid-template-columns: 1.15fr 0.85fr;
+      }
+
+      .compare-main {
+        display: grid;
+        gap: 14px;
+      }
+
+      .compare-headline {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .compare-badge {
+        padding: 8px 12px;
+        border-radius: 999px;
+        color: var(--accent);
+        background: var(--accent-soft);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .summary-stack {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-tile {
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: #f6f9ff;
+        border: 1px solid var(--line);
       }
 
       table {
@@ -353,8 +485,10 @@
       .tabbar {
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
-        padding: 8px;
+        padding: 10px;
         gap: 8px;
+        border-radius: 28px;
+        background: rgba(255, 255, 255, 0.92);
       }
 
       .tab-button {
@@ -362,10 +496,11 @@
         gap: 5px;
         justify-items: center;
         border: 0;
-        padding: 10px 6px;
+        padding: 10px 6px 12px;
         cursor: pointer;
         color: var(--muted);
         background: transparent;
+        border-radius: 20px;
       }
 
       .tab-button strong {
@@ -373,14 +508,19 @@
       }
 
       .tab-button .icon {
-        width: 26px;
-        height: 26px;
-        border-radius: 10px;
+        display: grid;
+        width: 30px;
+        height: 30px;
+        place-items: center;
+        border-radius: 12px;
         background: rgba(98, 113, 136, 0.12);
+        font-size: 14px;
+        font-weight: 700;
       }
 
       .tab-button.is-active {
         color: var(--accent);
+        background: rgba(13, 138, 103, 0.08);
       }
 
       .tab-button.is-active .icon {
@@ -407,7 +547,9 @@
         .scenario-grid,
         .compare-grid,
         .faq-grid,
-        .detail-grid {
+        .detail-grid,
+        .journey-grid,
+        .signal-grid {
           grid-template-columns: 1fr;
         }
 
@@ -432,6 +574,10 @@
         .detail-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
+
+        .journey-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
       }
 
       @media (min-width: 900px) and (orientation: landscape) {
@@ -450,6 +596,10 @@
         }
 
         .detail-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .journey-grid {
           grid-template-columns: repeat(3, minmax(0, 1fr));
         }
       }
@@ -964,6 +1114,67 @@
 
       const copy = messages[locale] || messages["en-US"];
       document.documentElement.lang = locale;
+      const uiLabels = {
+        "zh-CN": {
+          compassSignal: "演示信号",
+          heroVisualTitle: "专为现场讲解准备的产品化预览",
+          heroVisualBody: "Overview、Compare、Scenarios 被强化成更适合销售演示的界面，而不只是静态网页。",
+          trust: "信任",
+          architecturePath: "架构路径",
+          need: "需求",
+          proof: "论据",
+          risk: "风险"
+        },
+        "ja-JP": {
+          compassSignal: "プレゼン信号",
+          heroVisualTitle: "商談向けに磨いたプロダクトプレビュー",
+          heroVisualBody: "Overview、Compare、Scenarios を、単なる静的ページではなく商談向け UI として強化しています。",
+          trust: "信頼",
+          architecturePath: "アーキテクチャパス",
+          need: "課題",
+          proof: "根拠",
+          risk: "リスク"
+        },
+        "en-US": {
+          compassSignal: "Compass Signal",
+          heroVisualTitle: "A productized preview built for live storytelling",
+          heroVisualBody: "Overview, Compare, and Scenarios are shaped like presentation-ready app screens, not just static web sections.",
+          trust: "Trust",
+          architecturePath: "Architecture Path",
+          need: "Need",
+          proof: "Proof",
+          risk: "Risk"
+        },
+        "pt-BR": {
+          compassSignal: "Sinal Compass",
+          heroVisualTitle: "Um preview de produto pensado para apresentações ao vivo",
+          heroVisualBody: "Overview, Compare e Scenarios foram desenhados como telas prontas para conversa com cliente, não apenas como seções web.",
+          trust: "Confiança",
+          architecturePath: "Caminho arquitetural",
+          need: "Necessidade",
+          proof: "Prova",
+          risk: "Risco"
+        },
+        "es-ES": {
+          compassSignal: "Señal Compass",
+          heroVisualTitle: "Un preview de producto pensado para presentaciones en vivo",
+          heroVisualBody: "Overview, Compare y Scenarios están diseñados como pantallas listas para conversación con cliente, no solo como secciones web.",
+          trust: "Confianza",
+          architecturePath: "Ruta de arquitectura",
+          need: "Necesidad",
+          proof: "Prueba",
+          risk: "Riesgo"
+        }
+      }[locale] || {
+        compassSignal: "Compass Signal",
+        heroVisualTitle: "A productized preview built for live storytelling",
+        heroVisualBody: "Overview, Compare, and Scenarios are shaped like presentation-ready app screens, not just static web sections.",
+        trust: "Trust",
+        architecturePath: "Architecture Path",
+        need: "Need",
+        proof: "Proof",
+        risk: "Risk"
+      };
 
       const tabs = ["overview", "capabilities", "scenarios", "compare", "faq"];
       let activeTab = "overview";
@@ -988,6 +1199,17 @@
             `
           )
           .join("");
+      }
+
+      function tabGlyph(tab) {
+        const glyphs = {
+          overview: "O",
+          capabilities: "C",
+          scenarios: "S",
+          compare: "X",
+          faq: "?"
+        };
+        return glyphs[tab];
       }
 
       function renderApp() {
@@ -1030,20 +1252,49 @@
                       <button class="cta secondary" type="button">${copy.secondaryCta}</button>
                     </div>
                   </div>
-                  <div class="panel">
-                    <div class="metrics">
-                      ${copy.metrics
-                        .map(
-                          (item) => `
-                            <div class="metric">
-                              <strong>${item[0]}</strong>
-                              <span>${item[1]}</span>
-                            </div>
-                          `
-                        )
-                        .join("")}
+                  <div class="hero-visual">
+                    <p class="mini-kicker">${uiLabels.compassSignal}</p>
+                    <h3>${uiLabels.heroVisualTitle}</h3>
+                    <p>${uiLabels.heroVisualBody}</p>
+                    <div class="signal-grid">
+                      <div class="signal-card">
+                        <strong>Scale</strong>
+                        <div class="signal-bars">
+                          <span style="height: 38%"></span>
+                          <span style="height: 62%"></span>
+                          <span style="height: 86%"></span>
+                        </div>
+                      </div>
+                      <div class="signal-card">
+                        <strong>Insight</strong>
+                        <div class="signal-bars">
+                          <span style="height: 46%"></span>
+                          <span style="height: 58%"></span>
+                          <span style="height: 82%"></span>
+                        </div>
+                      </div>
+                      <div class="signal-card">
+                        <strong>${uiLabels.trust}</strong>
+                        <div class="signal-bars">
+                          <span style="height: 44%"></span>
+                          <span style="height: 72%"></span>
+                          <span style="height: 88%"></span>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                </div>
+                <div class="metrics section">
+                  ${copy.metrics
+                    .map(
+                      (item) => `
+                        <div class="metric">
+                          <strong>${item[0]}</strong>
+                          <span>${item[1]}</span>
+                        </div>
+                      `
+                    )
+                    .join("")}
                 </div>
                 <div class="device-note">${copy.deviceNote}</div>
               </div>
@@ -1055,6 +1306,23 @@
                   <p>${copy.overview.sectionBody}</p>
                 </div>
                 <div class="grid">${renderOverviewCards()}</div>
+                <div class="journey-grid">
+                  <article class="journey-card">
+                    <strong>1</strong>
+                    <h3>${copy.tabs[0]}</h3>
+                    <p>${copy.overview.sectionBody}</p>
+                  </article>
+                  <article class="journey-card">
+                    <strong>2</strong>
+                    <h3>${copy.tabs[2]}</h3>
+                    <p>${copy.scenarios.body}</p>
+                  </article>
+                  <article class="journey-card">
+                    <strong>3</strong>
+                    <h3>${copy.tabs[3]}</h3>
+                    <p>${copy.compare.summaryBody}</p>
+                  </article>
+                </div>
               </section>
             </section>
 
@@ -1142,36 +1410,61 @@
                 <p>${copy.compare.body}</p>
               </div>
               <div class="compare-grid">
-                <article class="compare-card featured">
-                  <table>
-                    <thead>
-                      <tr>
-                        ${copy.compare.headers.map((header) => `<th>${header}</th>`).join("")}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      ${copy.compare.rows
-                        .map(
-                          (row, index) => `
-                            <tr>
-                              <td>${row[0]}</td>
-                              <td class="${index < 3 ? "good" : "warning"}">${row[1]}</td>
-                              <td class="${index === 2 ? "warning" : "risk"}">${row[2]}</td>
-                            </tr>
-                          `
-                        )
-                        .join("")}
-                    </tbody>
-                  </table>
-                </article>
+                <div class="compare-main">
+                  <article class="compare-card featured">
+                    <div class="compare-headline">
+                      <h3>${copy.compare.title}</h3>
+                      <span class="compare-badge">${uiLabels.architecturePath}</span>
+                    </div>
+                    <table>
+                      <thead>
+                        <tr>
+                          ${copy.compare.headers.map((header) => `<th>${header}</th>`).join("")}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        ${copy.compare.rows
+                          .map(
+                            (row, index) => `
+                              <tr>
+                                <td>${row[0]}</td>
+                                <td class="${index < 3 ? "good" : "warning"}">${row[1]}</td>
+                                <td class="${index === 2 ? "warning" : "risk"}">${row[2]}</td>
+                              </tr>
+                            `
+                          )
+                          .join("")}
+                      </tbody>
+                    </table>
+                  </article>
+                  <article class="compare-card">
+                    <div class="journey-grid">
+                      <div class="journey-card">
+                        <strong>01</strong>
+                        <h3>${uiLabels.need}</h3>
+                        <p>${copy.chips.scaling}</p>
+                      </div>
+                      <div class="journey-card">
+                        <strong>02</strong>
+                        <h3>${uiLabels.proof}</h3>
+                        <p>${copy.compare.rows[0][1]}</p>
+                      </div>
+                      <div class="journey-card">
+                        <strong>03</strong>
+                        <h3>${uiLabels.risk}</h3>
+                        <p>${copy.compare.rows[3][2]}</p>
+                      </div>
+                    </div>
+                  </article>
+                </div>
                 <article class="compare-card">
                   <h3>${copy.compare.summaryTitle}</h3>
                   <p>${copy.compare.summaryBody}</p>
-                  <div class="detail-grid">
+                  <div class="summary-stack">
                     ${copy.compare.highlights
                       .map(
                         (item, index) => `
-                          <div class="two-line">
+                          <div class="summary-tile two-line">
                             <strong class="${index < 2 ? "good" : "warning"}">${item[0]}</strong>
                             <span>${item[1]}</span>
                           </div>
@@ -1210,7 +1503,7 @@
                 .map(
                   (tab, index) => `
                     <button class="tab-button ${activeTab === tab ? "is-active" : ""}" type="button" data-tab="${tab}">
-                      <span class="icon"></span>
+                      <span class="icon">${tabGlyph(tab)}</span>
                       <strong>${copy.tabs[index]}</strong>
                     </button>
                   `
