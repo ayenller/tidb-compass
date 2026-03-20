@@ -1,0 +1,249 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1B2C3D51234567890ABCDEF /* TiDBCompassApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D61234567890ABCDEF /* TiDBCompassApp.swift */; };
+		A1B2C3D71234567890ABCDEF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D81234567890ABCDEF /* ContentView.swift */; };
+		A1B2C3D91234567890ABCDEF /* CompassWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3DA1234567890ABCDEF /* CompassWebView.swift */; };
+		A1B2C3DB1234567890ABCDEF /* content in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3E01234567890ABCDEF /* content */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A1B2C3D11234567890ABCDEF /* TiDBCompass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TiDBCompass.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1B2C3D61234567890ABCDEF /* TiDBCompassApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiDBCompassApp.swift; sourceTree = "<group>"; };
+		A1B2C3D81234567890ABCDEF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A1B2C3DA1234567890ABCDEF /* CompassWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassWebView.swift; sourceTree = "<group>"; };
+		A1B2C3DC1234567890ABCDEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1B2C3E01234567890ABCDEF /* content */ = {isa = PBXFileReference; lastKnownFileType = folder; name = content; path = ../content; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1B2C3D31234567890ABCDEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1B2C3C91234567890ABCDEF = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3CC1234567890ABCDEF /* TiDBCompass */,
+				A1B2C3CA1234567890ABCDEF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A1B2C3CA1234567890ABCDEF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D11234567890ABCDEF /* TiDBCompass.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A1B2C3CC1234567890ABCDEF /* TiDBCompass */ = {
+			isa = PBXGroup;
+			children = (
+				A1B2C3D61234567890ABCDEF /* TiDBCompassApp.swift */,
+				A1B2C3D81234567890ABCDEF /* ContentView.swift */,
+				A1B2C3DA1234567890ABCDEF /* CompassWebView.swift */,
+				A1B2C3DC1234567890ABCDEF /* Info.plist */,
+				A1B2C3E01234567890ABCDEF /* content */,
+			);
+			path = TiDBCompass;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1B2C3D41234567890ABCDEF /* TiDBCompass */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1B2C3E71234567890ABCDEF /* Build configuration list for PBXNativeTarget "TiDBCompass" */;
+			buildPhases = (
+				A1B2C3D21234567890ABCDEF /* Sources */,
+				A1B2C3D31234567890ABCDEF /* Frameworks */,
+				A1B2C3D41234567890ABCDE0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TiDBCompass;
+			productName = TiDBCompass;
+			productReference = A1B2C3D11234567890ABCDEF /* TiDBCompass.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1B2C3C81234567890ABCDEF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2630;
+				LastUpgradeCheck = 2630;
+				TargetAttributes = {
+					A1B2C3D41234567890ABCDEF = {
+						CreatedOnToolsVersion = 16.3;
+					};
+				};
+			};
+			buildConfigurationList = A1B2C3CB1234567890ABCDEF /* Build configuration list for PBXProject "TiDBCompass" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A1B2C3C91234567890ABCDEF;
+			productRefGroup = A1B2C3CA1234567890ABCDEF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A1B2C3D41234567890ABCDEF /* TiDBCompass */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1B2C3D41234567890ABCDE0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1B2C3DB1234567890ABCDEF /* content in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1B2C3D21234567890ABCDEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1B2C3D51234567890ABCDEF /* TiDBCompassApp.swift in Sources */,
+				A1B2C3D71234567890ABCDEF /* ContentView.swift in Sources */,
+				A1B2C3D91234567890ABCDEF /* CompassWebView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A1B2C3E11234567890ABCDEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		A1B2C3E21234567890ABCDEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A1B2C3E31234567890ABCDEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TiDBCompass/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ayenller.tidbcompass;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A1B2C3E41234567890ABCDEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = TiDBCompass/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ayenller.tidbcompass;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1B2C3CB1234567890ABCDEF /* Build configuration list for PBXProject "TiDBCompass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1B2C3E11234567890ABCDEF /* Debug */,
+				A1B2C3E21234567890ABCDEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1B2C3E71234567890ABCDEF /* Build configuration list for PBXNativeTarget "TiDBCompass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1B2C3E31234567890ABCDEF /* Debug */,
+				A1B2C3E41234567890ABCDEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A1B2C3C81234567890ABCDEF /* Project object */;
+}
