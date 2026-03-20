@@ -19,6 +19,7 @@ TiDB Compass 是一个面向销售、售前和伙伴介绍场景的 iOS 风格�
 - `ios/TiDBCompass.xcodeproj`：原生 iOS 工程
 - `ios/TiDBCompass/`：SwiftUI + WKWebView 应用代码
 - `ios/content/tidb-sales-kit.html`：随 iOS App 打包的页面资源
+- `ios/TiDBCompass/Branding/tidb-logo.svg`：从 PingCAP 官方站点拉取的 TiDB logo 源文件，用于生成 App Icon
 
 ## 使用方式
 
