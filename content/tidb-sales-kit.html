@@ -173,7 +173,9 @@
       .detail-grid,
       .signal-grid,
       .journey-grid,
-      .summary-stack {
+      .summary-stack,
+      .capability-layout,
+      .stage-rail {
         display: grid;
         gap: 14px;
       }
@@ -323,6 +325,60 @@
         margin-top: 16px;
       }
 
+      .card-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .card-glyph {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border-radius: 14px;
+        color: var(--accent);
+        font-size: 14px;
+        font-weight: 700;
+        background: var(--accent-soft);
+      }
+
+      .capability-layout {
+        grid-template-columns: 1.1fr 0.9fr;
+        margin-top: 18px;
+      }
+
+      .spotlight-card {
+        padding: 20px;
+        border-radius: 28px;
+        border: 1px solid var(--line);
+        background:
+          linear-gradient(135deg, rgba(13, 138, 103, 0.12) 0%, rgba(255, 255, 255, 0.96) 68%),
+          var(--surface-strong);
+        box-shadow: var(--shadow);
+      }
+
+      .spotlight-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .spotlight-stat {
+        padding: 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid var(--line);
+      }
+
+      .spotlight-stat strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+      }
+
       .journey-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         margin-top: 16px;
@@ -427,6 +483,23 @@
         border-radius: 18px;
         background: #f6f9ff;
         border: 1px solid var(--line);
+      }
+
+      .stage-rail {
+        margin-top: 18px;
+      }
+
+      .stage-tile {
+        display: grid;
+        gap: 8px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.86);
+      }
+
+      .stage-tile strong {
+        color: var(--ink);
       }
 
       table {
@@ -549,7 +622,9 @@
         .faq-grid,
         .detail-grid,
         .journey-grid,
-        .signal-grid {
+        .signal-grid,
+        .capability-layout,
+        .spotlight-stats {
           grid-template-columns: 1fr;
         }
 
@@ -577,6 +652,10 @@
 
         .journey-grid {
           grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .capability-layout {
+          grid-template-columns: 1fr;
         }
       }
 
@@ -1117,54 +1196,89 @@
       const uiLabels = {
         "zh-CN": {
           compassSignal: "演示信号",
-          heroVisualTitle: "专为现场讲解准备的产品化预览",
-          heroVisualBody: "Overview、Compare、Scenarios 被强化成更适合销售演示的界面，而不只是静态网页。",
-          trust: "信任",
-          architecturePath: "架构路径",
-          need: "需求",
-          proof: "论据",
-          risk: "风险"
-        },
+        heroVisualTitle: "专为现场讲解准备的产品化预览",
+        heroVisualBody: "Overview、Compare、Scenarios 被强化成更适合销售演示的界面，而不只是静态网页。",
+        trust: "信任",
+        architecturePath: "架构路径",
+        need: "需求",
+        proof: "论据",
+        risk: "风险",
+        capabilitySpotlight: "核心能力聚焦",
+        stageMode: "横屏讲解模式",
+        stageBody: "在 iPad 横版中，左侧讲事实，右侧讲风险和决策路径。",
+        stageReason: "为什么现在谈",
+        stageReasonBody: "客户已开始感受到增长、链路或稳定性压力。",
+        stageNext: "下一步动作",
+        stageNextBody: "用 PoC 或架构评估承接，不要停留在概念介绍。"
+      },
         "ja-JP": {
           compassSignal: "プレゼン信号",
-          heroVisualTitle: "商談向けに磨いたプロダクトプレビュー",
-          heroVisualBody: "Overview、Compare、Scenarios を、単なる静的ページではなく商談向け UI として強化しています。",
-          trust: "信頼",
-          architecturePath: "アーキテクチャパス",
-          need: "課題",
-          proof: "根拠",
-          risk: "リスク"
-        },
+        heroVisualTitle: "商談向けに磨いたプロダクトプレビュー",
+        heroVisualBody: "Overview、Compare、Scenarios を、単なる静的ページではなく商談向け UI として強化しています。",
+        trust: "信頼",
+        architecturePath: "アーキテクチャパス",
+        need: "課題",
+        proof: "根拠",
+        risk: "リスク",
+        capabilitySpotlight: "主要機能の焦点",
+        stageMode: "横向きプレゼンモード",
+        stageBody: "iPad 横向きでは、左で事実、右でリスクと意思決定を伝える構成です。",
+        stageReason: "なぜ今なのか",
+        stageReasonBody: "顧客が成長、連携、安定性の圧力を感じ始めているためです。",
+        stageNext: "次の一手",
+        stageNextBody: "概念説明で止めず、PoC や構成評価に接続します。"
+      },
         "en-US": {
           compassSignal: "Compass Signal",
-          heroVisualTitle: "A productized preview built for live storytelling",
-          heroVisualBody: "Overview, Compare, and Scenarios are shaped like presentation-ready app screens, not just static web sections.",
-          trust: "Trust",
-          architecturePath: "Architecture Path",
-          need: "Need",
-          proof: "Proof",
-          risk: "Risk"
-        },
+        heroVisualTitle: "A productized preview built for live storytelling",
+        heroVisualBody: "Overview, Compare, and Scenarios are shaped like presentation-ready app screens, not just static web sections.",
+        trust: "Trust",
+        architecturePath: "Architecture Path",
+        need: "Need",
+        proof: "Proof",
+        risk: "Risk",
+        capabilitySpotlight: "Capability spotlight",
+        stageMode: "Landscape demo mode",
+        stageBody: "On iPad landscape, the left side carries evidence while the right side guides decision framing.",
+        stageReason: "Why now",
+        stageReasonBody: "The customer is already feeling pressure from growth, system sprawl, or resilience gaps.",
+        stageNext: "Next move",
+        stageNextBody: "Use PoC or architecture review as the bridge, not just conceptual storytelling."
+      },
         "pt-BR": {
           compassSignal: "Sinal Compass",
-          heroVisualTitle: "Um preview de produto pensado para apresentações ao vivo",
-          heroVisualBody: "Overview, Compare e Scenarios foram desenhados como telas prontas para conversa com cliente, não apenas como seções web.",
-          trust: "Confiança",
-          architecturePath: "Caminho arquitetural",
-          need: "Necessidade",
-          proof: "Prova",
-          risk: "Risco"
-        },
+        heroVisualTitle: "Um preview de produto pensado para apresentações ao vivo",
+        heroVisualBody: "Overview, Compare e Scenarios foram desenhados como telas prontas para conversa com cliente, não apenas como seções web.",
+        trust: "Confiança",
+        architecturePath: "Caminho arquitetural",
+        need: "Necessidade",
+        proof: "Prova",
+        risk: "Risco",
+        capabilitySpotlight: "Destaque de capacidades",
+        stageMode: "Modo demo em paisagem",
+        stageBody: "No iPad em paisagem, a esquerda mostra evidências e a direita conduz a decisão.",
+        stageReason: "Por que agora",
+        stageReasonBody: "O cliente já sente pressão de crescimento, proliferação de sistemas ou lacunas de resiliência.",
+        stageNext: "Próximo passo",
+        stageNextBody: "Use PoC ou revisão arquitetural como ponte, não apenas discurso conceitual."
+      },
         "es-ES": {
           compassSignal: "Señal Compass",
-          heroVisualTitle: "Un preview de producto pensado para presentaciones en vivo",
-          heroVisualBody: "Overview, Compare y Scenarios están diseñados como pantallas listas para conversación con cliente, no solo como secciones web.",
-          trust: "Confianza",
-          architecturePath: "Ruta de arquitectura",
-          need: "Necesidad",
-          proof: "Prueba",
-          risk: "Riesgo"
-        }
+        heroVisualTitle: "Un preview de producto pensado para presentaciones en vivo",
+        heroVisualBody: "Overview, Compare y Scenarios están diseñados como pantallas listas para conversación con cliente, no solo como secciones web.",
+        trust: "Confianza",
+        architecturePath: "Ruta de arquitectura",
+        need: "Necesidad",
+        proof: "Prueba",
+        risk: "Riesgo",
+        capabilitySpotlight: "Foco de capacidades",
+        stageMode: "Modo demo horizontal",
+        stageBody: "En iPad horizontal, la izquierda muestra evidencia y la derecha guía la decisión.",
+        stageReason: "Por qué ahora",
+        stageReasonBody: "El cliente ya siente presión por crecimiento, proliferación de sistemas o huecos de resiliencia.",
+        stageNext: "Siguiente paso",
+        stageNextBody: "Usa PoC o revisión arquitectónica como puente, no solo discurso conceptual."
+      }
       }[locale] || {
         compassSignal: "Compass Signal",
         heroVisualTitle: "A productized preview built for live storytelling",
@@ -1173,7 +1287,14 @@
         architecturePath: "Architecture Path",
         need: "Need",
         proof: "Proof",
-        risk: "Risk"
+        risk: "Risk",
+        capabilitySpotlight: "Capability spotlight",
+        stageMode: "Landscape demo mode",
+        stageBody: "On iPad landscape, the left side carries evidence while the right side guides decision framing.",
+        stageReason: "Why now",
+        stageReasonBody: "The customer is already feeling pressure from growth, system sprawl, or resilience gaps.",
+        stageNext: "Next move",
+        stageNextBody: "Use PoC or architecture review as the bridge, not just conceptual storytelling."
       };
 
       const tabs = ["overview", "capabilities", "scenarios", "compare", "faq"];
@@ -1332,6 +1453,41 @@
                 <h2>${copy.capabilities.title}</h2>
                 <p>${copy.capabilities.body}</p>
               </div>
+              <div class="capability-layout">
+                <article class="spotlight-card">
+                  <p class="mini-kicker">${uiLabels.capabilitySpotlight}</p>
+                  <h3>${copy.capabilities.cards[0][0]}</h3>
+                  <p>${copy.capabilities.cards[0][1]}</p>
+                  <div class="spotlight-stats">
+                    ${copy.capabilities.details
+                      .map(
+                        (item) => `
+                          <div class="spotlight-stat">
+                            <strong>${item[0]}</strong>
+                            <span>${item[1]}</span>
+                          </div>
+                        `
+                      )
+                      .join("")}
+                  </div>
+                </article>
+                <div class="detail-grid">
+                  ${copy.capabilities.cards
+                    .slice(1, 5)
+                    .map(
+                      (card, index) => `
+                        <article class="card">
+                          <div class="card-head">
+                            <span class="card-glyph">${index + 2}</span>
+                            <h3>${card[0]}</h3>
+                          </div>
+                          <p>${card[1]}</p>
+                        </article>
+                      `
+                    )
+                    .join("")}
+                </div>
+              </div>
               <div class="segmented">
                 ${copy.capabilities.segments
                   .map(
@@ -1348,7 +1504,10 @@
                   .map(
                     (card, index) => `
                       <article class="card ${index === 0 ? "featured" : ""}">
-                        <h3>${card[0]}</h3>
+                        <div class="card-head">
+                          <span class="card-glyph">${index + 1}</span>
+                          <h3>${card[0]}</h3>
+                        </div>
                         <p>${card[1]}</p>
                       </article>
                     `
@@ -1471,6 +1630,20 @@
                         `
                       )
                       .join("")}
+                  </div>
+                  <div class="stage-rail">
+                    <article class="stage-tile">
+                      <strong>${uiLabels.stageMode}</strong>
+                      <span>${uiLabels.stageBody}</span>
+                    </article>
+                    <article class="stage-tile">
+                      <strong>${uiLabels.stageReason}</strong>
+                      <span>${uiLabels.stageReasonBody}</span>
+                    </article>
+                    <article class="stage-tile">
+                      <strong>${uiLabels.stageNext}</strong>
+                      <span>${uiLabels.stageNextBody}</span>
+                    </article>
                   </div>
                 </article>
               </div>
