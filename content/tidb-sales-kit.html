@@ -786,6 +786,139 @@
         }
       }
 
+      @media (max-width: 430px) and (orientation: portrait) {
+        .app {
+          padding-bottom: calc(env(safe-area-inset-bottom, 0) + 86px);
+        }
+
+        .app-shell {
+          padding: 12px 12px 0;
+        }
+
+        .status-row {
+          margin-bottom: 10px;
+          font-size: 11px;
+        }
+
+        .topbar {
+          margin-bottom: 12px;
+        }
+
+        .topbar .avatar,
+        .hero-visual,
+        .projection-strip,
+        .device-note {
+          display: none;
+        }
+
+        .hero {
+          padding: 16px;
+          border-radius: 24px;
+        }
+
+        h1 {
+          margin-bottom: 4px;
+          font-size: 24px;
+          line-height: 1.08;
+        }
+
+        h2 {
+          font-size: 21px;
+        }
+
+        .hero-subtitle,
+        .section-header p,
+        .card p,
+        .faq-item p,
+        .compare-card p {
+          line-height: 1.55;
+        }
+
+        .brand-ribbon {
+          margin-bottom: 12px;
+        }
+
+        .brand-chip,
+        .avatar {
+          width: 34px;
+          height: 34px;
+          border-radius: 12px;
+          font-size: 13px;
+        }
+
+        .projection-badge {
+          padding: 7px 10px;
+          font-size: 11px;
+        }
+
+        .chip-row,
+        .tag-row,
+        .segmented,
+        .cta-row {
+          gap: 8px;
+        }
+
+        .chip,
+        .segment-button {
+          padding: 8px 12px;
+          font-size: 13px;
+        }
+
+        .panel,
+        .card,
+        .compare-card,
+        .faq-item,
+        .journey-card,
+        .spotlight-card {
+          padding: 15px;
+          border-radius: 22px;
+        }
+
+        .grid,
+        .journey-grid,
+        .detail-grid,
+        .capability-layout,
+        .compare-grid {
+          gap: 10px;
+        }
+
+        .section {
+          margin-top: 14px;
+        }
+
+        th,
+        td {
+          padding: 10px 8px;
+          font-size: 12px;
+        }
+
+        .faq-item h3 {
+          margin-bottom: 6px;
+          font-size: 16px;
+          line-height: 1.28;
+        }
+
+        .tabbar-wrap {
+          padding: 8px 10px calc(env(safe-area-inset-bottom, 0) + 8px);
+        }
+
+        .tabbar {
+          padding: 8px;
+          gap: 6px;
+        }
+
+        .tab-button {
+          padding: 8px 4px 10px;
+        }
+
+        .tab-button .icon {
+          width: 28px;
+          height: 28px;
+          border-radius: 10px;
+          font-size: 13px;
+        }
+      }
+
       @media (min-width: 768px) {
         .app-shell {
           padding: 24px 24px 0;
@@ -868,7 +1001,7 @@
           heroKicker: "Overview",
           heroTitle: "把 TiDB 的价值讲成一款真正可演示的 iOS 应用",
           heroSubtitle:
-            "首页先围绕客户需求筛选，再进入能力、场景、对比和 FAQ。这个预览版重点展示在 iPhone、iPad 横竖屏中的信息密度和层级组织。",
+            "先按客户诉求筛选，再进入能力、场景、对比和 Q&A。竖屏下优先保留能直接拿来讲的内容。",
           metrics: [
             ["快", "一套平台衔接事务处理与近实时分析"],
             ["稳", "适合关键业务连续性的分布式架构"],
@@ -949,13 +1082,15 @@
             ]
           },
           faq: {
-            title: "FAQ & Next Step",
-            body: "统一 objection 的答法，并引导下一步行动。",
+            title: "Q&A",
+            body: "先短答，再展开。先承认顾虑，再给判断，最后决定是否继续深入。",
             cards: [
-              ["迁移成本会不会很高？", "建议从兼容性、演进式迁移和 PoC 路径回答。"],
-              ["核心业务能不能放上来？", "建议围绕高可用、稳定性和试点方式回答。"],
-              ["为什么不是 MySQL 加分析库？", "建议从链路延迟和系统复杂度去解释。"],
-              ["下一步怎么推进？", "引导到 PoC、架构评估或联合客户拜访。"]
+              ["我们已经会 MySQL，为什么要换？", "如果未来几年 MySQL 还能稳住，就不必强推。TiDB 的价值在于把分库分表、扩容中断和高可用复杂度提前收住。"],
+              ["真的兼容 MySQL 吗？", "对大多数 OLTP、驱动和常见工具来说迁移门槛很低，但要诚实说明是高兼容，不是 100% 字节级等同。"],
+              ["迁移会不会很难？", "标准 MySQL 应用通常难点不在搬数据，而在主键、热点和少量不兼容点治理，所以先做评估和 PoC 最稳。"],
+              ["核心业务能不能放上来？", "可以把答案聚焦在高可用、故障恢复和分阶段上线，不必一开始就承诺全量替换。"],
+              ["为什么不是 MySQL 加分析库？", "那条路能走，但链路会更长、延迟更高、系统更多。TiDB 更适合讲成统一平台带来的简化价值。"],
+              ["下一步怎么推进？", "先选一个增长或复杂度最痛的 workload，做兼容性检查和小范围 PoC，再决定是否扩大。"]
             ]
           }
         },
@@ -965,7 +1100,7 @@
           heroKicker: "Overview",
           heroTitle: "TiDB の価値を本物の iOS アプリのように伝える",
           heroSubtitle:
-            "最初に顧客要件で絞り込み、その後に機能、シナリオ、比較、FAQ へ進む構成です。このプレビューは iPhone と iPad の縦横での情報設計を確認するためのものです。",
+            "まず顧客要件で絞り込み、その後に機能、シナリオ、比較、Q&A へ進みます。縦画面では商談に必要な情報を優先しています。",
           metrics: [
             ["速い", "トランザクションとほぼリアルタイム分析を 1 つの基盤で"],
             ["強い", "重要業務の継続性を支える分散アーキテクチャ"],
@@ -1046,13 +1181,15 @@
             ]
           },
           faq: {
-            title: "FAQ & Next Step",
-            body: "反論対応を揃え、次のアクションへつなげます。",
+            title: "Q&A",
+            body: "まず短く答え、その後で必要なら深掘りします。",
             cards: [
-              ["移行コストは高いですか？", "互換性、段階移行、PoC 観点で回答します。"],
-              ["重要業務でも使えますか？", "高可用性と評価計画を絡めて説明します。"],
-              ["なぜ MySQL + 分析 DB ではないのですか？", "遅延と複雑性の観点で整理します。"],
-              ["次は何をすべきですか？", "PoC、構成評価、共同訪問へつなげます。"]
+              ["MySQL を知っているのに、なぜ変えるのか？", "今後数年 MySQL で十分なら無理に変える必要はありません。TiDB は分割や高可用性の複雑さが見え始めた時に価値が出ます。"],
+              ["本当に MySQL 互換ですか？", "多くの OLTP、ドライバ、一般的なツールでは移行しやすいですが、100% 同一とは言わず高互換として説明します。"],
+              ["移行は難しいですか？", "標準的な MySQL アプリなら、データ移行そのものより主キー設計やホットスポット対策の方が重要です。"],
+              ["重要業務でも使えますか？", "高可用性、障害復旧、段階導入の話に絞って答えるのが有効です。"],
+              ["なぜ MySQL と分析 DB の組み合わせではないのですか？", "その構成でも可能ですが、遅延と構成の複雑さが増えやすい点を説明します。"],
+              ["次に何をするべきですか？", "一番痛みの強い workload を選び、小さく PoC と互換性確認から始めます。"]
             ]
           }
         },
@@ -1062,7 +1199,7 @@
           heroKicker: "Overview",
           heroTitle: "Present TiDB as a polished iOS app, not a static brochure",
           heroSubtitle:
-            "Start with customer-priority filters, then move into capabilities, scenarios, comparisons, and FAQ. This preview is focused on layout quality across iPhone and iPad in both orientations.",
+            "Start with customer-priority filters, then move into capabilities, scenarios, comparisons, and Q&A. On iPhone portrait, the layout prioritizes the content sellers actually present.",
           metrics: [
             ["Fast", "One platform for transactions and near real-time insight"],
             ["Resilient", "A distributed design for continuity in critical workloads"],
@@ -1143,13 +1280,15 @@
             ]
           },
           faq: {
-            title: "FAQ & Next Step",
-            body: "Keep objection handling consistent and move toward the next action.",
+            title: "Q&A",
+            body: "Answer briefly first: acknowledge the concern, give the point of view, then decide whether to go deeper.",
             cards: [
-              ["Will migration cost be high?", "Answer with compatibility, phased migration, and PoC framing."],
-              ["Can it handle critical workloads?", "Tie the answer to HA, resilience, and validation planning."],
-              ["Why not stay on MySQL plus analytics DBs?", "Explain using latency and system-sprawl arguments."],
-              ["What should happen next?", "Guide toward PoC, architecture review, or a joint customer session."]
+              ["We already know MySQL. Why change?", "If MySQL can comfortably support the next few years, do not force change. TiDB matters when sharding, scale events, and HA complexity start to drag the team down."],
+              ["Is it really MySQL-compatible?", "For most OLTP apps, drivers, and common tools, migration friction is low. The honest answer is high compatibility, not byte-for-byte sameness."],
+              ["How hard is migration?", "For standard MySQL apps, the hard part is usually not moving data. It is evaluating keys, hotspots, and a small number of incompatibilities."],
+              ["Can it run critical workloads?", "Keep the answer focused on HA, recovery, and phased rollout instead of promising a full replacement on day one."],
+              ["Why not keep MySQL plus analytics databases?", "That path can work, but it usually adds latency, more pipelines, and more operational sprawl. TiDB is stronger as a unified-platform story."],
+              ["What is the next step?", "Pick one workload where growth or complexity already hurts, run a compatibility check, and use a small PoC to decide whether to expand."]
             ]
           }
         },
@@ -1159,7 +1298,7 @@
           heroKicker: "Overview",
           heroTitle: "Apresente o TiDB como um app iOS de verdade, não como uma brochura",
           heroSubtitle:
-            "Comece pelos filtros de prioridade do cliente e depois avance para capacidades, cenários, comparativos e FAQ. Este preview foca a qualidade de layout em iPhone e iPad nas duas orientações.",
+            "Comece pelos filtros de prioridade do cliente e depois avance para capacidades, cenários, comparativos e Q&A. No iPhone em retrato, o foco fica no conteúdo principal.",
           metrics: [
             ["Rápido", "Uma plataforma para transações e insight quase em tempo real"],
             ["Confiável", "Design distribuído para continuidade em workloads críticos"],
@@ -1240,13 +1379,15 @@
             ]
           },
           faq: {
-            title: "FAQ & Next Step",
-            body: "Mantenha as respostas a objeções consistentes e avance para a próxima ação.",
+            title: "Q&A",
+            body: "Responda curto primeiro: reconheça a dúvida, dê o ponto principal e só depois aprofunde.",
             cards: [
-              ["O custo de migração será alto?", "Responda com compatibilidade, migração em fases e PoC."],
-              ["Suporta workloads críticos?", "Relacione a HA, resiliência e plano de validação."],
-              ["Por que não seguir com MySQL e bancos analíticos?", "Explique usando latência e proliferação de sistemas."],
-              ["Qual é o próximo passo?", "Leve para PoC, revisão de arquitetura ou reunião conjunta."]
+              ["Já conhecemos MySQL. Por que mudar?", "Se MySQL ainda sustenta bem os próximos anos, não faz sentido forçar mudança. O valor do TiDB aparece quando escala, sharding e HA começam a aumentar a complexidade."],
+              ["É mesmo compatível com MySQL?", "Para a maioria dos apps OLTP, drivers e ferramentas comuns, a migração tende a ser simples. A resposta honesta é alta compatibilidade, não equivalência absoluta."],
+              ["Migrar é difícil?", "Em aplicações MySQL padrão, a maior parte do trabalho está em chaves, hotspots e pequenos ajustes de compatibilidade, não em mover dados."],
+              ["Pode rodar workloads críticos?", "Vale responder com HA, recuperação e rollout por fases, sem prometer troca total logo no início."],
+              ["Por que não manter MySQL com bancos analíticos?", "Esse caminho funciona, mas costuma trazer mais latência, mais pipelines e mais complexidade operacional."],
+              ["Qual é o próximo passo?", "Escolha um workload onde crescimento ou complexidade já doem, faça checagem de compatibilidade e um PoC pequeno."]
             ]
           }
         },
@@ -1256,7 +1397,7 @@
           heroKicker: "Overview",
           heroTitle: "Presenta TiDB como una app iOS real, no como un folleto estático",
           heroSubtitle:
-            "Empieza por filtros según prioridad del cliente y luego pasa a capacidades, escenarios, comparativa y FAQ. Este preview se centra en la calidad del layout en iPhone y iPad, tanto en vertical como en horizontal.",
+            "Empieza por filtros según prioridad del cliente y luego pasa a capacidades, escenarios, comparativa y Q&A. En iPhone vertical se prioriza el contenido que realmente se presenta al cliente.",
           metrics: [
             ["Rápido", "Una plataforma para transacciones e insight casi en tiempo real"],
             ["Sólido", "Diseño distribuido para continuidad en cargas críticas"],
@@ -1337,13 +1478,15 @@
             ]
           },
           faq: {
-            title: "FAQ & Next Step",
-            body: "Mantén consistentes las respuestas a objeciones y orienta el siguiente paso.",
+            title: "Q&A",
+            body: "Responde primero en corto: reconoce la objeción, da el punto de vista y luego profundiza si hace falta.",
             cards: [
-              ["¿Será alto el coste de migración?", "Responde con compatibilidad, migración por fases y PoC."],
-              ["¿Soporta cargas críticas?", "Conéctalo con HA, resiliencia y plan de validación."],
-              ["¿Por qué no seguir con MySQL y bases analíticas?", "Explícalo con latencia y proliferación de sistemas."],
-              ["¿Cuál es el siguiente paso?", "Llévalo a PoC, revisión arquitectónica o reunión conjunta."]
+              ["Ya conocemos MySQL. ¿Por qué cambiar?", "Si MySQL puede sostener con comodidad los próximos años, no hace falta forzar el cambio. TiDB cobra sentido cuando sharding, escalado y HA empiezan a complicar al equipo."],
+              ["¿De verdad es compatible con MySQL?", "Para la mayoría de apps OLTP, drivers y herramientas comunes, la fricción de migración es baja. La respuesta honesta es alta compatibilidad, no equivalencia absoluta."],
+              ["¿Migrar es difícil?", "En aplicaciones MySQL estándar, lo más delicado suele ser revisar claves, hotspots y algunos puntos de incompatibilidad, no mover los datos."],
+              ["¿Puede llevar cargas críticas?", "Conviene responder con HA, recuperación y despliegue por fases, sin prometer sustitución total desde el primer día."],
+              ["¿Por qué no seguir con MySQL y bases analíticas?", "Ese camino sirve, pero normalmente añade más latencia, más pipelines y más complejidad operativa."],
+              ["¿Cuál es el siguiente paso?", "Elige un workload donde crecimiento o complejidad ya duelan, haz validación de compatibilidad y un PoC pequeño."]
             ]
           }
         }
@@ -1599,7 +1742,6 @@
                     <span>${uiLabels.stageNextBody}</span>
                   </article>
                 </div>
-                <div class="device-note">${copy.deviceNote}</div>
               </div>
 
               <section class="section">
