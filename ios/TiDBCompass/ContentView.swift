@@ -41,34 +41,35 @@ struct ContentView: View {
     private func header(context: PreviewContext, width: CGFloat) -> some View {
         let compact = width < 720
 
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .top, spacing: 12) {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("TiDB Compass")
-                        .font(.system(size: compact ? 28 : 34, weight: .bold, design: .rounded))
+        HStack(alignment: .center, spacing: 12) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("TiDB Compass")
+                    .font(.system(size: compact ? 22 : 26, weight: .bold, design: .rounded))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
 
-                    Text(languageCopy.badge)
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.secondary)
-                }
+                Text(languageCopy.badge)
+                    .font(.system(size: compact ? 11 : 12, weight: .medium))
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+            }
 
-                Spacer(minLength: 0)
+            Spacer(minLength: 0)
 
-                if compact {
-                    compactActions
-                } else {
-                    regularActions
-                }
+            if compact {
+                compactActions
+            } else {
+                regularActions
             }
         }
         .padding(.horizontal, compact ? 18 : 24)
-        .padding(.top, compact ? 14 : 18)
-        .padding(.bottom, 12)
+        .padding(.top, compact ? 10 : 14)
+        .padding(.bottom, compact ? 8 : 10)
         .background(.ultraThinMaterial)
     }
 
     private var compactActions: some View {
-        HStack(spacing: 10) {
+        HStack(spacing: 8) {
             languageMenu
             settingsButton
             reloadButton
@@ -76,7 +77,7 @@ struct ContentView: View {
     }
 
     private var regularActions: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 10) {
             languageMenu
             settingsButton
             reloadButton
@@ -91,10 +92,8 @@ struct ContentView: View {
                 }
             }
         } label: {
-            Label(languageCopy.name, systemImage: "globe")
-                .font(.system(size: 14, weight: .semibold))
-                .padding(.horizontal, 14)
-                .padding(.vertical, 10)
+            headerButton(systemImage: "globe", text: languageCopy.name)
+                .foregroundStyle(.primary)
                 .background(Color.white.opacity(0.9), in: Capsule())
         }
         .tint(.primary)
@@ -104,10 +103,7 @@ struct ContentView: View {
         Button {
             reloadKey = UUID()
         } label: {
-            Label(languageCopy.reload, systemImage: "arrow.clockwise")
-                .font(.system(size: 14, weight: .semibold))
-                .padding(.horizontal, 14)
-                .padding(.vertical, 10)
+            headerButton(systemImage: "arrow.clockwise")
                 .background(Color.accentColor.opacity(0.12), in: Capsule())
         }
         .buttonStyle(.plain)
@@ -117,13 +113,25 @@ struct ContentView: View {
         Button {
             showingSettings = true
         } label: {
-            Label(languageCopy.settings, systemImage: "slider.horizontal.3")
-                .font(.system(size: 14, weight: .semibold))
-                .padding(.horizontal, 14)
-                .padding(.vertical, 10)
+            headerButton(systemImage: "slider.horizontal.3")
                 .background(Color.white.opacity(0.9), in: Capsule())
         }
         .buttonStyle(.plain)
+    }
+
+    private func headerButton(systemImage: String, text: String? = nil) -> some View {
+        HStack(spacing: text == nil ? 0 : 6) {
+            Image(systemName: systemImage)
+                .font(.system(size: 14, weight: .semibold))
+
+            if let text {
+                Text(text)
+                    .font(.system(size: 13, weight: .semibold))
+                    .lineLimit(1)
+            }
+        }
+        .padding(.horizontal, text == nil ? 11 : 12)
+        .padding(.vertical, 10)
     }
 
     private var languageCopy: LanguageOption {
