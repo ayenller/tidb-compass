@@ -6,20 +6,24 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <title>TiDB Compass App Preview</title>
+    <title>TiDB Compass</title>
     <style>
       :root {
-        --bg: #f4f8fd;
-        --surface: rgba(255, 255, 255, 0.86);
-        --surface-strong: #ffffff;
-        --ink: #10233e;
-        --muted: #627188;
-        --line: rgba(16, 35, 62, 0.08);
-        --accent: #0d8a67;
-        --accent-strong: #0a6e52;
-        --accent-soft: rgba(13, 138, 103, 0.12);
-        --blue-soft: rgba(93, 127, 255, 0.1);
-        --shadow: 0 18px 40px rgba(29, 56, 88, 0.08);
+        --bg: #fcf8fb;
+        --surface: #fcf8fb;
+        --surface-low: #f6f3f5;
+        --surface-card: #ffffff;
+        --surface-high: #eae7ea;
+        --ink: #1b1b1d;
+        --muted: #5e5e60;
+        --primary: #bc000a;
+        --primary-strong: #e2241f;
+        --primary-soft: rgba(188, 0, 10, 0.08);
+        --tertiary: #00647f;
+        --tertiary-soft: rgba(0, 100, 127, 0.12);
+        --outline: rgba(231, 189, 183, 0.28);
+        --shadow: 0 8px 32px rgba(27, 27, 29, 0.06);
+        --shadow-soft: 0 6px 24px rgba(27, 27, 29, 0.04);
       }
 
       * {
@@ -28,124 +32,36 @@
 
       html,
       body {
-        height: 100%;
+        min-height: 100%;
       }
 
       body {
         margin: 0;
+        font-family: "Inter", "SF Pro Display", "PingFang SC", "Hiragino Sans",
+          "Helvetica Neue", sans-serif;
         color: var(--ink);
-        font-family: "SF Pro Display", "PingFang SC", "Hiragino Sans", "Helvetica Neue", sans-serif;
         background:
-          radial-gradient(circle at top left, rgba(13, 138, 103, 0.12), transparent 28%),
-          linear-gradient(180deg, #f4f8fd 0%, #fbfcff 100%);
+          radial-gradient(circle at top right, rgba(226, 36, 31, 0.08), transparent 30%),
+          linear-gradient(180deg, var(--surface) 0%, #f8f5f8 100%);
       }
 
       button {
         font: inherit;
       }
 
-      @keyframes fadeSlideUp {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      img {
+        display: block;
+        width: 100%;
       }
 
       .app {
-        display: flex;
-        flex-direction: column;
-        min-height: 100%;
+        min-height: 100dvh;
         padding-top: env(safe-area-inset-top, 0);
-        padding-bottom: calc(env(safe-area-inset-bottom, 0) + 94px);
+        padding-bottom: calc(env(safe-area-inset-bottom, 0) + 88px);
       }
 
       .app-shell {
-        flex: 1;
-        padding: 18px 18px 0;
-      }
-
-      .status-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 14px;
-        color: var(--muted);
-        font-size: 12px;
-        font-weight: 700;
-      }
-
-      .status-meta {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--accent);
-      }
-
-      .topbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 18px;
-      }
-
-      .title-group p,
-      .section-header p,
-      .card p,
-      .hero-subtitle,
-      .detail p,
-      .faq-item p,
-      .compare-card p {
-        margin-top: 0;
-        color: var(--muted);
-        line-height: 1.65;
-      }
-
-      .kicker {
-        margin: 0 0 8px;
-        color: var(--muted);
-        font-size: 12px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      h1,
-      h2,
-      h3 {
-        margin-top: 0;
-      }
-
-      h1 {
-        margin-bottom: 6px;
-        font-size: clamp(28px, 4vw, 42px);
-        line-height: 1.05;
-      }
-
-      h2 {
-        margin-bottom: 8px;
-        font-size: clamp(24px, 3vw, 32px);
-      }
-
-      .avatar {
-        display: grid;
-        width: 42px;
-        height: 42px;
-        place-items: center;
-        border-radius: 14px;
-        color: #fff;
-        font-weight: 700;
-        background: linear-gradient(135deg, var(--accent) 0%, #1a986d 100%);
+        padding: 20px 18px 0;
       }
 
       .screen {
@@ -154,548 +70,651 @@
 
       .screen.is-active {
         display: block;
-        animation: fadeSlideUp 280ms ease;
       }
 
-      .hero,
-      .panel,
-      .card,
-      .compare-card,
-      .faq-item,
-      .tabbar {
-        border: 1px solid var(--line);
-        border-radius: 28px;
-        background: var(--surface);
-        backdrop-filter: blur(18px);
-        box-shadow: var(--shadow);
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--primary);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
-      .hero {
-        padding: 22px;
-        background:
-          linear-gradient(135deg, rgba(13, 138, 103, 0.12) 0%, rgba(255, 255, 255, 0.98) 55%),
-          var(--surface-strong);
+      .page-header {
+        margin-bottom: 22px;
       }
 
-      .brand-ribbon {
+      .page-header h1,
+      .page-header h2,
+      .card h3,
+      .leaf h3,
+      .cta-panel h2 {
+        margin: 0;
+        letter-spacing: -0.03em;
+      }
+
+      .page-header h1 {
+        font-size: clamp(2.8rem, 8vw, 3.5rem);
+        line-height: 0.95;
+      }
+
+      .page-header h2 {
+        font-size: clamp(2rem, 6vw, 2.4rem);
+        line-height: 0.98;
+      }
+
+      .page-header p,
+      .card p,
+      .subtle,
+      .cta-panel p,
+      .list-row p,
+      .metric-card p,
+      .table-card td,
+      .table-card th {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .hero-actions,
+      .pill-row,
+      .tag-row,
+      .action-row {
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 18px;
+        gap: 10px;
       }
 
-      .brand-markline {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .brand-chip {
-        display: inline-grid;
-        width: 38px;
-        height: 38px;
-        place-items: center;
-        border-radius: 14px;
-        color: #fff;
-        font-weight: 800;
-        background: linear-gradient(135deg, var(--accent) 0%, #1a986d 100%);
-      }
-
-      .projection-badge {
-        padding: 9px 12px;
+      .button,
+      .button-secondary,
+      .tag,
+      .nav-pill {
+        border: 0;
         border-radius: 999px;
-        color: var(--ink);
-        font-size: 12px;
+      }
+
+      .button {
+        padding: 12px 18px;
+        color: #fff;
         font-weight: 700;
-        background: rgba(255, 255, 255, 0.8);
-        border: 1px solid var(--line);
+        background: linear-gradient(180deg, var(--primary) 0%, var(--primary-strong) 100%);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .button-secondary {
+        padding: 12px 18px;
+        color: var(--ink);
+        font-weight: 700;
+        background: var(--surface-high);
+      }
+
+      .tag {
+        padding: 6px 10px;
+        color: var(--primary);
+        background: rgba(255, 255, 255, 0.6);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .surface {
+        background: var(--surface-low);
+        border-radius: 28px;
+      }
+
+      .card {
+        padding: 18px;
+        background: var(--surface-card);
+        border-radius: 24px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .glass {
+        background: rgba(252, 248, 251, 0.8);
+        backdrop-filter: blur(20px);
       }
 
       .hero-grid,
-      .metrics,
-      .grid,
-      .scenario-grid,
-      .compare-grid,
-      .faq-grid,
-      .detail-grid,
-      .signal-grid,
-      .journey-grid,
-      .summary-stack,
-      .capability-layout,
-      .stage-rail {
+      .grid-two,
+      .grid-three,
+      .stack {
         display: grid;
         gap: 14px;
       }
 
       .hero-grid {
-        grid-template-columns: 1.3fr 1fr;
-        margin-top: 18px;
-      }
-
-      .hero-visual {
-        position: relative;
-        overflow: hidden;
-        min-height: 248px;
-        padding: 18px;
-        border-radius: 24px;
-        background:
-          radial-gradient(circle at top right, rgba(93, 127, 255, 0.26), transparent 36%),
-          linear-gradient(180deg, #13365d 0%, #0f2743 100%);
-        color: #fff;
-      }
-
-      .hero-visual::after {
-        content: "";
-        position: absolute;
-        right: -36px;
-        bottom: -48px;
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(13, 138, 103, 0.28), transparent 68%);
-      }
-
-      .mini-kicker {
-        margin: 0 0 10px;
-        font-size: 11px;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.68);
-      }
-
-      .hero-visual h3,
-      .hero-visual p {
-        position: relative;
-        z-index: 1;
-      }
-
-      .hero-visual p {
-        color: rgba(255, 255, 255, 0.78);
-      }
-
-      .signal-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        margin-top: 18px;
-      }
-
-      .signal-card {
-        position: relative;
-        padding: 14px;
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-      }
-
-      .signal-card strong {
-        display: block;
-        margin-bottom: 20px;
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.82);
-      }
-
-      .signal-bars {
-        display: flex;
-        align-items: flex-end;
-        gap: 8px;
-        height: 92px;
-      }
-
-      .signal-bars span {
-        width: 100%;
-        border-radius: 12px 12px 4px 4px;
-        background: linear-gradient(180deg, rgba(114, 180, 255, 0.92) 0%, rgba(13, 138, 103, 0.9) 100%);
-      }
-
-      .panel,
-      .card,
-      .compare-card,
-      .faq-item {
-        padding: 18px;
-        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
-      }
-
-      .card:hover,
-      .compare-card:hover,
-      .faq-item:hover,
-      .journey-card:hover,
-      .projection-tile:hover,
-      .stage-tile:hover {
-        transform: translateY(-2px);
-        border-color: rgba(13, 138, 103, 0.16);
-        box-shadow: 0 22px 42px rgba(29, 56, 88, 0.12);
-      }
-
-      .metrics {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .projection-strip {
-        display: grid;
-        grid-template-columns: 1.4fr 0.6fr 0.7fr;
-        gap: 12px;
-        margin-top: 16px;
-      }
-
-      .projection-tile {
-        padding: 14px 16px;
-        border-radius: 20px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.82);
-      }
-
-      .projection-tile strong {
-        display: block;
-        margin-bottom: 6px;
-        font-size: 13px;
-      }
-
-      .metric {
-        padding: 14px;
-        border-radius: 20px;
-        background: #f6f9ff;
-      }
-
-      .metric strong {
-        display: block;
-        margin-bottom: 6px;
-        font-size: 24px;
-      }
-
-      .chip-row,
-      .tag-row,
-      .segmented {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .chip,
-      .tag,
-      .segment-button,
-      .tab-button {
-        border-radius: 999px;
-      }
-
-      .chip,
-      .segment-button {
-        padding: 10px 14px;
-        border: 1px solid var(--line);
-        color: var(--ink);
-        background: #fff;
-        cursor: pointer;
-        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease;
-      }
-
-      .chip.is-active,
-      .segment-button.is-active {
-        color: #fff;
-        border-color: transparent;
-        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
-      }
-
-      .tag {
-        padding: 6px 10px;
-        font-size: 12px;
-        color: var(--accent);
-        background: var(--accent-soft);
-      }
-
-      .grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        margin-top: 16px;
-      }
-
-      .card-head {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 12px;
-      }
-
-      .card-glyph {
-        display: grid;
-        width: 38px;
-        height: 38px;
-        place-items: center;
-        border-radius: 14px;
-        color: var(--accent);
-        font-size: 14px;
-        font-weight: 700;
-        background: var(--accent-soft);
-      }
-
-      .capability-layout {
-        grid-template-columns: 1.1fr 0.9fr;
-        margin-top: 18px;
-      }
-
-      .spotlight-card {
-        padding: 20px;
-        border-radius: 28px;
-        border: 1px solid var(--line);
-        background:
-          linear-gradient(135deg, rgba(13, 138, 103, 0.12) 0%, rgba(255, 255, 255, 0.96) 68%),
-          var(--surface-strong);
-        box-shadow: var(--shadow);
-      }
-
-      .spotlight-stats {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
-        margin-top: 16px;
-      }
-
-      .spotlight-stat {
-        padding: 14px;
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.8);
-        border: 1px solid var(--line);
-      }
-
-      .spotlight-stat strong {
-        display: block;
-        margin-bottom: 6px;
-        font-size: 13px;
-      }
-
-      .journey-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        margin-top: 16px;
-      }
-
-      .journey-card {
-        padding: 16px;
-        border-radius: 22px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.84);
-      }
-
-      .journey-card strong {
-        display: inline-grid;
-        width: 32px;
-        height: 32px;
-        place-items: center;
-        margin-bottom: 12px;
-        border-radius: 12px;
-        color: var(--accent);
-        background: var(--accent-soft);
-      }
-
-      .card h3,
-      .compare-card h3,
-      .faq-item h3 {
-        margin-bottom: 8px;
-      }
-
-      .cta-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 16px;
-      }
-
-      .cta {
-        padding: 12px 16px;
-        border: 0;
-        border-radius: 16px;
-        cursor: pointer;
-        color: #fff;
-        background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
-        transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
-      }
-
-      .cta.secondary {
-        color: var(--ink);
-        background: #fff;
-        border: 1px solid var(--line);
-      }
-
-      .cta:hover,
-      .cta.secondary:hover,
-      .chip:hover,
-      .segment-button:hover,
-      .tab-button:hover {
-        transform: translateY(-1px);
-      }
-
-      .section {
-        margin-top: 18px;
-      }
-
-      .section-header {
-        margin-bottom: 14px;
-      }
-
-      .scenario-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .card.featured,
-      .compare-card.featured {
-        background:
-          linear-gradient(135deg, rgba(93, 127, 255, 0.1) 0%, rgba(255, 255, 255, 0.96) 70%),
-          var(--surface-strong);
-      }
-
-      .compare-grid {
-        grid-template-columns: 1.15fr 0.85fr;
-      }
-
-      .compare-main {
-        display: grid;
-        gap: 14px;
-      }
-
-      .compare-headline {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        align-items: center;
-      }
-
-      .projection-panel {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-
-      .projection-stat {
-        padding: 16px;
-        border-radius: 20px;
-        color: #fff;
-        background: linear-gradient(135deg, #173d67 0%, #0f2844 100%);
-      }
-
-      .projection-stat strong {
-        display: block;
-        margin-bottom: 6px;
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.72);
-      }
-
-      .projection-stat span {
-        font-size: 26px;
-        font-weight: 800;
-        line-height: 1;
-      }
-
-      .compare-badge {
-        padding: 8px 12px;
-        border-radius: 999px;
-        color: var(--accent);
-        background: var(--accent-soft);
-        font-size: 12px;
-        font-weight: 700;
-      }
-
-      .summary-stack {
         grid-template-columns: 1fr;
       }
 
-      .summary-tile {
-        padding: 14px 16px;
-        border-radius: 18px;
-        background: #f6f9ff;
-        border: 1px solid var(--line);
+      .grid-two {
+        grid-template-columns: 1fr;
       }
 
-      .stage-rail {
+      .grid-three {
+        grid-template-columns: 1fr;
+      }
+
+      .intro-hero {
+        position: relative;
+        overflow: hidden;
+        min-height: 280px;
+        padding: 22px;
+        background: var(--surface-card);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .intro-hero::after {
+        content: "";
+        position: absolute;
+        inset: auto -10% -20% 24%;
+        height: 56%;
+        background:
+          linear-gradient(135deg, rgba(188, 0, 10, 0.16), transparent 48%),
+          radial-gradient(circle at top left, rgba(226, 36, 31, 0.15), transparent 42%);
+        filter: blur(8px);
+        pointer-events: none;
+      }
+
+      .hero-visual {
+        margin-top: 18px;
+        min-height: 170px;
+        border-radius: 22px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 243, 245, 0.92)),
+          radial-gradient(circle at top right, rgba(188, 0, 10, 0.1), transparent 35%);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .hero-visual::before,
+      .hero-visual::after {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border-radius: 18px;
+        background:
+          linear-gradient(135deg, rgba(188, 0, 10, 0.08), transparent 44%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(244, 239, 243, 0.7));
+      }
+
+      .hero-visual::after {
+        inset: auto 24px 20px 24px;
+        height: 44%;
+        background:
+          linear-gradient(90deg, rgba(188, 0, 10, 0.24), transparent 55%),
+          repeating-linear-gradient(
+            90deg,
+            rgba(188, 0, 10, 0.08) 0 1px,
+            transparent 1px 42px
+          ),
+          repeating-linear-gradient(
+            0deg,
+            rgba(0, 100, 127, 0.06) 0 1px,
+            transparent 1px 28px
+          );
+      }
+
+      .metric-leaf {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 18px;
+        min-height: 220px;
+        padding: 22px;
+        color: #fff;
+        background: linear-gradient(180deg, var(--primary) 0%, var(--primary-strong) 100%);
+        border-radius: 24px 8px 24px 8px;
+        box-shadow: 0 16px 36px rgba(188, 0, 10, 0.22);
+      }
+
+      .metric-leaf .value {
+        font-size: clamp(2.75rem, 8vw, 3.5rem);
+        font-weight: 800;
+        line-height: 0.9;
+      }
+
+      .metric-leaf .caption,
+      .metric-leaf .subtle {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .icon-wrap {
+        display: inline-grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 14px;
+        background: var(--primary-soft);
+        color: var(--primary);
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .icon-wrap.tertiary {
+        background: var(--tertiary-soft);
+        color: var(--tertiary);
+      }
+
+      .feature-card,
+      .tool-card,
+      .list-row,
+      .stat-card,
+      .table-card,
+      .cta-panel,
+      .ai-panel,
+      .dark-card {
+        border-radius: 24px;
+      }
+
+      .feature-card {
+        padding: 18px;
+        background: var(--surface-low);
+      }
+
+      .hero-feature {
+        position: relative;
+        overflow: hidden;
+        min-height: 280px;
+        padding: 22px;
+        background: var(--surface-card);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .hero-feature::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, transparent 40%, rgba(252, 248, 251, 0.92) 100%),
+          radial-gradient(circle at top right, rgba(188, 0, 10, 0.08), transparent 30%);
+        pointer-events: none;
+      }
+
+      .hero-feature .content {
+        position: relative;
+        z-index: 1;
+        max-width: 74%;
+      }
+
+      .hero-image,
+      .compare-image,
+      .ai-image {
+        overflow: hidden;
+        border-radius: 22px;
+        background: linear-gradient(180deg, rgba(27, 27, 29, 0.06), rgba(27, 27, 29, 0.01));
+      }
+
+      .preview-pane {
+        min-height: 240px;
+        padding: 16px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 243, 245, 0.92)),
+          radial-gradient(circle at top right, rgba(188, 0, 10, 0.1), transparent 34%);
+      }
+
+      .preview-pane.compare {
+        min-height: 220px;
+      }
+
+      .preview-pane.ai {
+        min-height: 250px;
+        background:
+          linear-gradient(180deg, rgba(0, 100, 127, 0.12), rgba(255, 255, 255, 0.92)),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 243, 245, 0.92));
+      }
+
+      .preview-device {
+        display: grid;
+        gap: 10px;
+        height: 100%;
+        padding: 14px;
+        border-radius: 24px;
+        background: linear-gradient(180deg, #17171a 0%, #252529 100%);
+        box-shadow: 0 16px 30px rgba(27, 27, 29, 0.12);
+      }
+
+      .preview-island {
+        width: 74px;
+        height: 18px;
+        margin: 0 auto;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+      }
+
+      .preview-screen {
+        display: grid;
+        gap: 10px;
+        min-height: 150px;
+        padding: 14px;
+        border-radius: 20px;
+        background:
+          radial-gradient(circle at top right, rgba(226, 36, 31, 0.12), transparent 24%),
+          linear-gradient(180deg, #fcf8fb 0%, #f5f1f4 100%);
+      }
+
+      .preview-row,
+      .preview-bars,
+      .preview-mini-grid {
+        display: grid;
+        gap: 8px;
+      }
+
+      .preview-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .preview-bars {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+
+      .preview-mini-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .preview-chip,
+      .preview-block,
+      .preview-stat,
+      .preview-pill {
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.78);
+      }
+
+      .preview-chip {
+        height: 24px;
+      }
+
+      .preview-pill {
+        height: 18px;
+        width: 46%;
+        background: rgba(188, 0, 10, 0.12);
+      }
+
+      .preview-block {
+        min-height: 62px;
+        padding: 12px;
+      }
+
+      .preview-stat {
+        min-height: 76px;
+        padding: 12px;
+      }
+
+      .preview-line {
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(188, 0, 10, 0.14);
+      }
+
+      .preview-line.short {
+        width: 56%;
+      }
+
+      .preview-line.mid {
+        width: 72%;
+      }
+
+      .preview-grid-panel {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+
+      .preview-table {
+        display: grid;
+        gap: 8px;
+      }
+
+      .preview-table-row {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: 0.9fr 1fr 1fr;
+      }
+
+      .preview-cell {
+        min-height: 42px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.82);
+      }
+
+      .preview-cell.highlight {
+        background: rgba(188, 0, 10, 0.14);
+      }
+
+      .preview-ai-rail {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 0.95fr 1.05fr;
+      }
+
+      .preview-glow {
+        min-height: 110px;
+        border-radius: 18px;
+        background:
+          radial-gradient(circle at 30% 30%, rgba(0, 100, 127, 0.26), transparent 28%),
+          radial-gradient(circle at 72% 64%, rgba(188, 0, 10, 0.18), transparent 26%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(242, 247, 249, 0.9));
+      }
+
+      .list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .list-row {
+        display: grid;
+        gap: 8px;
+        padding: 16px 18px;
+        background: var(--surface-card);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .list-row-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .badge.primary {
+        color: var(--primary);
+        background: rgba(188, 0, 10, 0.1);
+      }
+
+      .badge.tertiary {
+        color: var(--tertiary);
+        background: rgba(0, 100, 127, 0.1);
+      }
+
+      .badge.soft {
+        color: var(--muted);
+        background: rgba(228, 226, 228, 0.72);
+      }
+
+      .stats-inline {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .stat-card {
+        padding: 14px 16px;
+        background: rgba(255, 255, 255, 0.62);
+      }
+
+      .stat-card strong {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--primary);
+        font-size: 1.6rem;
+        line-height: 1;
+      }
+
+      .sub-grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      .dark-card {
+        position: relative;
+        overflow: hidden;
+        padding: 22px;
+        color: #fff;
+        background: linear-gradient(180deg, #252527 0%, #1b1b1d 100%);
+      }
+
+      .dark-card p,
+      .dark-card .subtle {
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .dark-stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
         margin-top: 18px;
       }
 
-      .stage-tile {
-        display: grid;
-        gap: 8px;
-        padding: 14px 16px;
-        border-radius: 18px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.86);
+      .dark-stat {
+        padding: 12px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.08);
       }
 
-      .stage-tile strong {
-        color: var(--ink);
+      .table-card {
+        padding: 8px;
+        background: var(--surface-low);
+      }
+
+      .table-scroll {
+        overflow-x: auto;
       }
 
       table {
         width: 100%;
-        border-collapse: collapse;
+        min-width: 560px;
+        border-collapse: separate;
+        border-spacing: 0;
       }
 
       th,
       td {
-        padding: 14px 10px;
-        text-align: left;
+        padding: 16px 14px;
         vertical-align: top;
-        border-bottom: 1px solid var(--line);
-        font-size: 14px;
+        text-align: left;
       }
 
-      th {
+      thead th {
         color: var(--muted);
-        font-weight: 700;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      tbody tr {
+        background: var(--surface-card);
+      }
+
+      tbody tr + tr td {
+        border-top: 12px solid var(--surface-low);
+      }
+
+      tbody td:first-child,
+      thead th:first-child {
+        border-top-left-radius: 18px;
+        border-bottom-left-radius: 18px;
+      }
+
+      tbody td:last-child,
+      thead th:last-child {
+        border-top-right-radius: 18px;
+        border-bottom-right-radius: 18px;
       }
 
       .good {
-        color: var(--accent);
+        color: var(--primary);
         font-weight: 700;
       }
 
-      .warning {
-        color: #9f7418;
+      .neutral {
+        color: var(--tertiary);
         font-weight: 700;
       }
 
-      .risk {
-        color: #ac4a2c;
+      .cta-panel {
+        padding: 24px 22px;
+        background: var(--surface-low);
+      }
+
+      .ai-panel {
+        padding: 22px;
+        background: linear-gradient(180deg, #007fa0 0%, #005770 100%);
+        color: #fff;
+      }
+
+      .ai-panel p {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .chip-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .chip {
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        color: rgba(255, 255, 255, 0.92);
+        font-size: 11px;
         font-weight: 700;
-      }
-
-      .faq-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .detail-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .tabbar-wrap {
         position: fixed;
-        left: 0;
         right: 0;
         bottom: 0;
-        padding:
-          10px 14px
-          calc(env(safe-area-inset-bottom, 0) + 10px);
-        background: linear-gradient(180deg, rgba(244, 248, 253, 0) 0%, rgba(244, 248, 253, 0.92) 26%, rgba(244, 248, 253, 1) 100%);
+        left: 0;
+        padding: 10px 14px calc(env(safe-area-inset-bottom, 0) + 10px);
+        background: linear-gradient(180deg, rgba(252, 248, 251, 0), rgba(252, 248, 251, 0.96) 34%);
       }
 
       .tabbar {
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
-        padding: 10px;
         gap: 8px;
-        border-radius: 28px;
-        background: rgba(255, 255, 255, 0.92);
+        padding: 10px;
+        border-radius: 24px;
+        background: rgba(252, 248, 251, 0.8);
+        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.04);
       }
 
       .tab-button {
         display: grid;
-        gap: 5px;
+        gap: 6px;
         justify-items: center;
+        padding: 8px 4px 10px;
         border: 0;
-        padding: 10px 6px 12px;
-        cursor: pointer;
+        border-radius: 18px;
         color: var(--muted);
         background: transparent;
-        border-radius: 20px;
-        transition: transform 160ms ease, background 160ms ease, color 160ms ease;
-      }
-
-      .tab-button strong {
-        font-size: 11px;
       }
 
       .tab-button .icon {
@@ -703,220 +722,25 @@
         width: 30px;
         height: 30px;
         place-items: center;
-        border-radius: 12px;
-        background: rgba(98, 113, 136, 0.12);
+        border-radius: 10px;
+        background: rgba(228, 226, 228, 0.8);
         font-size: 14px;
+        font-weight: 800;
+      }
+
+      .tab-button strong {
+        font-size: 10px;
         font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
       }
 
       .tab-button.is-active {
-        color: var(--accent);
-        background: rgba(13, 138, 103, 0.08);
+        color: var(--primary);
       }
 
       .tab-button.is-active .icon {
-        background: var(--accent-soft);
-      }
-
-      .two-line {
-        display: grid;
-        gap: 6px;
-      }
-
-      .device-note {
-        margin-top: 16px;
-        padding: 16px;
-        border-radius: 20px;
-        background: var(--blue-soft);
-        color: var(--muted);
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .screen.is-active {
-          animation: none;
-        }
-
-        .card,
-        .compare-card,
-        .faq-item,
-        .journey-card,
-        .projection-tile,
-        .stage-tile,
-        .cta,
-        .chip,
-        .segment-button,
-        .tab-button {
-          transition: none;
-        }
-
-        .card:hover,
-        .compare-card:hover,
-        .faq-item:hover,
-        .journey-card:hover,
-        .projection-tile:hover,
-        .stage-tile:hover,
-        .cta:hover,
-        .cta.secondary:hover,
-        .chip:hover,
-        .segment-button:hover,
-        .tab-button:hover {
-          transform: none;
-        }
-      }
-
-      @media (max-width: 767px) {
-        .hero-grid,
-        .metrics,
-        .grid,
-        .scenario-grid,
-        .compare-grid,
-        .faq-grid,
-        .detail-grid,
-        .journey-grid,
-        .signal-grid,
-        .capability-layout,
-        .spotlight-stats,
-        .projection-strip,
-        .projection-panel {
-          grid-template-columns: 1fr;
-        }
-
-        .tab-button strong {
-          font-size: 10px;
-        }
-      }
-
-      @media (max-width: 430px) and (orientation: portrait) {
-        .app {
-          padding-bottom: calc(env(safe-area-inset-bottom, 0) + 86px);
-        }
-
-        .app-shell {
-          padding: 12px 12px 0;
-        }
-
-        .status-row {
-          margin-bottom: 10px;
-          font-size: 11px;
-        }
-
-        .topbar {
-          margin-bottom: 12px;
-        }
-
-        .topbar .avatar,
-        .hero-visual,
-        .projection-strip,
-        .device-note {
-          display: none;
-        }
-
-        .hero {
-          padding: 16px;
-          border-radius: 24px;
-        }
-
-        h1 {
-          margin-bottom: 4px;
-          font-size: 24px;
-          line-height: 1.08;
-        }
-
-        h2 {
-          font-size: 21px;
-        }
-
-        .hero-subtitle,
-        .section-header p,
-        .card p,
-        .faq-item p,
-        .compare-card p {
-          line-height: 1.55;
-        }
-
-        .brand-ribbon {
-          margin-bottom: 12px;
-        }
-
-        .brand-chip,
-        .avatar {
-          width: 34px;
-          height: 34px;
-          border-radius: 12px;
-          font-size: 13px;
-        }
-
-        .projection-badge {
-          padding: 7px 10px;
-          font-size: 11px;
-        }
-
-        .chip-row,
-        .tag-row,
-        .segmented,
-        .cta-row {
-          gap: 8px;
-        }
-
-        .chip,
-        .segment-button {
-          padding: 8px 12px;
-          font-size: 13px;
-        }
-
-        .panel,
-        .card,
-        .compare-card,
-        .faq-item,
-        .journey-card,
-        .spotlight-card {
-          padding: 15px;
-          border-radius: 22px;
-        }
-
-        .grid,
-        .journey-grid,
-        .detail-grid,
-        .capability-layout,
-        .compare-grid {
-          gap: 10px;
-        }
-
-        .section {
-          margin-top: 14px;
-        }
-
-        th,
-        td {
-          padding: 10px 8px;
-          font-size: 12px;
-        }
-
-        .faq-item h3 {
-          margin-bottom: 6px;
-          font-size: 16px;
-          line-height: 1.28;
-        }
-
-        .tabbar-wrap {
-          padding: 8px 10px calc(env(safe-area-inset-bottom, 0) + 8px);
-        }
-
-        .tabbar {
-          padding: 8px;
-          gap: 6px;
-        }
-
-        .tab-button {
-          padding: 8px 4px 10px;
-        }
-
-        .tab-button .icon {
-          width: 28px;
-          height: 28px;
-          border-radius: 10px;
-          font-size: 13px;
-        }
+        background: rgba(188, 0, 10, 0.1);
       }
 
       @media (min-width: 768px) {
@@ -924,62 +748,74 @@
           padding: 24px 24px 0;
         }
 
-        .hero {
-          padding: 26px;
-        }
-
-        .grid.capability-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-
-        .detail-grid {
+        .grid-two {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        .journey-grid {
+        .grid-three {
           grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
-        .capability-layout {
-          grid-template-columns: 1fr;
+        .hero-grid {
+          grid-template-columns: 1.2fr 0.8fr;
         }
       }
 
-      @media (min-width: 900px) and (orientation: landscape) {
-        .screen.overview .hero-grid {
-          grid-template-columns: 1.25fr 0.95fr;
+      @media (max-width: 430px) and (orientation: portrait) {
+        .app-shell {
+          padding: 16px 14px 0;
         }
 
-        .screen.overview .projection-strip {
-          grid-template-columns: 1.2fr 0.8fr 0.8fr;
+        .page-header {
+          margin-bottom: 18px;
         }
 
-        .screen.overview .layout-split,
-        .screen.compare .compare-grid,
-        .screen.faq .faq-grid {
-          grid-template-columns: 1.15fr 0.85fr;
+        .page-header h1 {
+          font-size: 2.7rem;
         }
 
-        .scenario-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+        .page-header h2 {
+          font-size: 1.85rem;
         }
 
-        .detail-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+        .hero-feature .content {
+          max-width: 100%;
         }
 
-        .journey-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+        .card,
+        .feature-card,
+        .hero-feature,
+        .metric-leaf,
+        .dark-card,
+        .cta-panel,
+        .ai-panel {
+          padding: 16px;
+          border-radius: 20px;
         }
-      }
 
-      @media (min-width: 900px) and (orientation: portrait) {
-        .grid.capability-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+        .tabbar {
+          gap: 4px;
+          padding: 8px;
         }
 
-        .scenario-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+        .tab-button strong {
+          font-size: 9px;
+        }
+
+        .preview-pane,
+        .preview-pane.compare,
+        .preview-pane.ai {
+          min-height: 196px;
+        }
+
+        .preview-device {
+          padding: 12px;
+          border-radius: 22px;
+        }
+
+        .preview-screen {
+          min-height: 128px;
+          padding: 12px;
         }
       }
     </style>
@@ -991,1021 +827,1192 @@
       const params = new URLSearchParams(window.location.search);
       const injectedContext = window.__TIDB_COMPASS_CONTEXT__ || {};
       const locale = params.get("lang") || injectedContext.lang || "zh-CN";
-      const device = params.get("device") || injectedContext.device || "iphone";
-      const orientation = params.get("orientation") || injectedContext.orientation || "portrait";
 
       const messages = {
         "zh-CN": {
           appName: "TiDB Compass",
-          reviewer: "售前模式",
-          heroKicker: "Overview",
-          heroTitle: "把 TiDB 的价值讲成一款真正可演示的 iOS 应用",
-          heroSubtitle:
-            "先按客户诉求筛选，再进入能力、场景、对比和 Q&A。竖屏下优先保留能直接拿来讲的内容。",
-          metrics: [
-            ["快", "一套平台衔接事务处理与近实时分析"],
-            ["稳", "适合关键业务连续性的分布式架构"],
-            ["省", "减少分库分表和多链路同步复杂度"]
-          ],
-          chips: {
-            all: "全部",
-            scaling: "扩展瓶颈",
-            realtime: "实时分析",
-            ha: "高可用",
-            mysql: "MySQL 迁移",
-            cost: "复杂度/成本"
-          },
-          heroPanelTitle: "客户需求入口",
-          heroPanelBody: "在销售现场先问需求，再切到最合适的讲法。不同页面会跟随筛选重点保留相关内容。",
-          primaryCta: "开始讲解",
-          secondaryCta: "查看对比",
-          deviceNote: `当前预览：${device === "ipad" ? "iPad" : "iPhone"} ${orientation === "landscape" ? "横版" : "竖版"}。`,
-          tabs: ["概览", "能力", "场景", "对比", "FAQ"],
-          overview: {
-            sectionTitle: "三分钟开场结构",
-            sectionBody: "先讲业务结果，再补架构理由，最后再进入竞品差异。",
+          reviewer: "Digital Curator Mode",
+          tabs: ["导览", "核心", "场景", "对比", "AI"],
+          intro: {
+            eyebrow: "Intro",
+            title: "下一代分布式数据库架构",
+            accent: "数据库",
+            body:
+              "TiDB 是开源、云原生的分布式 SQL 数据库，兼顾 HTAP、弹性扩展与高可用，适合面向增长和现代化升级的关键业务。",
+            primary: "开始讲解",
+            secondary: "查看文档",
+            innovation: "创新能力",
+            featureTitle: "弹性扩展",
+            featureBody:
+              "计算与存储可以独立扩展，业务增长时不必依赖停机扩容或复杂的分片治理。",
+            leafLabel: "核心可靠性",
+            leafValue: "99.99",
+            leafUnit: "% 可用性",
+            leafBody: "面向企业级核心负载的连续服务能力。",
             cards: [
-              ["增长系统不再被单机上限卡住", "适合订单、支付、库存、营销等持续增长业务。", ["scaling", "cost"]],
-              ["交易和分析更靠近", "让实时经营分析不再过度依赖长链路同步。", ["realtime", "cost"]],
-              ["关键业务可持续服务", "把高可用、故障隔离和连续性讲清楚。", ["ha"]],
-              ["迁移门槛更可控", "先保留 SQL / MySQL 习惯，再谈架构升级。", ["mysql", "scaling"]]
+              ["企业安全", "细粒度权限、加密与合规能力内建在平台中。", "shield"],
+              ["标准 SQL", "兼容 MySQL 协议，迁移常常从连接串切换开始。", "database"],
+              ["云原生", "适合 Kubernetes 与多云部署的现代化平台架构。", "cloud"]
+            ],
+            insightsTitle: "最新能力",
+            insightsLink: "查看归档",
+            insights: [
+              ["New", "HTAP 性能", "TiFlash 7.0：让实时分析更贴近业务动作。"],
+              ["Stable", "存储层", "TiKV 优化：P99 延迟进一步下降。"]
             ]
           },
-          capabilities: {
-            title: "Capabilities",
-            body: "把能力组织成客户问题，而不是数据库术语堆叠。",
-            segments: ["Scale", "Resilience", "Insight", "Migration", "Simplification"],
-            cards: [
-              ["分布式水平扩展", "讲清楚为什么业务增长时更容易横向扩容。"],
-              ["高可用与恢复", "适合讲核心系统的连续服务能力。"],
-              ["HTAP", "适合讲交易数据更快形成分析结果。"],
-              ["MySQL 兼容", "适合讲迁移和团队学习成本。"],
-              ["云原生弹性", "适合讲现代平台化建设。"],
-              ["减少中间件", "适合讲长期复杂度和团队效率。"]
+          core: {
+            eyebrow: "Core Ecosystem",
+            title: "核心能力底座",
+            body:
+              "TiDB 的架构核心围绕分布式 SQL、事务一致性、HTAP 与云原生治理展开，适合作为统一的数据平台能力层。",
+            heroTitle: "分布式 SQL 存储",
+            heroBody:
+              "TiKV 提供强一致的事务型 KV 存储层，可横向扩展到大规模节点，并保持统一的数据语义。",
+            stats: [
+              ["OLTP 延迟", "1ms"],
+              ["OLAP 吞吐", "10GB/s"]
             ],
-            details: [
-              ["SQL / MySQL", "降低业务系统迁移和团队学习门槛，让介绍更容易从技术风险切到业务升级。"],
-              ["Distributed SQL", "帮助客户理解为什么扩展性、高可用和平台化能力能放在同一条故事线上。"],
-              ["HTAP", "把交易系统和实时分析讲成一个更连贯的经营数据平台。"]
+            cards: [
+              ["HTAP 引擎", "通过 TiFlash 在业务数据上做实时分析，无需额外 ETL。", "storage"],
+              ["Cloud Native", "借助 TiDB Operator 在 Kubernetes 上自动化运维。", "cloud"],
+              ["强一致", "Multi-Raft 架构帮助关键业务实现 RPO=0。", "shield"],
+              ["自动扩缩容", "按负载动态调度资源，降低人工干预。", "bolt"]
+            ],
+            toolingTitle: "生态工具链",
+            tooling: [
+              ["TiCDC", "支持下游系统的增量复制。"],
+              ["Dumpling", "适合大规模逻辑导出场景。"],
+              ["Lightning", "帮助快速导入海量数据。"],
+              ["BR Tool", "提供分布式备份恢复能力。"]
             ]
           },
           scenarios: {
-            title: "Scenarios",
-            body: "用行业和业务问题来组织材料，方便销售代入。",
-            cards: [
-              ["电商与平台高峰扩展", "峰值并发、促销活动、实时运营分析并存。"],
-              ["金融交易与关键业务稳定性", "强调连续性、稳定性和现代化升级。"],
-              ["实时经营分析", "希望交易数据更快转成决策动作。"],
-              ["出海与多地域部署", "更适合讲统一数据平台和业务连续性。"]
+            eyebrow: "Solutions Ecosystem",
+            title: "行业与场景中心",
+            body:
+              "把 TiDB 讲成业务方案，而不只是数据库功能。围绕关键行业、高峰扩展、实时分析和数据主权组织讲法。",
+            fintechBadge: "FinTech",
+            fintechTitle: "金融交易与资产管理",
+            fintechBody:
+              "适合全球交易系统的低延迟事务处理、强一致性要求与连续服务能力。",
+            fintechAction: "查看架构",
+            analyticsTitle: "实时分析",
+            analyticsBody: "在交易数据上直接获得实时经营分析，不再依赖长链路 ETL。",
+            analyticsMetric: "99.99",
+            analyticsMetricLabel: "Uptime SLA",
+            logTitle: "大规模日志分析",
+            logBody: "面向海量日志的索引与查询，支持更快的排障与运营洞察。",
+            sovereigntyTitle: "多云数据主权",
+            sovereigntyBody:
+              "在跨区域和多云环境中维持统一访问、合规边界与业务连续性。",
+            sovereigntyStats: [
+              ["覆盖区域", "24+"],
+              ["典型延迟", "<10ms"]
             ],
-            talkTitle: "推荐讲法",
-            talkTrack: "建议先讲客户当前痛点，再进入 TiDB 如何在扩展、稳定与实时分析之间减少取舍。",
-            pocTitle: "PoC Trigger",
-            poc: "当客户已经感觉到单机上限、链路复杂或多区域治理难度时，最适合推进 PoC。"
+            ctaTitle: "准备优化你的基础架构？",
+            ctaBody: "从一个关键 workload 开始验证，再逐步扩大 TiDB 的覆盖范围。",
+            ctaPrimary: "预约演示",
+            ctaSecondary: "下载白皮书"
           },
           compare: {
-            title: "Compare",
-            body: "主视图先做架构路径对比，而不是先绑定具体厂商。",
-            summaryTitle: "推荐讲法",
-            summaryBody: "先解释 TiDB 更适合解决什么问题，再谈为什么现有方案在增长后会变复杂。",
-            headers: ["维度", "TiDB", "传统路径"],
+            eyebrow: "Architecture Rivalry",
+            title: "竞争对比",
+            body:
+              "从架构路径、扩展模式和总拥有成本三条主线切入，帮助销售在客户面前快速建立差异化。",
+            heroTitle: "Shared-Nothing vs. Cloud-Native",
+            heroBody:
+              "TiDB 的计算存储分离和云原生扩展方式，在峰值扩容与长期运维上通常更具成本效率。",
+            statA: ["0ms", "读取抖动"],
+            statB: ["99.999%", "可用性目标"],
+            leafValue: "3.2x",
+            leafTitle: "更快吞吐",
+            leafBody: "复杂分析查询下对比传统 NewSQL 的参考结果。",
+            tableHeaders: ["能力项", "TiDB", "传统 NewSQL", "Legacy RDBMS"],
             rows: [
-              ["扩展方式", "水平扩展", "单机或拆分治理复杂"],
-              ["实时分析", "统一平台故事", "通常需要额外分析链路"],
-              ["高可用", "更适合故障隔离", "依赖更多补丁式设计"],
-              ["长期复杂度", "平台化空间更大", "团队成本持续上升"]
+              ["自动扩展", "即时扩展", "人工分区", "主要依赖副本"],
+              ["HTAP", "原生 TiFlash", "有限支持", "通常依赖 ETL"],
+              ["事务一致性", "外部一致快照", "Serializable", "传统 MVCC"]
             ],
-            highlights: [
-              ["Scale", "先解决增长焦虑。"],
-              ["Insight", "再讲实时分析价值。"],
-              ["Complexity", "最后强调长期架构复杂度。"]
-            ]
+            insightTitle: "TCO 优势",
+            insightBody:
+              "从分库分表 MySQL 迁移后，3 年期总拥有成本可显著下降，尤其体现在运维与扩容效率上。"
           },
-          faq: {
-            title: "Q&A",
-            body: "先短答，再展开。先承认顾虑，再给判断，最后决定是否继续深入。",
+          ai: {
+            eyebrow: "Intelligence Layer",
+            title: "智能能力层",
+            body:
+              "将向量能力、自愈优化和工作负载预测组织成更适合客户理解的 AI 故事，而不是单一技术名词。",
+            heroTitle: "Autonomous Database Optimizer",
+            heroBody:
+              "基于工作负载趋势、热点识别与实时 SQL 优化，帮助平台在性能问题出现前先做调整。",
             cards: [
-              ["我们已经会 MySQL，为什么要换？", "如果未来几年 MySQL 还能稳住，就不必强推。TiDB 的价值在于把分库分表、扩容中断和高可用复杂度提前收住。"],
-              ["真的兼容 MySQL 吗？", "对大多数 OLTP、驱动和常见工具来说迁移门槛很低，但要诚实说明是高兼容，不是 100% 字节级等同。"],
-              ["迁移会不会很难？", "标准 MySQL 应用通常难点不在搬数据，而在主键、热点和少量不兼容点治理，所以先做评估和 PoC 最稳。"],
-              ["核心业务能不能放上来？", "可以把答案聚焦在高可用、故障恢复和分阶段上线，不必一开始就承诺全量替换。"],
-              ["为什么不是 MySQL 加分析库？", "那条路能走，但链路会更长、延迟更高、系统更多。TiDB 更适合讲成统一平台带来的简化价值。"],
-              ["下一步怎么推进？", "先选一个增长或复杂度最痛的 workload，做兼容性检查和小范围 PoC，再决定是否扩大。"]
-            ]
-          }
-        },
-        "ja-JP": {
-          appName: "TiDB Compass",
-          reviewer: "プリセールスモード",
-          heroKicker: "Overview",
-          heroTitle: "TiDB の価値を本物の iOS アプリのように伝える",
-          heroSubtitle:
-            "まず顧客要件で絞り込み、その後に機能、シナリオ、比較、Q&A へ進みます。縦画面では商談に必要な情報を優先しています。",
-          metrics: [
-            ["速い", "トランザクションとほぼリアルタイム分析を 1 つの基盤で"],
-            ["強い", "重要業務の継続性を支える分散アーキテクチャ"],
-            ["軽い", "シャーディングや複数同期経路の複雑さを減らす"]
-          ],
-          chips: {
-            all: "すべて",
-            scaling: "拡張課題",
-            realtime: "リアルタイム分析",
-            ha: "高可用性",
-            mysql: "MySQL 移行",
-            cost: "複雑性とコスト"
-          },
-          heroPanelTitle: "顧客要件の入口",
-          heroPanelBody: "商談ではまず課題を聞き、その後に最適な説明順へ切り替えます。",
-          primaryCta: "説明を開始",
-          secondaryCta: "比較を見る",
-          deviceNote: `現在のプレビュー: ${device === "ipad" ? "iPad" : "iPhone"} ${orientation === "landscape" ? "横向き" : "縦向き"}`,
-          tabs: ["概要", "機能", "シナリオ", "比較", "FAQ"],
-          overview: {
-            sectionTitle: "3 分で伝える構成",
-            sectionBody: "最初に業務成果、その後にアーキテクチャ理由、最後に差別化です。",
-            cards: [
-              ["単一ノードの限界を超えて成長へ対応", "受注、決済、在庫など伸び続ける業務に適しています。", ["scaling", "cost"]],
-              ["取引と分析を近づける", "リアルタイム経営分析をより自然に説明できます。", ["realtime", "cost"]],
-              ["重要業務の継続提供", "高可用性、障害分離、継続性を明確に伝えます。", ["ha"]],
-              ["移行の心理的負担を下げる", "SQL / MySQL の習慣を残したまま段階的に進められます。", ["mysql", "scaling"]]
-            ]
-          },
-          capabilities: {
-            title: "Capabilities",
-            body: "DB 用語の羅列ではなく、顧客課題で整理します。",
-            segments: ["Scale", "Resilience", "Insight", "Migration", "Simplification"],
-            cards: [
-              ["水平スケール", "事業成長時の拡張余地を説明しやすい。"],
-              ["高可用性と復旧", "重要業務の継続性を説明しやすい。"],
-              ["HTAP", "取引データをより早く分析へつなげられる。"],
-              ["MySQL 互換", "移行や学習コストを下げやすい。"],
-              ["クラウドネイティブ弾力性", "現代的なプラットフォーム構想につなげやすい。"],
-              ["中間層の削減", "長期的な複雑さを抑える話がしやすい。"]
+              ["语义检索", "原生向量搜索能力，适合 RAG 与 AI 应用的数据底座。", "schema"],
+              ["自愈能力", "自动处理死锁、索引修复与热点迁移。", "fix"]
             ],
-            details: [
-              ["SQL / MySQL", "移行や学習の心理的負担を抑え、技術リスクの話から業務進化の話へ移りやすくします。"],
-              ["Distributed SQL", "拡張性、高可用性、標準化を 1 本のストーリーとして説明しやすくします。"],
-              ["HTAP", "取引と分析をより一体的なデータ基盤として見せられます。"]
-            ]
-          },
-          scenarios: {
-            title: "Scenarios",
-            body: "業界と業務課題で整理し、現場で再利用しやすくします。",
-            cards: [
-              ["EC / プラットフォームのピーク拡張", "ピーク負荷、販促、運営分析が同時に発生。"],
-              ["金融取引と安定性", "継続性と安定性を重視する顧客向け。"],
-              ["リアルタイム経営分析", "夜間 ETL を待たずに判断したいケース。"],
-              ["海外展開とマルチリージョン", "統一基盤と継続運用の価値を説明。"]
+            metricLabel: "AI 效率指标",
+            metricValue: "98.4%",
+            metricBody: "预测准确率",
+            roadmapTitle: "能力路线图",
+            roadmap: [
+              ["Natural Language SQL", "自然语言到 SQL 的分析助手。"],
+              ["AI Hotspot Analysis", "更主动的热点识别与重平衡。"],
+              ["Federated Learning", "适合隐私场景的模型协同训练。"]
             ],
-            talkTitle: "推奨トーク",
-            talkTrack: "最初に顧客の痛みを確認し、その後に TiDB が拡張、安定、分析のバランスをどう変えるかを示します。",
-            pocTitle: "PoC のきっかけ",
-            poc: "単一ノード限界や複雑な連携、リージョン管理に悩んでいるときが PoC の最適タイミングです。"
-          },
-          compare: {
-            title: "Compare",
-            body: "最初はアーキテクチャ比較として見せるのが有効です。",
-            summaryTitle: "推奨トーク",
-            summaryBody: "TiDB が何に適しているかを先に説明し、次に従来構成が成長後に複雑になる理由を示します。",
-            headers: ["軸", "TiDB", "従来パス"],
-            rows: [
-              ["拡張", "水平スケール", "単一ノードや複雑な分割"],
-              ["リアルタイム分析", "統一されたストーリー", "別分析経路が必要"],
-              ["高可用性", "障害分離に適する", "補綴的な設計に依存"],
-              ["長期複雑性", "標準化しやすい", "運用コストが上がりやすい"]
-            ],
-            highlights: [
-              ["Scale", "まず成長不安を解消する。"],
-              ["Insight", "次にリアルタイム分析価値を示す。"],
-              ["Complexity", "最後に長期的な複雑さを強調する。"]
-            ]
-          },
-          faq: {
-            title: "Q&A",
-            body: "まず短く答え、その後で必要なら深掘りします。",
-            cards: [
-              ["MySQL を知っているのに、なぜ変えるのか？", "今後数年 MySQL で十分なら無理に変える必要はありません。TiDB は分割や高可用性の複雑さが見え始めた時に価値が出ます。"],
-              ["本当に MySQL 互換ですか？", "多くの OLTP、ドライバ、一般的なツールでは移行しやすいですが、100% 同一とは言わず高互換として説明します。"],
-              ["移行は難しいですか？", "標準的な MySQL アプリなら、データ移行そのものより主キー設計やホットスポット対策の方が重要です。"],
-              ["重要業務でも使えますか？", "高可用性、障害復旧、段階導入の話に絞って答えるのが有効です。"],
-              ["なぜ MySQL と分析 DB の組み合わせではないのですか？", "その構成でも可能ですが、遅延と構成の複雑さが増えやすい点を説明します。"],
-              ["次に何をするべきですか？", "一番痛みの強い workload を選び、小さく PoC と互換性確認から始めます。"]
-            ]
+            vectorTitle: "原生向量数据库能力",
+            vectorBody:
+              "在 TiDB 内直接存储、索引和查询 embedding，帮助 AI 应用更快落地到生产系统。",
+            chips: ["HNSW", "Cosine", "Metadata Filter"],
+            action: "探索 AI Core"
           }
         },
         "en-US": {
           appName: "TiDB Compass",
-          reviewer: "Presales Mode",
-          heroKicker: "Overview",
-          heroTitle: "Present TiDB as a polished iOS app, not a static brochure",
-          heroSubtitle:
-            "Start with customer-priority filters, then move into capabilities, scenarios, comparisons, and Q&A. On iPhone portrait, the layout prioritizes the content sellers actually present.",
-          metrics: [
-            ["Fast", "One platform for transactions and near real-time insight"],
-            ["Resilient", "A distributed design for continuity in critical workloads"],
-            ["Lean", "Less sharding and fewer stitched-together sync paths"]
-          ],
-          chips: {
-            all: "All",
-            scaling: "Scale limits",
-            realtime: "Real-time insight",
-            ha: "High availability",
-            mysql: "MySQL migration",
-            cost: "Complexity / cost"
-          },
-          heroPanelTitle: "Customer need entry point",
-          heroPanelBody: "In live conversations, start with the need and then switch to the strongest story path.",
-          primaryCta: "Start story",
-          secondaryCta: "Open compare",
-          deviceNote: `Current preview: ${device === "ipad" ? "iPad" : "iPhone"} ${orientation === "landscape" ? "Landscape" : "Portrait"}.`,
-          tabs: ["Overview", "Capabilities", "Scenarios", "Compare", "FAQ"],
-          overview: {
-            sectionTitle: "A three-minute opening flow",
-            sectionBody: "Lead with business outcomes, then connect them to architecture and differentiation.",
+          reviewer: "Digital Curator Mode",
+          tabs: ["Intro", "Core", "Scenarios", "Compare", "AI"],
+          intro: {
+            eyebrow: "Intro",
+            title: "The Next Generation Distributed Database",
+            accent: "Database",
+            body:
+              "TiDB is an open-source, cloud-native distributed SQL database built for HTAP, elastic scale, and high availability in modern business-critical workloads.",
+            primary: "Start Exploring",
+            secondary: "View Docs",
+            innovation: "Innovation",
+            featureTitle: "Elastic Scalability",
+            featureBody:
+              "Scale compute and storage independently as demand grows, without relying on downtime or heavy sharding governance.",
+            leafLabel: "Core Reliability",
+            leafValue: "99.99",
+            leafUnit: "% Uptime",
+            leafBody: "Continuity for enterprise-grade mission-critical systems.",
             cards: [
-              ["Grow beyond a single-node ceiling", "A fit for orders, payments, inventory, and other workloads that keep expanding.", ["scaling", "cost"]],
-              ["Bring transactions and analytics closer", "A better story for real-time operating insight without long sync chains.", ["realtime", "cost"]],
-              ["Keep critical systems available", "Talk clearly about HA, fault isolation, and continuity.", ["ha"]],
-              ["Keep migration emotionally manageable", "Preserve SQL and MySQL habits before moving the architecture forward.", ["mysql", "scaling"]]
+              ["Enterprise Security", "Fine-grained access control, encryption, and compliance-ready platform controls.", "shield"],
+              ["Standard SQL", "MySQL protocol compatibility keeps migration friction low for most teams.", "database"],
+              ["Cloud Native", "Built for Kubernetes and multi-cloud deployment flexibility.", "cloud"]
+            ],
+            insightsTitle: "Latest Capabilities",
+            insightsLink: "View Archive",
+            insights: [
+              ["New", "HTAP Performance", "TiFlash 7.0 brings real-time analytics closer to operational action."],
+              ["Stable", "Storage Layer", "TiKV optimizations continue to improve P99 latency."]
             ]
           },
-          capabilities: {
-            title: "Capabilities",
-            body: "Organize capability stories around customer problems, not database jargon.",
-            segments: ["Scale", "Resilience", "Insight", "Migration", "Simplification"],
-            cards: [
-              ["Distributed scale-out", "Explain why growth can be absorbed more smoothly over time."],
-              ["HA and recovery", "Useful for continuity and critical-service conversations."],
-              ["HTAP", "Show how transactional data can support faster analytics."],
-              ["MySQL compatibility", "Lower perceived migration and learning friction."],
-              ["Cloud-native elasticity", "Support a modern platform narrative."],
-              ["Less middleware", "A stronger story around long-term simplicity and team efficiency."]
+          core: {
+            eyebrow: "Core Ecosystem",
+            title: "Architectural Backbone",
+            body:
+              "TiDB’s core story is built on distributed SQL, transactional consistency, HTAP, and cloud-native operations as one coherent platform layer.",
+            heroTitle: "Distributed SQL Storage",
+            heroBody:
+              "TiKV provides the strongly consistent transactional KV layer that scales horizontally while preserving a unified SQL experience.",
+            stats: [
+              ["OLTP Latency", "1ms"],
+              ["OLAP Throughput", "10GB/s"]
             ],
-            details: [
-              ["SQL / MySQL", "Lower migration anxiety and move the conversation from technical risk toward business modernization."],
-              ["Distributed SQL", "Show why scale, availability, and platform consistency can live in the same architecture story."],
-              ["HTAP", "Position transactions and analytics as one more coherent operational data platform."]
+            cards: [
+              ["HTAP Engine", "Use TiFlash for real-time analytics on operational data without extra ETL.", "storage"],
+              ["Cloud Native", "Operate with TiDB Operator and Kubernetes-native orchestration.", "cloud"],
+              ["Strong Consistency", "Multi-Raft helps critical systems target RPO=0.", "shield"],
+              ["Auto Scaling", "Balance resources dynamically across the cluster.", "bolt"]
+            ],
+            toolingTitle: "Ecosystem Tooling",
+            tooling: [
+              ["TiCDC", "Incremental replication for downstream systems."],
+              ["Dumpling", "Logical export for large dataset migration."],
+              ["Lightning", "High-speed import for bulk data onboarding."],
+              ["BR Tool", "Distributed backup and restore for enterprise safety."]
             ]
           },
           scenarios: {
-            title: "Scenarios",
-            body: "Structure content by industry and business problem so teams can reuse it quickly.",
-            cards: [
-              ["E-commerce and peak traffic", "Promotions, spikes, and operating insight all happen together."],
-              ["Financial transactions and stability", "A stronger frame for continuity and modernization."],
-              ["Real-time business analytics", "For teams that do not want to wait for overnight ETL."],
-              ["Global deployment and multi-region", "A good frame for continuity and unified data platforms."]
+            eyebrow: "Solutions Ecosystem",
+            title: "Enterprise Solutions",
+            body:
+              "Frame TiDB as a business solution, not just a database feature set. Organize the story around industry pressure, operational insight, and data sovereignty.",
+            fintechBadge: "FinTech",
+            fintechTitle: "Financial Trading & Asset Management",
+            fintechBody:
+              "A strong fit for low-latency transactions, ACID guarantees, and operational continuity in global exchange systems.",
+            fintechAction: "Explore Architecture",
+            analyticsTitle: "Real-time Analytics",
+            analyticsBody: "Turn operational data into insight without long ETL chains.",
+            analyticsMetric: "99.99",
+            analyticsMetricLabel: "Uptime SLA",
+            logTitle: "Large Scale Log Analysis",
+            logBody: "Index and query massive log workloads with faster troubleshooting and response.",
+            sovereigntyTitle: "Multi-Cloud Data Sovereignty",
+            sovereigntyBody:
+              "Maintain unified access, compliance boundaries, and continuity across regions and cloud providers.",
+            sovereigntyStats: [
+              ["Regions", "24+"],
+              ["Latency", "<10ms"]
             ],
-            talkTitle: "Talk Track",
-            talkTrack: "Start with the customer's current pain, then explain how TiDB reduces the tradeoff between scale, resilience, and insight.",
-            pocTitle: "PoC Trigger",
-            poc: "The best moment to propose a PoC is when the customer already feels the limits of single-node growth, system sprawl, or multi-region complexity."
+            ctaTitle: "Ready to optimize your infrastructure?",
+            ctaBody: "Start with one workload where growth or complexity is already visible, then expand from proof.",
+            ctaPrimary: "Schedule Demo",
+            ctaSecondary: "White Paper"
           },
           compare: {
-            title: "Compare",
-            body: "Start with architecture-path comparison before vendor-level comparison.",
-            summaryTitle: "Recommended talk track",
-            summaryBody: "Explain what TiDB is better suited for, then show why traditional paths become more complex as the business grows.",
-            headers: ["Dimension", "TiDB", "Traditional path"],
+            eyebrow: "Architecture Rivalry",
+            title: "Competitive Compare",
+            body:
+              "Lead with architecture path, scaling behavior, and TCO so sales teams can create a faster differentiation story in customer conversations.",
+            heroTitle: "Shared-Nothing vs. Cloud-Native",
+            heroBody:
+              "Compute-storage separation and cloud-native expansion often make TiDB more efficient during peak scaling and long-term operations.",
+            statA: ["0ms", "Read Jitter"],
+            statB: ["99.999%", "Availability SLI"],
+            leafValue: "3.2x",
+            leafTitle: "Faster Throughput",
+            leafBody: "Reference result on complex analytical workloads versus traditional NewSQL paths.",
+            tableHeaders: ["Capability", "TiDB", "Traditional NewSQL", "Legacy RDBMS"],
             rows: [
-              ["Scaling", "Horizontal scale", "Single-node or complex sharding"],
-              ["Real-time insight", "Unified platform story", "Often needs extra analytics pipelines"],
-              ["High availability", "Better fit for fault isolation", "Depends on more patchwork design"],
-              ["Long-term complexity", "More room for platform standardization", "Team cost keeps rising"]
+              ["Auto Scaling", "Instant", "Manual partitioning", "Replica-led scaling"],
+              ["HTAP", "Native TiFlash", "Limited support", "Usually ETL-based"],
+              ["Consistency", "External snapshot", "Serializable", "Traditional MVCC"]
             ],
-            highlights: [
-              ["Scale", "Solve the growth anxiety first."],
-              ["Insight", "Then show the real-time analytics value."],
-              ["Complexity", "Close by framing long-term architecture complexity."]
-            ]
+            insightTitle: "TCO Advantage",
+            insightBody:
+              "Migrating from legacy sharded MySQL can materially lower three-year ownership cost, especially in operations and scale events."
           },
-          faq: {
-            title: "Q&A",
-            body: "Answer briefly first: acknowledge the concern, give the point of view, then decide whether to go deeper.",
+          ai: {
+            eyebrow: "Intelligence Layer",
+            title: "AI-Powered Operations",
+            body:
+              "Package vector search, self-healing, and workload forecasting as one practical AI layer instead of a disconnected list of features.",
+            heroTitle: "Autonomous Database Optimizer",
+            heroBody:
+              "Use workload trends, hotspot analysis, and live SQL optimization to act before performance issues turn into incidents.",
             cards: [
-              ["We already know MySQL. Why change?", "If MySQL can comfortably support the next few years, do not force change. TiDB matters when sharding, scale events, and HA complexity start to drag the team down."],
-              ["Is it really MySQL-compatible?", "For most OLTP apps, drivers, and common tools, migration friction is low. The honest answer is high compatibility, not byte-for-byte sameness."],
-              ["How hard is migration?", "For standard MySQL apps, the hard part is usually not moving data. It is evaluating keys, hotspots, and a small number of incompatibilities."],
-              ["Can it run critical workloads?", "Keep the answer focused on HA, recovery, and phased rollout instead of promising a full replacement on day one."],
-              ["Why not keep MySQL plus analytics databases?", "That path can work, but it usually adds latency, more pipelines, and more operational sprawl. TiDB is stronger as a unified-platform story."],
-              ["What is the next step?", "Pick one workload where growth or complexity already hurts, run a compatibility check, and use a small PoC to decide whether to expand."]
-            ]
+              ["Semantic Search", "Native vector search for RAG and AI application foundations.", "schema"],
+              ["Self-Healing", "Automate deadlock resolution, index repair, and hotspot mitigation.", "fix"]
+            ],
+            metricLabel: "AI Efficiency Metric",
+            metricValue: "98.4%",
+            metricBody: "Prediction accuracy",
+            roadmapTitle: "Capabilities Roadmap",
+            roadmap: [
+              ["Natural Language SQL", "Text-to-query assistance for analysts."],
+              ["AI Hotspot Analysis", "More proactive hotspot prediction and balancing."],
+              ["Federated Learning", "Privacy-sensitive collaborative model training."]
+            ],
+            vectorTitle: "Vector Database Native",
+            vectorBody:
+              "Store, index, and query embeddings directly inside TiDB to make AI application delivery more production-ready.",
+            chips: ["HNSW", "Cosine", "Metadata Filter"],
+            action: "Explore AI Core"
           }
+        }
+      };
+
+      messages["ja-JP"] = {
+        ...messages["en-US"],
+        appName: "TiDB Compass",
+        reviewer: "Digital Curator Mode",
+        tabs: ["イントロ", "コア", "シナリオ", "比較", "AI"],
+        intro: {
+          eyebrow: "Intro",
+          title: "次世代の分散データベース",
+          accent: "データベース",
+          body:
+            "TiDB は、HTAP、弾力的な拡張、高可用性を一体で提供するクラウドネイティブな分散 SQL データベースです。",
+          primary: "説明を始める",
+          secondary: "資料を見る",
+          innovation: "Innovation",
+          featureTitle: "弾力的なスケーラビリティ",
+          featureBody:
+            "ダウンタイムや重いシャーディング運用に依存せず、計算とストレージを個別に拡張できます。",
+          leafLabel: "基盤の信頼性",
+          leafValue: "99.99",
+          leafUnit: "% 稼働率",
+          leafBody: "重要業務を継続させるための可用性設計です。",
+          cards: [
+            ["エンタープライズセキュリティ", "細かな権限制御、暗号化、コンプライアンス対応を支えます。", "shield"],
+            ["標準 SQL", "MySQL 互換で多くのチームにとって移行負荷を抑えられます。", "database"],
+            ["クラウドネイティブ", "Kubernetes とマルチクラウド運用に適した設計です。", "cloud"]
+          ],
+          insightsTitle: "最新機能",
+          insightsLink: "アーカイブを見る",
+          insights: [
+            ["New", "HTAP 性能", "TiFlash 7.0 でリアルタイム分析を業務判断に近づけます。"],
+            ["Stable", "ストレージ層", "TiKV 最適化で P99 レイテンシがさらに改善しました。"]
+          ]
         },
-        "pt-BR": {
-          appName: "TiDB Compass",
-          reviewer: "Modo Pré-vendas",
-          heroKicker: "Overview",
-          heroTitle: "Apresente o TiDB como um app iOS de verdade, não como uma brochura",
-          heroSubtitle:
-            "Comece pelos filtros de prioridade do cliente e depois avance para capacidades, cenários, comparativos e Q&A. No iPhone em retrato, o foco fica no conteúdo principal.",
-          metrics: [
-            ["Rápido", "Uma plataforma para transações e insight quase em tempo real"],
-            ["Confiável", "Design distribuído para continuidade em workloads críticos"],
-            ["Enxuto", "Menos sharding e menos cadeias de sincronização costuradas"]
+        core: {
+          eyebrow: "Core Ecosystem",
+          title: "アーキテクチャ基盤",
+          body:
+            "TiDB の核心は、分散 SQL、トランザクション整合性、HTAP、クラウドネイティブ運用を 1 つの基盤として統合する点です。",
+          heroTitle: "分散 SQL ストレージ",
+          heroBody:
+            "TiKV は強整合なトランザクション KV 層として、統一された SQL 体験を保ちながら水平拡張します。",
+          stats: [
+            ["OLTP 遅延", "1ms"],
+            ["OLAP 吞吐", "10GB/s"]
           ],
-          chips: {
-            all: "Todos",
-            scaling: "Escala",
-            realtime: "Insight em tempo real",
-            ha: "Alta disponibilidade",
-            mysql: "Migração MySQL",
-            cost: "Complexidade / custo"
-          },
-          heroPanelTitle: "Entrada pela necessidade do cliente",
-          heroPanelBody: "Em conversas ao vivo, comece pela necessidade e mude para a melhor trilha de narrativa.",
-          primaryCta: "Começar",
-          secondaryCta: "Abrir comparativo",
-          deviceNote: `Preview atual: ${device === "ipad" ? "iPad" : "iPhone"} ${orientation === "landscape" ? "Paisagem" : "Retrato"}.`,
-          tabs: ["Visão", "Capacidades", "Cenários", "Compare", "FAQ"],
-          overview: {
-            sectionTitle: "Estrutura de abertura em três minutos",
-            sectionBody: "Comece pelo resultado de negócio, depois conecte à arquitetura e à diferenciação.",
-            cards: [
-              ["Cresça além do limite de um único nó", "Bom para pedidos, pagamentos, estoque e outras cargas em expansão.", ["scaling", "cost"]],
-              ["Aproxime transações e analytics", "Melhor narrativa para insight operacional sem longas cadeias de sync.", ["realtime", "cost"]],
-              ["Mantenha sistemas críticos disponíveis", "Explique HA, isolamento de falhas e continuidade com clareza.", ["ha"]],
-              ["Torne a migração mais controlável", "Preserve hábitos de SQL e MySQL antes de evoluir a arquitetura.", ["mysql", "scaling"]]
-            ]
-          },
-          capabilities: {
-            title: "Capabilities",
-            body: "Organize a história por problema do cliente, não por jargão técnico.",
-            segments: ["Scale", "Resilience", "Insight", "Migration", "Simplification"],
-            cards: [
-              ["Escala distribuída", "Mostre por que o crescimento pode ser absorvido com mais fluidez."],
-              ["HA e recuperação", "Boa para continuidade e serviços críticos."],
-              ["HTAP", "Mostre como dados transacionais aceleram analytics."],
-              ["Compatibilidade MySQL", "Reduz fricção percebida de migração e aprendizado."],
-              ["Elasticidade cloud-native", "Fortalece a narrativa de plataforma moderna."],
-              ["Menos middleware", "Melhor argumento para simplicidade de longo prazo."]
-            ],
-            details: [
-              ["SQL / MySQL", "Reduz a ansiedade de migração e muda a conversa de risco técnico para modernização do negócio."],
-              ["Distributed SQL", "Mostra por que escala, disponibilidade e padronização podem viver na mesma história de arquitetura."],
-              ["HTAP", "Posiciona transações e analytics como uma plataforma operacional mais coerente."]
-            ]
-          },
-          scenarios: {
-            title: "Scenarios",
-            body: "Organize por setor e problema de negócio para reutilização rápida.",
-            cards: [
-              ["E-commerce e picos de tráfego", "Promoções, picos e analytics operacional acontecem juntos."],
-              ["Transações financeiras e estabilidade", "Boa moldura para continuidade e modernização."],
-              ["Analytics operacional em tempo real", "Para equipes que não querem esperar ETL noturno."],
-              ["Implantação global e multirregião", "Boa moldura para continuidade e plataforma unificada."]
-            ],
-            talkTitle: "Talk Track",
-            talkTrack: "Comece pela dor atual do cliente e depois explique como o TiDB reduz o trade-off entre escala, resiliência e insight.",
-            pocTitle: "PoC Trigger",
-            poc: "O melhor momento para propor PoC é quando o cliente já sente limites de crescimento, proliferação de sistemas ou complexidade multirregião."
-          },
-          compare: {
-            title: "Compare",
-            body: "Comece por comparação de arquitetura antes de comparação por fornecedor.",
-            summaryTitle: "Fala recomendada",
-            summaryBody: "Explique para que o TiDB é mais adequado e depois mostre por que caminhos tradicionais ficam mais complexos com o crescimento.",
-            headers: ["Dimensão", "TiDB", "Caminho tradicional"],
-            rows: [
-              ["Escala", "Escala horizontal", "Nó único ou sharding complexo"],
-              ["Insight em tempo real", "Narrativa de plataforma unificada", "Costuma exigir pipelines extras"],
-              ["Alta disponibilidade", "Melhor para isolamento de falhas", "Depende mais de soluções remendadas"],
-              ["Complexidade de longo prazo", "Mais espaço para padronização", "O custo da equipe continua subindo"]
-            ],
-            highlights: [
-              ["Scale", "Resolva primeiro a ansiedade de crescimento."],
-              ["Insight", "Depois mostre o valor do analytics em tempo real."],
-              ["Complexity", "Feche enquadrando a complexidade arquitetural de longo prazo."]
-            ]
-          },
-          faq: {
-            title: "Q&A",
-            body: "Responda curto primeiro: reconheça a dúvida, dê o ponto principal e só depois aprofunde.",
-            cards: [
-              ["Já conhecemos MySQL. Por que mudar?", "Se MySQL ainda sustenta bem os próximos anos, não faz sentido forçar mudança. O valor do TiDB aparece quando escala, sharding e HA começam a aumentar a complexidade."],
-              ["É mesmo compatível com MySQL?", "Para a maioria dos apps OLTP, drivers e ferramentas comuns, a migração tende a ser simples. A resposta honesta é alta compatibilidade, não equivalência absoluta."],
-              ["Migrar é difícil?", "Em aplicações MySQL padrão, a maior parte do trabalho está em chaves, hotspots e pequenos ajustes de compatibilidade, não em mover dados."],
-              ["Pode rodar workloads críticos?", "Vale responder com HA, recuperação e rollout por fases, sem prometer troca total logo no início."],
-              ["Por que não manter MySQL com bancos analíticos?", "Esse caminho funciona, mas costuma trazer mais latência, mais pipelines e mais complexidade operacional."],
-              ["Qual é o próximo passo?", "Escolha um workload onde crescimento ou complexidade já doem, faça checagem de compatibilidade e um PoC pequeno."]
-            ]
-          }
+          cards: [
+            ["HTAP エンジン", "TiFlash により追加 ETL なしでリアルタイム分析を行えます。", "storage"],
+            ["Cloud Native", "TiDB Operator と Kubernetes で運用を標準化できます。", "cloud"],
+            ["強整合性", "Multi-Raft により RPO=0 を目指す重要業務を支えます。", "shield"],
+            ["自動拡縮", "クラスタ全体の負荷に応じて資源を調整します。", "bolt"]
+          ],
+          toolingTitle: "エコシステムツール",
+          tooling: [
+            ["TiCDC", "下流システム向けの増分レプリケーション。"],
+            ["Dumpling", "大規模データの論理エクスポート。"],
+            ["Lightning", "大量データの高速インポート。"],
+            ["BR Tool", "分散バックアップとリストア。"]
+          ]
         },
-        "es-ES": {
-          appName: "TiDB Compass",
-          reviewer: "Modo Preventa",
-          heroKicker: "Overview",
-          heroTitle: "Presenta TiDB como una app iOS real, no como un folleto estático",
-          heroSubtitle:
-            "Empieza por filtros según prioridad del cliente y luego pasa a capacidades, escenarios, comparativa y Q&A. En iPhone vertical se prioriza el contenido que realmente se presenta al cliente.",
-          metrics: [
-            ["Rápido", "Una plataforma para transacciones e insight casi en tiempo real"],
-            ["Sólido", "Diseño distribuido para continuidad en cargas críticas"],
-            ["Simple", "Menos sharding y menos cadenas de sincronización cosidas"]
+        scenarios: {
+          eyebrow: "Solutions Ecosystem",
+          title: "業界ソリューション",
+          body:
+            "単なる機能説明ではなく、業界課題、運用分析、データ主権の観点から TiDB を説明します。",
+          fintechBadge: "FinTech",
+          fintechTitle: "金融取引と資産管理",
+          fintechBody:
+            "低遅延取引、ACID、一貫したサービス継続性が求められるグローバル取引基盤に適しています。",
+          fintechAction: "アーキテクチャを見る",
+          analyticsTitle: "リアルタイム分析",
+          analyticsBody: "長い ETL チェーンを待たずに運用データを分析へつなげます。",
+          analyticsMetric: "99.99",
+          analyticsMetricLabel: "Uptime SLA",
+          logTitle: "大規模ログ分析",
+          logBody: "膨大なログを高速に検索し、障害対応と運用判断を支援します。",
+          sovereigntyTitle: "マルチクラウドデータ主権",
+          sovereigntyBody:
+            "地域やクラウドを跨いでも、一貫したアクセス、コンプライアンス、継続性を保ちます。",
+          sovereigntyStats: [
+            ["リージョン", "24+"],
+            ["遅延", "<10ms"]
           ],
-          chips: {
-            all: "Todo",
-            scaling: "Escala",
-            realtime: "Insight en tiempo real",
-            ha: "Alta disponibilidad",
-            mysql: "Migración MySQL",
-            cost: "Complejidad / coste"
-          },
-          heroPanelTitle: "Entrada por necesidad del cliente",
-          heroPanelBody: "En conversaciones en vivo, empieza por la necesidad y después cambia a la mejor ruta narrativa.",
-          primaryCta: "Empezar",
-          secondaryCta: "Abrir comparativa",
-          deviceNote: `Preview actual: ${device === "ipad" ? "iPad" : "iPhone"} ${orientation === "landscape" ? "Horizontal" : "Vertical"}.`,
-          tabs: ["Resumen", "Capacidades", "Escenarios", "Compare", "FAQ"],
-          overview: {
-            sectionTitle: "Estructura de apertura en tres minutos",
-            sectionBody: "Empieza por el resultado de negocio, luego enlázalo con arquitectura y diferenciación.",
-            cards: [
-              ["Crece más allá del límite de un solo nodo", "Útil para pedidos, pagos, inventario y otras cargas en expansión.", ["scaling", "cost"]],
-              ["Acerca transacciones y analítica", "Una mejor narrativa para insight operativo sin largas cadenas de sync.", ["realtime", "cost"]],
-              ["Mantén sistemas críticos disponibles", "Explica con claridad HA, aislamiento de fallos y continuidad.", ["ha"]],
-              ["Haz la migración más manejable", "Conserva hábitos de SQL y MySQL antes de evolucionar la arquitectura.", ["mysql", "scaling"]]
-            ]
-          },
-          capabilities: {
-            title: "Capabilities",
-            body: "Organiza la historia por problema del cliente, no por jerga de base de datos.",
-            segments: ["Scale", "Resilience", "Insight", "Migration", "Simplification"],
-            cards: [
-              ["Escalado distribuido", "Explica por qué el crecimiento puede absorberse con más fluidez."],
-              ["HA y recuperación", "Útil para continuidad y servicios críticos."],
-              ["HTAP", "Muestra cómo los datos transaccionales aceleran la analítica."],
-              ["Compatibilidad MySQL", "Reduce la fricción percibida de migración y aprendizaje."],
-              ["Elasticidad cloud-native", "Refuerza la narrativa de plataforma moderna."],
-              ["Menos middleware", "Mejor argumento para simplicidad a largo plazo."]
-            ],
-            details: [
-              ["SQL / MySQL", "Reduce la ansiedad de migración y mueve la conversación del riesgo técnico a la modernización del negocio."],
-              ["Distributed SQL", "Muestra por qué escala, disponibilidad y estandarización pueden convivir en una sola historia de arquitectura."],
-              ["HTAP", "Posiciona transacciones y analítica como una plataforma operativa más coherente."]
-            ]
-          },
-          scenarios: {
-            title: "Scenarios",
-            body: "Organiza por industria y problema de negocio para reutilización rápida.",
-            cards: [
-              ["E-commerce y picos de tráfico", "Promociones, picos y analítica operativa ocurren al mismo tiempo."],
-              ["Transacciones financieras y estabilidad", "Buen marco para continuidad y modernización."],
-              ["Analítica operativa en tiempo real", "Para equipos que no quieren esperar al ETL nocturno."],
-              ["Despliegue global y multirregión", "Buen marco para continuidad y plataforma de datos unificada."]
-            ],
-            talkTitle: "Talk Track",
-            talkTrack: "Empieza por el dolor actual del cliente y luego explica cómo TiDB reduce el equilibrio forzado entre escala, resiliencia e insight.",
-            pocTitle: "PoC Trigger",
-            poc: "El mejor momento para proponer un PoC es cuando el cliente ya siente límites de crecimiento, proliferación de sistemas o complejidad multirregión."
-          },
-          compare: {
-            title: "Compare",
-            body: "Empieza con comparación de rutas de arquitectura antes de hablar de proveedores.",
-            summaryTitle: "Narrativa recomendada",
-            summaryBody: "Explica para qué está mejor preparado TiDB y luego muestra por qué los caminos tradicionales se complican con el crecimiento.",
-            headers: ["Dimensión", "TiDB", "Ruta tradicional"],
-            rows: [
-              ["Escala", "Escalado horizontal", "Nodo único o sharding complejo"],
-              ["Insight en tiempo real", "Historia de plataforma unificada", "Suele requerir pipelines extra"],
-              ["Alta disponibilidad", "Mejor ajuste para aislamiento de fallos", "Depende más de diseños parcheados"],
-              ["Complejidad a largo plazo", "Más margen para estandarización", "El coste del equipo sigue creciendo"]
-            ],
-            highlights: [
-              ["Scale", "Resuelve primero la ansiedad por crecimiento."],
-              ["Insight", "Después muestra el valor de la analítica en tiempo real."],
-              ["Complexity", "Cierra enmarcando la complejidad arquitectónica a largo plazo."]
-            ]
-          },
-          faq: {
-            title: "Q&A",
-            body: "Responde primero en corto: reconoce la objeción, da el punto de vista y luego profundiza si hace falta.",
-            cards: [
-              ["Ya conocemos MySQL. ¿Por qué cambiar?", "Si MySQL puede sostener con comodidad los próximos años, no hace falta forzar el cambio. TiDB cobra sentido cuando sharding, escalado y HA empiezan a complicar al equipo."],
-              ["¿De verdad es compatible con MySQL?", "Para la mayoría de apps OLTP, drivers y herramientas comunes, la fricción de migración es baja. La respuesta honesta es alta compatibilidad, no equivalencia absoluta."],
-              ["¿Migrar es difícil?", "En aplicaciones MySQL estándar, lo más delicado suele ser revisar claves, hotspots y algunos puntos de incompatibilidad, no mover los datos."],
-              ["¿Puede llevar cargas críticas?", "Conviene responder con HA, recuperación y despliegue por fases, sin prometer sustitución total desde el primer día."],
-              ["¿Por qué no seguir con MySQL y bases analíticas?", "Ese camino sirve, pero normalmente añade más latencia, más pipelines y más complejidad operativa."],
-              ["¿Cuál es el siguiente paso?", "Elige un workload donde crecimiento o complejidad ya duelan, haz validación de compatibilidad y un PoC pequeño."]
-            ]
-          }
+          ctaTitle: "インフラ最適化を始めますか？",
+          ctaBody: "成長や複雑性が見え始めた workload から小さく検証し、そこから広げます。",
+          ctaPrimary: "デモを予約",
+          ctaSecondary: "ホワイトペーパー"
+        },
+        compare: {
+          eyebrow: "Architecture Rivalry",
+          title: "競争比較",
+          body:
+            "アーキテクチャ、拡張方式、TCO から説明を始めることで、顧客との会話で差別化を作りやすくします。",
+          heroTitle: "Shared-Nothing vs. Cloud-Native",
+          heroBody:
+            "計算とストレージの分離、そしてクラウドネイティブな拡張により、ピーク時と長期運用の両方で効率を出しやすくなります。",
+          statA: ["0ms", "読み取り揺らぎ"],
+          statB: ["99.999%", "可用性指標"],
+          leafValue: "3.2x",
+          leafTitle: "高いスループット",
+          leafBody: "複雑分析ワークロードにおける参考比較値です。",
+          tableHeaders: ["能力項目", "TiDB", "Traditional NewSQL", "Legacy RDBMS"],
+          rows: [
+            ["自動拡張", "即時", "手動分割", "レプリカ中心"],
+            ["HTAP", "Native TiFlash", "限定的", "通常は ETL"],
+            ["整合性", "外部一貫スナップショット", "Serializable", "Traditional MVCC"]
+          ],
+          insightTitle: "TCO 優位性",
+          insightBody:
+            "分庫分表した MySQL からの移行では、特に運用と拡張イベントで 3 年 TCO を下げやすくなります。"
+        },
+        ai: {
+          eyebrow: "Intelligence Layer",
+          title: "AI オペレーション層",
+          body:
+            "ベクトル検索、自癒、ワークロード予測を分断された機能ではなく、1 つの実用的な AI ストーリーとして見せます。",
+          heroTitle: "Autonomous Database Optimizer",
+          heroBody:
+            "ワークロードの傾向、ホットスポット分析、リアルタイム SQL 最適化を通じて、問題が顕在化する前に動けます。",
+          cards: [
+            ["Semantic Search", "RAG や AI アプリ向けのネイティブなベクトル検索基盤。", "schema"],
+            ["Self-Healing", "デッドロック解消、索引修復、ホットスポット緩和を自動化。", "fix"]
+          ],
+          metricLabel: "AI 効率指標",
+          metricValue: "98.4%",
+          metricBody: "予測精度",
+          roadmapTitle: "機能ロードマップ",
+          roadmap: [
+            ["Natural Language SQL", "自然言語から SQL を支援。"],
+            ["AI Hotspot Analysis", "より能動的なホットスポット予測。"],
+            ["Federated Learning", "プライバシー配慮型の協調学習。"]
+          ],
+          vectorTitle: "ネイティブなベクトル DB 能力",
+          vectorBody:
+            "embedding を TiDB 内に保存・索引・検索することで、AI アプリの本番導入を進めやすくします。",
+          chips: ["HNSW", "Cosine", "Metadata Filter"],
+          action: "AI Core を見る"
+        }
+      };
+
+      messages["pt-BR"] = {
+        ...messages["en-US"],
+        appName: "TiDB Compass",
+        reviewer: "Modo Curadoria Digital",
+        tabs: ["Intro", "Core", "Cenários", "Comparar", "AI"],
+        intro: {
+          eyebrow: "Intro",
+          title: "O banco de dados distribuído da nova geração",
+          accent: "Banco de Dados",
+          body:
+            "TiDB é um banco de dados SQL distribuído, open source e cloud-native, criado para HTAP, escala elástica e alta disponibilidade em cargas críticas.",
+          primary: "Começar apresentação",
+          secondary: "Ver materiais",
+          innovation: "Inovação",
+          featureTitle: "Escalabilidade elástica",
+          featureBody:
+            "Escalone computação e armazenamento de forma independente, sem depender de janelas de parada nem de uma arquitetura pesada de sharding.",
+          leafLabel: "Confiabilidade central",
+          leafValue: "99.99",
+          leafUnit: "% de disponibilidade",
+          leafBody: "Continuidade para sistemas corporativos de missão crítica.",
+          cards: [
+            ["Segurança empresarial", "Controles finos de acesso, criptografia e recursos de conformidade prontos para produção.", "shield"],
+            ["SQL padrão", "Compatibilidade com protocolo MySQL para reduzir o atrito de migração.", "database"],
+            ["Cloud Native", "Preparado para Kubernetes e operações multi-cloud.", "cloud"]
+          ],
+          insightsTitle: "Capacidades recentes",
+          insightsLink: "Ver histórico",
+          insights: [
+            ["Novo", "Desempenho HTAP", "TiFlash 7.0 aproxima a análise em tempo real da operação do negócio."],
+            ["Estável", "Camada de armazenamento", "As otimizações do TiKV continuam reduzindo a latência P99."]
+          ]
+        },
+        core: {
+          eyebrow: "Ecossistema Core",
+          title: "Base arquitetural",
+          body:
+            "A história central do TiDB combina SQL distribuído, consistência transacional, HTAP e operação cloud-native em uma única plataforma.",
+          heroTitle: "Armazenamento SQL distribuído",
+          heroBody:
+            "O TiKV fornece a camada transacional KV com forte consistência e escala horizontal, preservando uma experiência SQL unificada.",
+          stats: [
+            ["Latência OLTP", "1ms"],
+            ["Throughput OLAP", "10GB/s"]
+          ],
+          cards: [
+            ["Motor HTAP", "Use TiFlash para análises em tempo real sem ETL adicional.", "storage"],
+            ["Cloud Native", "Operação padronizada com TiDB Operator e Kubernetes.", "cloud"],
+            ["Consistência forte", "Multi-Raft ajuda sistemas críticos a mirar RPO=0.", "shield"],
+            ["Auto scaling", "Distribuição dinâmica de recursos ao longo do cluster.", "bolt"]
+          ],
+          toolingTitle: "Ferramentas do ecossistema",
+          tooling: [
+            ["TiCDC", "Replicação incremental para sistemas downstream."],
+            ["Dumpling", "Exportação lógica para migrações de grandes volumes."],
+            ["Lightning", "Importação de alta velocidade para onboarding massivo."],
+            ["BR Tool", "Backup e restore distribuídos para segurança corporativa."]
+          ]
+        },
+        scenarios: {
+          eyebrow: "Ecossistema de Soluções",
+          title: "Cenários empresariais",
+          body:
+            "Posicione o TiDB como solução de negócio, e não apenas como conjunto de funções de banco de dados.",
+          fintechBadge: "FinTech",
+          fintechTitle: "Trading financeiro e gestão de ativos",
+          fintechBody:
+            "Boa aderência para transações de baixa latência, consistência ACID e continuidade operacional em ambientes globais.",
+          fintechAction: "Ver arquitetura",
+          analyticsTitle: "Análise em tempo real",
+          analyticsBody: "Transforme dados operacionais em insight sem cadeias longas de ETL.",
+          analyticsMetric: "99.99",
+          analyticsMetricLabel: "SLA de uptime",
+          logTitle: "Análise massiva de logs",
+          logBody: "Indexe e consulte grandes volumes de logs com troubleshooting mais rápido.",
+          sovereigntyTitle: "Soberania de dados em multi-cloud",
+          sovereigntyBody:
+            "Mantenha acesso unificado, fronteiras de compliance e continuidade entre regiões e nuvens.",
+          sovereigntyStats: [
+            ["Regiões", "24+"],
+            ["Latência", "<10ms"]
+          ],
+          ctaTitle: "Pronto para otimizar sua infraestrutura?",
+          ctaBody: "Comece por um workload onde crescimento ou complexidade já estejam visíveis e amplie a partir da prova.",
+          ctaPrimary: "Agendar demo",
+          ctaSecondary: "White paper"
+        },
+        compare: {
+          eyebrow: "Rivalidade Arquitetural",
+          title: "Comparativo competitivo",
+          body:
+            "Comece por arquitetura, comportamento de escala e TCO para criar diferenciação mais rapidamente na conversa comercial.",
+          heroTitle: "Shared-Nothing vs. Cloud-Native",
+          heroBody:
+            "A separação entre computação e armazenamento e a expansão cloud-native costumam tornar o TiDB mais eficiente em picos e na operação contínua.",
+          statA: ["0ms", "Jitter de leitura"],
+          statB: ["99.999%", "Meta de disponibilidade"],
+          leafValue: "3.2x",
+          leafTitle: "Mais throughput",
+          leafBody: "Resultado de referência em workloads analíticos complexos.",
+          tableHeaders: ["Capacidade", "TiDB", "NewSQL tradicional", "RDBMS legado"],
+          rows: [
+            ["Escala automática", "Instantânea", "Particionamento manual", "Escala por réplica"],
+            ["HTAP", "TiFlash nativo", "Suporte limitado", "Normalmente via ETL"],
+            ["Consistência", "Snapshot externo", "Serializable", "MVCC tradicional"]
+          ],
+          insightTitle: "Vantagem de TCO",
+          insightBody:
+            "Migrar de MySQL shardeado pode reduzir de forma relevante o custo total de propriedade em três anos, principalmente em operação e expansão."
+        },
+        ai: {
+          eyebrow: "Camada de Inteligência",
+          title: "Operações com IA",
+          body:
+            "Organize busca vetorial, auto-recuperação e previsão de workload como uma camada prática de IA, e não como recursos isolados.",
+          heroTitle: "Autonomous Database Optimizer",
+          heroBody:
+            "Use tendência de workload, análise de hotspots e otimização SQL em tempo real para agir antes que performance vire incidente.",
+          cards: [
+            ["Busca semântica", "Busca vetorial nativa para RAG e aplicações de IA.", "schema"],
+            ["Auto-recuperação", "Automatiza resolução de deadlock, reparo de índice e mitigação de hotspots.", "fix"]
+          ],
+          metricLabel: "Métrica de eficiência IA",
+          metricValue: "98.4%",
+          metricBody: "Precisão de previsão",
+          roadmapTitle: "Roadmap de capacidades",
+          roadmap: [
+            ["SQL em linguagem natural", "Assistência texto-para-query para analistas."],
+            ["AI Hotspot Analysis", "Previsão e balanceamento mais proativos de hotspots."],
+            ["Federated Learning", "Treinamento colaborativo com privacidade."]
+          ],
+          vectorTitle: "Capacidade nativa de banco vetorial",
+          vectorBody:
+            "Armazene, indexe e consulte embeddings dentro do TiDB para levar aplicações de IA à produção com menos fricção.",
+          chips: ["HNSW", "Cosine", "Metadata Filter"],
+          action: "Explorar AI Core"
+        }
+      };
+
+      messages["es-ES"] = {
+        ...messages["en-US"],
+        appName: "TiDB Compass",
+        reviewer: "Modo Curaduría Digital",
+        tabs: ["Intro", "Core", "Escenarios", "Comparar", "AI"],
+        intro: {
+          eyebrow: "Intro",
+          title: "La nueva generación de base de datos distribuida",
+          accent: "Base de Datos",
+          body:
+            "TiDB es una base de datos SQL distribuida, open source y cloud-native, diseñada para HTAP, escala elástica y alta disponibilidad en cargas críticas.",
+          primary: "Iniciar presentación",
+          secondary: "Ver materiales",
+          innovation: "Innovación",
+          featureTitle: "Escalabilidad elástica",
+          featureBody:
+            "Escala cómputo y almacenamiento por separado sin depender de ventanas de parada ni de una arquitectura pesada de sharding.",
+          leafLabel: "Confiabilidad central",
+          leafValue: "99.99",
+          leafUnit: "% de disponibilidad",
+          leafBody: "Continuidad para sistemas empresariales de misión crítica.",
+          cards: [
+            ["Seguridad empresarial", "Controles granulares de acceso, cifrado y capacidades listas para cumplimiento.", "shield"],
+            ["SQL estándar", "Compatibilidad con el protocolo MySQL para reducir fricción en la migración.", "database"],
+            ["Cloud Native", "Preparado para Kubernetes y despliegues multi-cloud.", "cloud"]
+          ],
+          insightsTitle: "Capacidades recientes",
+          insightsLink: "Ver archivo",
+          insights: [
+            ["Nuevo", "Rendimiento HTAP", "TiFlash 7.0 acerca la analítica en tiempo real a la operación del negocio."],
+            ["Estable", "Capa de almacenamiento", "Las optimizaciones de TiKV siguen mejorando la latencia P99."]
+          ]
+        },
+        core: {
+          eyebrow: "Ecosistema Core",
+          title: "Base arquitectónica",
+          body:
+            "La historia central de TiDB combina SQL distribuido, consistencia transaccional, HTAP y operación cloud-native en una sola plataforma.",
+          heroTitle: "Almacenamiento SQL distribuido",
+          heroBody:
+            "TiKV aporta la capa transaccional KV con fuerte consistencia y escalado horizontal, manteniendo una experiencia SQL unificada.",
+          stats: [
+            ["Latencia OLTP", "1ms"],
+            ["Rendimiento OLAP", "10GB/s"]
+          ],
+          cards: [
+            ["Motor HTAP", "Usa TiFlash para analítica en tiempo real sin ETL adicional.", "storage"],
+            ["Cloud Native", "Operación estandarizada con TiDB Operator y Kubernetes.", "cloud"],
+            ["Consistencia fuerte", "Multi-Raft ayuda a sistemas críticos a aspirar a RPO=0.", "shield"],
+            ["Auto scaling", "Distribución dinámica de recursos en todo el clúster.", "bolt"]
+          ],
+          toolingTitle: "Herramientas del ecosistema",
+          tooling: [
+            ["TiCDC", "Replicación incremental hacia sistemas downstream."],
+            ["Dumpling", "Exportación lógica para migraciones de gran volumen."],
+            ["Lightning", "Importación de alta velocidad para cargas masivas."],
+            ["BR Tool", "Backup y restore distribuidos para seguridad empresarial."]
+          ]
+        },
+        scenarios: {
+          eyebrow: "Ecosistema de Soluciones",
+          title: "Escenarios empresariales",
+          body:
+            "Presenta TiDB como una solución de negocio, no solo como una lista de funciones de base de datos.",
+          fintechBadge: "FinTech",
+          fintechTitle: "Trading financiero y gestión de activos",
+          fintechBody:
+            "Buen encaje para transacciones de baja latencia, consistencia ACID y continuidad operativa en entornos globales.",
+          fintechAction: "Ver arquitectura",
+          analyticsTitle: "Analítica en tiempo real",
+          analyticsBody: "Convierte datos operativos en insight sin largas cadenas ETL.",
+          analyticsMetric: "99.99",
+          analyticsMetricLabel: "SLA de uptime",
+          logTitle: "Análisis masivo de logs",
+          logBody: "Indexa y consulta grandes volúmenes de logs con troubleshooting más rápido.",
+          sovereigntyTitle: "Soberanía de datos multi-cloud",
+          sovereigntyBody:
+            "Mantén acceso unificado, límites de compliance y continuidad entre regiones y nubes.",
+          sovereigntyStats: [
+            ["Regiones", "24+"],
+            ["Latencia", "<10ms"]
+          ],
+          ctaTitle: "¿Listo para optimizar tu infraestructura?",
+          ctaBody: "Empieza con un workload donde el crecimiento o la complejidad ya sean visibles y amplía desde esa prueba.",
+          ctaPrimary: "Agendar demo",
+          ctaSecondary: "White paper"
+        },
+        compare: {
+          eyebrow: "Rivalidad Arquitectónica",
+          title: "Comparativa competitiva",
+          body:
+            "Empieza por arquitectura, patrón de escalado y TCO para diferenciar más rápido en la conversación con el cliente.",
+          heroTitle: "Shared-Nothing vs. Cloud-Native",
+          heroBody:
+            "La separación de cómputo y almacenamiento y la expansión cloud-native suelen hacer que TiDB sea más eficiente en picos y en operación continua.",
+          statA: ["0ms", "Jitter de lectura"],
+          statB: ["99.999%", "Objetivo de disponibilidad"],
+          leafValue: "3.2x",
+          leafTitle: "Más throughput",
+          leafBody: "Resultado de referencia en cargas analíticas complejas.",
+          tableHeaders: ["Capacidad", "TiDB", "NewSQL tradicional", "RDBMS legado"],
+          rows: [
+            ["Escalado automático", "Instantáneo", "Particionado manual", "Escalado por réplicas"],
+            ["HTAP", "TiFlash nativo", "Soporte limitado", "Normalmente con ETL"],
+            ["Consistencia", "Snapshot externo", "Serializable", "MVCC tradicional"]
+          ],
+          insightTitle: "Ventaja de TCO",
+          insightBody:
+            "Migrar desde MySQL shardeado puede reducir de forma importante el costo total de propiedad a tres años, especialmente en operación y crecimiento."
+        },
+        ai: {
+          eyebrow: "Capa de Inteligencia",
+          title: "Operaciones impulsadas por IA",
+          body:
+            "Agrupa búsqueda vectorial, auto-recuperación y pronóstico de workloads como una capa práctica de IA, no como funciones aisladas.",
+          heroTitle: "Autonomous Database Optimizer",
+          heroBody:
+            "Usa tendencias de workload, análisis de hotspots y optimización SQL en vivo para actuar antes de que la degradación se convierta en incidente.",
+          cards: [
+            ["Búsqueda semántica", "Búsqueda vectorial nativa para RAG y aplicaciones de IA.", "schema"],
+            ["Auto-recuperación", "Automatiza resolución de deadlocks, reparación de índices y mitigación de hotspots.", "fix"]
+          ],
+          metricLabel: "Métrica de eficiencia IA",
+          metricValue: "98.4%",
+          metricBody: "Precisión de predicción",
+          roadmapTitle: "Hoja de ruta",
+          roadmap: [
+            ["SQL en lenguaje natural", "Asistencia texto-a-query para analistas."],
+            ["AI Hotspot Analysis", "Predicción y balanceo más proactivos de hotspots."],
+            ["Federated Learning", "Entrenamiento colaborativo con privacidad."]
+          ],
+          vectorTitle: "Capacidad nativa de base vectorial",
+          vectorBody:
+            "Guarda, indexa y consulta embeddings dentro de TiDB para llevar aplicaciones de IA a producción con menos fricción.",
+          chips: ["HNSW", "Cosine", "Metadata Filter"],
+          action: "Explorar AI Core"
         }
       };
 
       const copy = messages[locale] || messages["en-US"];
       document.documentElement.lang = locale;
-      const uiLabels = {
-        "zh-CN": {
-          compassSignal: "演示信号",
-        heroVisualTitle: "专为现场讲解准备的产品化预览",
-        heroVisualBody: "Overview、Compare、Scenarios 被强化成更适合销售演示的界面，而不只是静态网页。",
-        trust: "信任",
-        architecturePath: "架构路径",
-        need: "需求",
-        proof: "论据",
-        risk: "风险",
-        capabilitySpotlight: "核心能力聚焦",
-        stageMode: "横屏讲解模式",
-        stageBody: "在 iPad 横版中，左侧讲事实，右侧讲风险和决策路径。",
-        stageReason: "为什么现在谈",
-        stageReasonBody: "客户已开始感受到增长、链路或稳定性压力。",
-        stageNext: "下一步动作",
-        stageNextBody: "用 PoC 或架构评估承接，不要停留在概念介绍。"
-      },
-        "ja-JP": {
-          compassSignal: "プレゼン信号",
-        heroVisualTitle: "商談向けに磨いたプロダクトプレビュー",
-        heroVisualBody: "Overview、Compare、Scenarios を、単なる静的ページではなく商談向け UI として強化しています。",
-        trust: "信頼",
-        architecturePath: "アーキテクチャパス",
-        need: "課題",
-        proof: "根拠",
-        risk: "リスク",
-        capabilitySpotlight: "主要機能の焦点",
-        stageMode: "横向きプレゼンモード",
-        stageBody: "iPad 横向きでは、左で事実、右でリスクと意思決定を伝える構成です。",
-        stageReason: "なぜ今なのか",
-        stageReasonBody: "顧客が成長、連携、安定性の圧力を感じ始めているためです。",
-        stageNext: "次の一手",
-        stageNextBody: "概念説明で止めず、PoC や構成評価に接続します。"
-      },
-        "en-US": {
-          compassSignal: "Compass Signal",
-        heroVisualTitle: "A productized preview built for live storytelling",
-        heroVisualBody: "Overview, Compare, and Scenarios are shaped like presentation-ready app screens, not just static web sections.",
-        trust: "Trust",
-        architecturePath: "Architecture Path",
-        need: "Need",
-        proof: "Proof",
-        risk: "Risk",
-        capabilitySpotlight: "Capability spotlight",
-        stageMode: "Landscape demo mode",
-        stageBody: "On iPad landscape, the left side carries evidence while the right side guides decision framing.",
-        stageReason: "Why now",
-        stageReasonBody: "The customer is already feeling pressure from growth, system sprawl, or resilience gaps.",
-        stageNext: "Next move",
-        stageNextBody: "Use PoC or architecture review as the bridge, not just conceptual storytelling."
-      },
-        "pt-BR": {
-          compassSignal: "Sinal Compass",
-        heroVisualTitle: "Um preview de produto pensado para apresentações ao vivo",
-        heroVisualBody: "Overview, Compare e Scenarios foram desenhados como telas prontas para conversa com cliente, não apenas como seções web.",
-        trust: "Confiança",
-        architecturePath: "Caminho arquitetural",
-        need: "Necessidade",
-        proof: "Prova",
-        risk: "Risco",
-        capabilitySpotlight: "Destaque de capacidades",
-        stageMode: "Modo demo em paisagem",
-        stageBody: "No iPad em paisagem, a esquerda mostra evidências e a direita conduz a decisão.",
-        stageReason: "Por que agora",
-        stageReasonBody: "O cliente já sente pressão de crescimento, proliferação de sistemas ou lacunas de resiliência.",
-        stageNext: "Próximo passo",
-        stageNextBody: "Use PoC ou revisão arquitetural como ponte, não apenas discurso conceitual."
-      },
-        "es-ES": {
-          compassSignal: "Señal Compass",
-        heroVisualTitle: "Un preview de producto pensado para presentaciones en vivo",
-        heroVisualBody: "Overview, Compare y Scenarios están diseñados como pantallas listas para conversación con cliente, no solo como secciones web.",
-        trust: "Confianza",
-        architecturePath: "Ruta de arquitectura",
-        need: "Necesidad",
-        proof: "Prueba",
-        risk: "Riesgo",
-        capabilitySpotlight: "Foco de capacidades",
-        stageMode: "Modo demo horizontal",
-        stageBody: "En iPad horizontal, la izquierda muestra evidencia y la derecha guía la decisión.",
-        stageReason: "Por qué ahora",
-        stageReasonBody: "El cliente ya siente presión por crecimiento, proliferación de sistemas o huecos de resiliencia.",
-        stageNext: "Siguiente paso",
-        stageNextBody: "Usa PoC o revisión arquitectónica como puente, no solo discurso conceptual."
-      }
-      }[locale] || {
-        compassSignal: "Compass Signal",
-        heroVisualTitle: "A productized preview built for live storytelling",
-        heroVisualBody: "Overview, Compare, and Scenarios are shaped like presentation-ready app screens, not just static web sections.",
-        trust: "Trust",
-        architecturePath: "Architecture Path",
-        need: "Need",
-        proof: "Proof",
-        risk: "Risk",
-        capabilitySpotlight: "Capability spotlight",
-        stageMode: "Landscape demo mode",
-        stageBody: "On iPad landscape, the left side carries evidence while the right side guides decision framing.",
-        stageReason: "Why now",
-        stageReasonBody: "The customer is already feeling pressure from growth, system sprawl, or resilience gaps.",
-        stageNext: "Next move",
-        stageNextBody: "Use PoC or architecture review as the bridge, not just conceptual storytelling."
-      };
 
-      const tabs = ["overview", "capabilities", "scenarios", "compare", "faq"];
-      let activeTab = "overview";
-      let activeNeed = "all";
+      const tabs = ["intro", "core", "scenarios", "compare", "ai"];
+      let activeTab = "intro";
 
-      function tagMarkup(tags) {
-        return tags
-          .map((tag) => `<span class="tag">${copy.chips[tag]}</span>`)
-          .join("");
-      }
-
-      function renderOverviewCards() {
-        return copy.overview.cards
-          .filter((card) => activeNeed === "all" || card[2].includes(activeNeed))
-          .map(
-            (card) => `
-              <article class="card">
-                <h3>${card[0]}</h3>
-                <p>${card[1]}</p>
-                <div class="tag-row">${tagMarkup(card[2])}</div>
-              </article>
-            `
-          )
-          .join("");
-      }
-
-      function tabGlyph(tab) {
-        const glyphs = {
-          overview: "O",
-          capabilities: "C",
-          scenarios: "S",
-          compare: "X",
-          faq: "?"
+      function iconGlyph(name) {
+        const map = {
+          shield: "●",
+          database: "■",
+          cloud: "▲",
+          storage: "HT",
+          bolt: "↗",
+          schema: "⌁",
+          fix: "✓"
         };
-        return glyphs[tab];
+        return map[name] || "•";
       }
 
-      function renderApp() {
-        const root = document.querySelector("#app");
-        root.innerHTML = `
-          <div class="app-shell">
-            <div class="status-row">
-              <span>${copy.appName}</span>
-              <span class="status-meta"><span class="dot"></span>${copy.reviewer}</span>
-            </div>
-
-            <div class="topbar">
-              <div class="title-group">
-                <p class="kicker">${copy.heroKicker}</p>
-                <h1>${copy.heroTitle}</h1>
-                <p class="hero-subtitle">${copy.heroSubtitle}</p>
-              </div>
-              <div class="avatar">TC</div>
-            </div>
-
-            <section class="screen overview ${activeTab === "overview" ? "is-active" : ""}">
-              <div class="hero">
-                <div class="brand-ribbon">
-                  <div class="brand-markline">
-                    <span class="brand-chip">TC</span>
-                    <div class="two-line">
-                      <strong>${copy.appName}</strong>
-                      <span>${copy.reviewer}</span>
-                    </div>
-                  </div>
-                  <span class="projection-badge">${uiLabels.stageMode}</span>
-                </div>
-                <div class="chip-row">
-                  ${Object.entries(copy.chips)
-                    .map(
-                      ([key, value]) => `
-                        <button class="chip ${activeNeed === key ? "is-active" : ""}" type="button" data-need="${key}">
-                          ${value}
-                        </button>
-                      `
-                    )
-                    .join("")}
-                </div>
-                <div class="hero-grid">
-                  <div class="panel">
-                    <h3>${copy.heroPanelTitle}</h3>
-                    <p>${copy.heroPanelBody}</p>
-                    <div class="cta-row">
-                      <button class="cta" type="button">${copy.primaryCta}</button>
-                      <button class="cta secondary" type="button">${copy.secondaryCta}</button>
-                    </div>
-                  </div>
-                  <div class="hero-visual">
-                    <p class="mini-kicker">${uiLabels.compassSignal}</p>
-                    <h3>${uiLabels.heroVisualTitle}</h3>
-                    <p>${uiLabels.heroVisualBody}</p>
-                    <div class="signal-grid">
-                      <div class="signal-card">
-                        <strong>Scale</strong>
-                        <div class="signal-bars">
-                          <span style="height: 38%"></span>
-                          <span style="height: 62%"></span>
-                          <span style="height: 86%"></span>
-                        </div>
+      function renderPreviewPane(kind) {
+        if (kind === "compare") {
+          return `
+            <div class="preview-pane compare">
+              <div class="preview-device">
+                <div class="preview-island"></div>
+                <div class="preview-screen">
+                  <div class="preview-pill"></div>
+                  <div class="preview-grid-panel">
+                    <div class="preview-table">
+                      <div class="preview-table-row">
+                        <div class="preview-cell"></div>
+                        <div class="preview-cell highlight"></div>
+                        <div class="preview-cell"></div>
                       </div>
-                      <div class="signal-card">
-                        <strong>Insight</strong>
-                        <div class="signal-bars">
-                          <span style="height: 46%"></span>
-                          <span style="height: 58%"></span>
-                          <span style="height: 82%"></span>
-                        </div>
+                      <div class="preview-table-row">
+                        <div class="preview-cell"></div>
+                        <div class="preview-cell highlight"></div>
+                        <div class="preview-cell"></div>
                       </div>
-                      <div class="signal-card">
-                        <strong>${uiLabels.trust}</strong>
-                        <div class="signal-bars">
-                          <span style="height: 44%"></span>
-                          <span style="height: 72%"></span>
-                          <span style="height: 88%"></span>
-                        </div>
+                      <div class="preview-table-row">
+                        <div class="preview-cell"></div>
+                        <div class="preview-cell highlight"></div>
+                        <div class="preview-cell"></div>
                       </div>
                     </div>
+                    <div class="preview-mini-grid">
+                      <div class="preview-stat"></div>
+                      <div class="preview-stat"></div>
+                      <div class="preview-block"></div>
+                      <div class="preview-block"></div>
+                    </div>
                   </div>
-                </div>
-                <div class="metrics section">
-                  ${copy.metrics
-                    .map(
-                      (item) => `
-                        <div class="metric">
-                          <strong>${item[0]}</strong>
-                          <span>${item[1]}</span>
-                        </div>
-                      `
-                    )
-                    .join("")}
-                </div>
-                <div class="projection-strip">
-                  <article class="projection-tile">
-                    <strong>${uiLabels.stageReason}</strong>
-                    <span>${uiLabels.stageReasonBody}</span>
-                  </article>
-                  <article class="projection-tile">
-                    <strong>${uiLabels.need}</strong>
-                    <span>${copy.chips[activeNeed] || copy.chips.all}</span>
-                  </article>
-                  <article class="projection-tile">
-                    <strong>${uiLabels.stageNext}</strong>
-                    <span>${uiLabels.stageNextBody}</span>
-                  </article>
                 </div>
               </div>
+            </div>
+          `;
+        }
 
-              <section class="section">
-                <div class="section-header">
-                  <p class="kicker">${copy.tabs[0]}</p>
-                  <h2>${copy.overview.sectionTitle}</h2>
-                  <p>${copy.overview.sectionBody}</p>
+        if (kind === "ai") {
+          return `
+            <div class="preview-pane ai">
+              <div class="preview-device">
+                <div class="preview-island"></div>
+                <div class="preview-screen">
+                  <div class="preview-pill"></div>
+                  <div class="preview-ai-rail">
+                    <div class="preview-glow"></div>
+                    <div class="preview-mini-grid">
+                      <div class="preview-stat"></div>
+                      <div class="preview-stat"></div>
+                      <div class="preview-block"></div>
+                      <div class="preview-block"></div>
+                    </div>
+                  </div>
+                  <div class="preview-row">
+                    <div class="preview-chip"></div>
+                    <div class="preview-chip"></div>
+                    <div class="preview-chip"></div>
+                  </div>
                 </div>
-                <div class="grid">${renderOverviewCards()}</div>
-                <div class="journey-grid">
-                  <article class="journey-card">
-                    <strong>1</strong>
-                    <h3>${copy.tabs[0]}</h3>
-                    <p>${copy.overview.sectionBody}</p>
-                  </article>
-                  <article class="journey-card">
-                    <strong>2</strong>
-                    <h3>${copy.tabs[2]}</h3>
-                    <p>${copy.scenarios.body}</p>
-                  </article>
-                  <article class="journey-card">
-                    <strong>3</strong>
-                    <h3>${copy.tabs[3]}</h3>
-                    <p>${copy.compare.summaryBody}</p>
-                  </article>
+              </div>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="preview-pane">
+            <div class="preview-device">
+              <div class="preview-island"></div>
+              <div class="preview-screen">
+                <div class="preview-pill"></div>
+                <div class="preview-row">
+                  <div class="preview-chip"></div>
+                  <div class="preview-chip"></div>
+                  <div class="preview-chip"></div>
                 </div>
-              </section>
+                <div class="preview-bars">
+                  <div class="preview-block">
+                    <div class="preview-line short"></div>
+                    <div class="preview-line" style="margin-top:10px;"></div>
+                    <div class="preview-line mid" style="margin-top:10px;"></div>
+                  </div>
+                  <div class="preview-stat"></div>
+                </div>
+                <div class="preview-mini-grid">
+                  <div class="preview-block"></div>
+                  <div class="preview-block"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      function renderIntro() {
+        return `
+          <section class="screen ${activeTab === "intro" ? "is-active" : ""}">
+            <header class="page-header">
+              <p class="eyebrow">${copy.intro.eyebrow}</p>
+              <h1>${copy.intro.title}</h1>
+              <p class="subtle" style="margin-top:12px;">${copy.intro.body}</p>
+              <div class="hero-actions" style="margin-top:18px;">
+                <button class="button">${copy.intro.primary}</button>
+                <button class="button-secondary">${copy.intro.secondary}</button>
+              </div>
+            </header>
+
+            <div class="hero-grid">
+              <article class="hero-feature">
+                <div class="content">
+                  <span class="tag">${copy.intro.innovation}</span>
+                  <h3 style="margin-top:14px; font-size:1.75rem;">${copy.intro.featureTitle}</h3>
+                  <p style="margin-top:10px;">${copy.intro.featureBody}</p>
+                </div>
+                <div class="hero-visual"></div>
+              </article>
+
+              <article class="metric-leaf">
+                <div>
+                  <div class="caption">${copy.intro.leafLabel}</div>
+                  <div class="value" style="margin-top:10px;">${copy.intro.leafValue}</div>
+                  <div class="caption" style="margin-top:6px;">${copy.intro.leafUnit}</div>
+                </div>
+                <p class="subtle">${copy.intro.leafBody}</p>
+              </article>
+            </div>
+
+            <section class="grid-three" style="margin-top:14px;">
+              ${copy.intro.cards
+                .map(
+                  (card) => `
+                    <article class="feature-card">
+                      <span class="icon-wrap">${iconGlyph(card[2])}</span>
+                      <h3 style="margin-top:14px; font-size:1.1rem;">${card[0]}</h3>
+                      <p style="margin-top:8px;">${card[1]}</p>
+                    </article>
+                  `
+                )
+                .join("")}
             </section>
 
-            <section class="screen ${activeTab === "capabilities" ? "is-active" : ""}">
-              <div class="section-header">
-                <p class="kicker">${copy.tabs[1]}</p>
-                <h2>${copy.capabilities.title}</h2>
-                <p>${copy.capabilities.body}</p>
+            <section style="margin-top:24px;">
+              <div class="list-row-top" style="margin-bottom:12px;">
+                <div>
+                  <p class="eyebrow" style="margin-bottom:6px;">Insights</p>
+                  <h2>${copy.intro.insightsTitle}</h2>
+                </div>
+                <span class="subtle" style="font-weight:700;">${copy.intro.insightsLink}</span>
               </div>
-              <div class="capability-layout">
-                <article class="spotlight-card">
-                  <p class="mini-kicker">${uiLabels.capabilitySpotlight}</p>
-                  <h3>${copy.capabilities.cards[0][0]}</h3>
-                  <p>${copy.capabilities.cards[0][1]}</p>
-                  <div class="spotlight-stats">
-                    ${copy.capabilities.details
+              <div class="list">
+                ${copy.intro.insights
+                  .map(
+                    (item) => `
+                      <article class="list-row">
+                        <div class="list-row-top">
+                          <span class="badge ${item[0] === "New" ? "primary" : "soft"}">${item[0]}</span>
+                          <span class="subtle">${item[1]}</span>
+                        </div>
+                        <h3 style="font-size:1rem;">${item[2]}</h3>
+                      </article>
+                    `
+                  )
+                  .join("")}
+              </div>
+            </section>
+          </section>
+        `;
+      }
+
+      function renderCore() {
+        return `
+          <section class="screen ${activeTab === "core" ? "is-active" : ""}">
+            <header class="page-header">
+              <p class="eyebrow">${copy.core.eyebrow}</p>
+              <h2>${copy.core.title}</h2>
+              <p class="subtle" style="margin-top:12px;">${copy.core.body}</p>
+            </header>
+
+            <div class="grid-two">
+              <article class="card">
+                <span class="icon-wrap">${iconGlyph("storage")}</span>
+                <h3 style="margin-top:14px; font-size:1.5rem;">${copy.core.heroTitle}</h3>
+                <p style="margin-top:10px;">${copy.core.heroBody}</p>
+                <div class="hero-image" style="margin-top:18px;">${renderPreviewPane("core")}</div>
+              </article>
+
+              <div class="stack">
+                <article class="card">
+                  <div class="stats-inline">
+                    ${copy.core.stats
                       .map(
-                        (item) => `
-                          <div class="spotlight-stat">
-                            <strong>${item[0]}</strong>
-                            <span>${item[1]}</span>
+                        (stat) => `
+                          <div class="stat-card">
+                            <strong>${stat[1]}</strong>
+                            <p>${stat[0]}</p>
                           </div>
                         `
                       )
                       .join("")}
                   </div>
                 </article>
-                <div class="detail-grid">
-                  ${copy.capabilities.cards
-                    .slice(1, 5)
-                    .map(
-                      (card, index) => `
-                        <article class="card">
-                          <div class="card-head">
-                            <span class="card-glyph">${index + 2}</span>
-                            <h3>${card[0]}</h3>
-                          </div>
-                          <p>${card[1]}</p>
-                        </article>
-                      `
-                    )
-                    .join("")}
-                </div>
-              </div>
-              <div class="segmented">
-                ${copy.capabilities.segments
+
+                ${copy.core.cards
                   .map(
-                    (segment, index) => `
-                      <button class="segment-button ${index === 0 ? "is-active" : ""}" type="button">
-                        ${segment}
-                      </button>
-                    `
-                  )
-                  .join("")}
-              </div>
-              <div class="grid capability-grid section">
-                ${copy.capabilities.cards
-                  .map(
-                    (card, index) => `
-                      <article class="card ${index === 0 ? "featured" : ""}">
-                        <div class="card-head">
-                          <span class="card-glyph">${index + 1}</span>
-                          <h3>${card[0]}</h3>
-                        </div>
-                        <p>${card[1]}</p>
+                    (card) => `
+                      <article class="feature-card">
+                        <span class="icon-wrap ${card[2] === "shield" ? "" : "tertiary"}">${iconGlyph(card[2])}</span>
+                        <h3 style="margin-top:12px; font-size:1rem;">${card[0]}</h3>
+                        <p style="margin-top:8px;">${card[1]}</p>
                       </article>
                     `
                   )
                   .join("")}
               </div>
-              <section class="section">
-                <div class="detail-grid">
-                  ${copy.capabilities.details
+            </div>
+
+            <section style="margin-top:24px;">
+              <p class="eyebrow">${copy.core.toolingTitle}</p>
+              <div class="grid-two">
+                ${copy.core.tooling
+                  .map(
+                    (item) => `
+                      <article class="list-row">
+                        <h3 style="font-size:1rem;">${item[0]}</h3>
+                        <p>${item[1]}</p>
+                      </article>
+                    `
+                  )
+                  .join("")}
+              </div>
+            </section>
+          </section>
+        `;
+      }
+
+      function renderScenarios() {
+        return `
+          <section class="screen ${activeTab === "scenarios" ? "is-active" : ""}">
+            <header class="page-header">
+              <p class="eyebrow">${copy.scenarios.eyebrow}</p>
+              <h2>${copy.scenarios.title}</h2>
+              <p class="subtle" style="margin-top:12px;">${copy.scenarios.body}</p>
+            </header>
+
+            <article class="hero-feature" style="background:var(--surface-low);">
+              <div class="content">
+                <span class="badge primary">${copy.scenarios.fintechBadge}</span>
+                <h3 style="margin-top:16px; font-size:1.7rem;">${copy.scenarios.fintechTitle}</h3>
+                <p style="margin-top:10px;">${copy.scenarios.fintechBody}</p>
+                <div class="action-row" style="margin-top:18px;">
+                  <button class="button">${copy.scenarios.fintechAction}</button>
+                </div>
+              </div>
+            </article>
+
+            <div class="grid-two" style="margin-top:14px;">
+              <article class="card">
+                <span class="icon-wrap tertiary">◔</span>
+                <h3 style="margin-top:14px; font-size:1.2rem;">${copy.scenarios.analyticsTitle}</h3>
+                <p style="margin-top:8px;">${copy.scenarios.analyticsBody}</p>
+                <div style="margin-top:22px;">
+                  <div style="font-size:2.8rem; font-weight:800; line-height:0.9;">${copy.scenarios.analyticsMetric}</div>
+                  <p class="eyebrow" style="margin-top:8px;">${copy.scenarios.analyticsMetricLabel}</p>
+                </div>
+              </article>
+
+              <article class="card">
+                <span class="icon-wrap">⌘</span>
+                <h3 style="margin-top:14px; font-size:1.2rem;">${copy.scenarios.logTitle}</h3>
+                <p style="margin-top:8px;">${copy.scenarios.logBody}</p>
+              </article>
+            </div>
+
+            <article class="dark-card" style="margin-top:14px;">
+              <h3 style="font-size:1.8rem;">${copy.scenarios.sovereigntyTitle}</h3>
+              <p style="margin-top:10px;">${copy.scenarios.sovereigntyBody}</p>
+              <div class="dark-stats">
+                ${copy.scenarios.sovereigntyStats
+                  .map(
+                    (item) => `
+                      <div class="dark-stat">
+                        <div class="eyebrow" style="margin-bottom:6px; color:rgba(255,255,255,0.56);">${item[0]}</div>
+                        <div style="font-size:1.4rem; font-weight:800;">${item[1]}</div>
+                      </div>
+                    `
+                  )
+                  .join("")}
+              </div>
+            </article>
+
+            <article class="cta-panel" style="margin-top:18px;">
+              <h2>${copy.scenarios.ctaTitle}</h2>
+              <p style="margin-top:10px;">${copy.scenarios.ctaBody}</p>
+              <div class="hero-actions" style="margin-top:18px;">
+                <button class="button">${copy.scenarios.ctaPrimary}</button>
+                <button class="button-secondary">${copy.scenarios.ctaSecondary}</button>
+              </div>
+            </article>
+          </section>
+        `;
+      }
+
+      function renderCompare() {
+        return `
+          <section class="screen ${activeTab === "compare" ? "is-active" : ""}">
+            <header class="page-header">
+              <p class="eyebrow">${copy.compare.eyebrow}</p>
+              <h2>${copy.compare.title}</h2>
+              <p class="subtle" style="margin-top:12px;">${copy.compare.body}</p>
+            </header>
+
+            <div class="grid-two">
+              <article class="card">
+                <span class="badge primary">${copy.compare.eyebrow}</span>
+                <h3 style="margin-top:16px; font-size:1.5rem;">${copy.compare.heroTitle}</h3>
+                <p style="margin-top:10px;">${copy.compare.heroBody}</p>
+                <div class="stats-inline" style="margin-top:18px;">
+                  <div class="stat-card">
+                    <strong>${copy.compare.statA[0]}</strong>
+                    <p>${copy.compare.statA[1]}</p>
+                  </div>
+                  <div class="stat-card">
+                    <strong>${copy.compare.statB[0]}</strong>
+                    <p>${copy.compare.statB[1]}</p>
+                  </div>
+                </div>
+              </article>
+
+              <article class="metric-leaf">
+                <div class="value">${copy.compare.leafValue}</div>
+                <div style="font-size:1.4rem; font-weight:800;">${copy.compare.leafTitle}</div>
+                <p class="subtle">${copy.compare.leafBody}</p>
+              </article>
+            </div>
+
+            <article class="table-card" style="margin-top:14px;">
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      ${copy.compare.tableHeaders.map((item) => `<th>${item}</th>`).join("")}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${copy.compare.rows
+                      .map(
+                        (row) => `
+                          <tr>
+                            <td>${row[0]}</td>
+                            <td class="good">${row[1]}</td>
+                            <td class="neutral">${row[2]}</td>
+                            <td>${row[3]}</td>
+                          </tr>
+                        `
+                      )
+                      .join("")}
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
+            <div class="grid-two" style="margin-top:14px;">
+              <article class="card">
+                <div class="list-row-top">
+                  <span class="icon-wrap tertiary">≈</span>
+                  <h3 style="font-size:1.1rem;">${copy.compare.insightTitle}</h3>
+                </div>
+                <p style="margin-top:10px;">${copy.compare.insightBody}</p>
+              </article>
+              <article class="compare-image">${renderPreviewPane("compare")}</article>
+            </div>
+          </section>
+        `;
+      }
+
+      function renderAI() {
+        return `
+          <section class="screen ${activeTab === "ai" ? "is-active" : ""}">
+            <header class="page-header">
+              <p class="eyebrow">${copy.ai.eyebrow}</p>
+              <h2>${copy.ai.title}</h2>
+              <p class="subtle" style="margin-top:12px;">${copy.ai.body}</p>
+            </header>
+
+            <div class="grid-two">
+              <article class="card">
+                <span class="icon-wrap">◈</span>
+                <h3 style="margin-top:14px; font-size:1.45rem;">${copy.ai.heroTitle}</h3>
+                <p style="margin-top:10px;">${copy.ai.heroBody}</p>
+                <div class="ai-image" style="margin-top:18px;">${renderPreviewPane("ai")}</div>
+              </article>
+
+              <div class="stack">
+                ${copy.ai.cards
+                  .map(
+                    (card) => `
+                      <article class="feature-card">
+                        <span class="icon-wrap tertiary">${iconGlyph(card[2])}</span>
+                        <h3 style="margin-top:12px; font-size:1rem;">${card[0]}</h3>
+                        <p style="margin-top:8px;">${card[1]}</p>
+                      </article>
+                    `
+                  )
+                  .join("")}
+
+                <article class="metric-leaf">
+                  <div class="caption">${copy.ai.metricLabel}</div>
+                  <div class="value" style="margin-top:8px;">${copy.ai.metricValue}</div>
+                  <div class="caption" style="margin-top:6px;">${copy.ai.metricBody}</div>
+                </article>
+              </div>
+            </div>
+
+            <div class="grid-two" style="margin-top:14px;">
+              <article class="card">
+                <p class="eyebrow">${copy.ai.roadmapTitle}</p>
+                <div class="list">
+                  ${copy.ai.roadmap
                     .map(
-                      (item) => `
-                        <article class="compare-card">
-                          <h3>${item[0]}</h3>
+                      (item, index) => `
+                        <article class="list-row" style="padding:14px 0; background:transparent; box-shadow:none; border-radius:0;">
+                          <div class="list-row-top">
+                            <span class="badge soft">0${index + 1}</span>
+                            <h3 style="font-size:1rem;">${item[0]}</h3>
+                          </div>
                           <p>${item[1]}</p>
                         </article>
                       `
                     )
                     .join("")}
                 </div>
-              </section>
-            </section>
-
-            <section class="screen ${activeTab === "scenarios" ? "is-active" : ""}">
-              <div class="section-header">
-                <p class="kicker">${copy.tabs[2]}</p>
-                <h2>${copy.scenarios.title}</h2>
-                <p>${copy.scenarios.body}</p>
-              </div>
-              <div class="scenario-grid">
-                ${copy.scenarios.cards
-                  .map(
-                    (card, index) => `
-                      <article class="card ${index === 0 ? "featured" : ""}">
-                        <h3>${card[0]}</h3>
-                        <p>${card[1]}</p>
-                      </article>
-                    `
-                  )
-                  .join("")}
-              </div>
-              <section class="section">
-                <div class="compare-grid">
-                  <article class="compare-card featured">
-                    <h3>${copy.scenarios.talkTitle}</h3>
-                    <p>${copy.scenarios.talkTrack}</p>
-                  </article>
-                  <article class="compare-card">
-                    <h3>${copy.scenarios.pocTitle}</h3>
-                    <p>${copy.scenarios.poc}</p>
-                  </article>
+                <div class="hero-actions" style="margin-top:14px;">
+                  <button class="button">${copy.ai.action}</button>
                 </div>
-              </section>
-            </section>
+              </article>
 
-            <section class="screen compare ${activeTab === "compare" ? "is-active" : ""}">
-              <div class="section-header">
-                <p class="kicker">${copy.tabs[3]}</p>
-                <h2>${copy.compare.title}</h2>
-                <p>${copy.compare.body}</p>
-              </div>
-              <div class="compare-grid">
-                <div class="compare-main">
-                  <article class="compare-card featured">
-                    <div class="compare-headline">
-                      <h3>${copy.compare.title}</h3>
-                      <span class="compare-badge">${uiLabels.architecturePath}</span>
-                    </div>
-                    <div class="projection-panel">
-                      <div class="projection-stat">
-                        <strong>${uiLabels.need}</strong>
-                        <span>${copy.chips.scaling}</span>
-                      </div>
-                      <div class="projection-stat">
-                        <strong>${uiLabels.proof}</strong>
-                        <span>${copy.compare.rows[0][1]}</span>
-                      </div>
-                    </div>
-                    <table>
-                      <thead>
-                        <tr>
-                          ${copy.compare.headers.map((header) => `<th>${header}</th>`).join("")}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        ${copy.compare.rows
-                          .map(
-                            (row, index) => `
-                              <tr>
-                                <td>${row[0]}</td>
-                                <td class="${index < 3 ? "good" : "warning"}">${row[1]}</td>
-                                <td class="${index === 2 ? "warning" : "risk"}">${row[2]}</td>
-                              </tr>
-                            `
-                          )
-                          .join("")}
-                      </tbody>
-                    </table>
-                  </article>
-                  <article class="compare-card">
-                    <div class="journey-grid">
-                      <div class="journey-card">
-                        <strong>01</strong>
-                        <h3>${uiLabels.need}</h3>
-                        <p>${copy.chips.scaling}</p>
-                      </div>
-                      <div class="journey-card">
-                        <strong>02</strong>
-                        <h3>${uiLabels.proof}</h3>
-                        <p>${copy.compare.rows[0][1]}</p>
-                      </div>
-                      <div class="journey-card">
-                        <strong>03</strong>
-                        <h3>${uiLabels.risk}</h3>
-                        <p>${copy.compare.rows[3][2]}</p>
-                      </div>
-                    </div>
-                  </article>
+              <article class="ai-panel">
+                <h3 style="font-size:1.65rem;">${copy.ai.vectorTitle}</h3>
+                <p style="margin-top:10px;">${copy.ai.vectorBody}</p>
+                <div class="chip-strip">
+                  ${copy.ai.chips.map((item) => `<span class="chip">${item}</span>`).join("")}
                 </div>
-                <article class="compare-card">
-                  <h3>${copy.compare.summaryTitle}</h3>
-                  <p>${copy.compare.summaryBody}</p>
-                  <div class="summary-stack">
-                    ${copy.compare.highlights
-                      .map(
-                        (item, index) => `
-                          <div class="summary-tile two-line">
-                            <strong class="${index < 2 ? "good" : "warning"}">${item[0]}</strong>
-                            <span>${item[1]}</span>
-                          </div>
-                        `
-                      )
-                      .join("")}
-                  </div>
-                  <div class="stage-rail">
-                    <article class="stage-tile">
-                      <strong>${uiLabels.stageMode}</strong>
-                      <span>${uiLabels.stageBody}</span>
-                    </article>
-                    <article class="stage-tile">
-                      <strong>${uiLabels.stageReason}</strong>
-                      <span>${uiLabels.stageReasonBody}</span>
-                    </article>
-                    <article class="stage-tile">
-                      <strong>${uiLabels.stageNext}</strong>
-                      <span>${uiLabels.stageNextBody}</span>
-                    </article>
-                  </div>
-                </article>
-              </div>
-            </section>
+              </article>
+            </div>
+          </section>
+        `;
+      }
 
-            <section class="screen ${activeTab === "faq" ? "is-active" : ""}">
-              <div class="section-header">
-                <p class="kicker">${copy.tabs[4]}</p>
-                <h2>${copy.faq.title}</h2>
-                <p>${copy.faq.body}</p>
-              </div>
-              <div class="faq-grid">
-                ${copy.faq.cards
-                  .map(
-                    (card) => `
-                      <article class="faq-item">
-                        <h3>${card[0]}</h3>
-                        <p>${card[1]}</p>
-                      </article>
-                    `
-                  )
-                  .join("")}
-              </div>
-            </section>
+      function tabGlyph(tab) {
+        return {
+          intro: "I",
+          core: "C",
+          scenarios: "S",
+          compare: "X",
+          ai: "AI"
+        }[tab];
+      }
+
+      function renderApp() {
+        const root = document.querySelector("#app");
+        root.innerHTML = `
+          <div class="app-shell">
+            ${renderIntro()}
+            ${renderCore()}
+            ${renderScenarios()}
+            ${renderCompare()}
+            ${renderAI()}
           </div>
 
           <div class="tabbar-wrap">
-            <div class="tabbar">
+            <div class="tabbar glass">
               ${tabs
                 .map(
                   (tab, index) => `
@@ -2023,13 +2030,6 @@
         root.querySelectorAll("[data-tab]").forEach((button) => {
           button.addEventListener("click", () => {
             activeTab = button.dataset.tab;
-            renderApp();
-          });
-        });
-
-        root.querySelectorAll("[data-need]").forEach((button) => {
-          button.addEventListener("click", () => {
-            activeNeed = button.dataset.need;
             renderApp();
           });
         });
