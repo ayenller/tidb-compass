@@ -9,6 +9,17 @@
     <title>TiDB Compass</title>
     <style>
       :root {
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 20px;
+        --space-6: 24px;
+        --space-7: 32px;
+        --radius-sm: 12px;
+        --radius-md: 18px;
+        --radius-lg: 24px;
+        --radius-xl: 28px;
         --bg: #fcf8fb;
         --surface: #fcf8fb;
         --surface-low: #f6f3f5;
@@ -57,7 +68,7 @@
       .app {
         min-height: 100dvh;
         padding-top: env(safe-area-inset-top, 0);
-        padding-bottom: calc(env(safe-area-inset-bottom, 0) + 88px);
+        padding-bottom: calc(env(safe-area-inset-bottom, 0) + 64px);
       }
 
       .app-shell {
@@ -134,6 +145,13 @@
         border-radius: 999px;
       }
 
+      .button:focus-visible,
+      .button-secondary:focus-visible,
+      .tab-button:focus-visible {
+        outline: 2px solid rgba(0, 100, 127, 0.42);
+        outline-offset: 2px;
+      }
+
       .button {
         padding: 12px 18px;
         color: #fff;
@@ -174,6 +192,79 @@
       .glass {
         background: rgba(252, 248, 251, 0.8);
         backdrop-filter: blur(20px);
+      }
+
+      .section-frame {
+        padding: 18px;
+        border-radius: var(--radius-xl);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(246, 243, 245, 0.94)),
+          var(--surface-low);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .summary-strip {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      .summary-card {
+        min-height: 92px;
+        padding: 14px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .summary-label {
+        margin: 0 0 8px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .summary-value {
+        margin: 0;
+        font-size: 1.7rem;
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      .summary-note {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .stage-banner {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 18px;
+        padding: 16px 18px;
+        border-radius: 22px;
+        background: linear-gradient(180deg, rgba(188, 0, 10, 0.08), rgba(188, 0, 10, 0.02));
+      }
+
+      .stage-banner h3,
+      .stage-banner p {
+        margin: 0;
+      }
+
+      .stage-banner h3 {
+        font-size: 1.05rem;
+      }
+
+      .stage-banner p {
+        color: var(--muted);
+        line-height: 1.55;
       }
 
       .hero-grid,
@@ -692,46 +783,46 @@
         right: 0;
         bottom: 0;
         left: 0;
-        padding: 10px 14px calc(env(safe-area-inset-bottom, 0) + 10px);
-        background: linear-gradient(180deg, rgba(252, 248, 251, 0), rgba(252, 248, 251, 0.96) 34%);
+        padding: 4px 10px calc(env(safe-area-inset-bottom, 0) + 4px);
+        background: linear-gradient(180deg, rgba(252, 248, 251, 0), rgba(252, 248, 251, 0.94) 28%);
       }
 
       .tabbar {
         display: grid;
         grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 8px;
-        padding: 10px;
-        border-radius: 24px;
-        background: rgba(252, 248, 251, 0.8);
-        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.04);
+        gap: 4px;
+        padding: 6px;
+        border-radius: 20px;
+        background: rgba(252, 248, 251, 0.76);
+        box-shadow: 0 -2px 18px rgba(0, 0, 0, 0.035);
       }
 
       .tab-button {
         display: grid;
-        gap: 6px;
+        gap: 4px;
         justify-items: center;
-        padding: 8px 4px 10px;
+        padding: 6px 3px 7px;
         border: 0;
-        border-radius: 18px;
+        border-radius: 15px;
         color: var(--muted);
         background: transparent;
       }
 
       .tab-button .icon {
         display: grid;
-        width: 30px;
-        height: 30px;
+        width: 26px;
+        height: 26px;
         place-items: center;
-        border-radius: 10px;
+        border-radius: 9px;
         background: rgba(228, 226, 228, 0.8);
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 800;
       }
 
       .tab-button strong {
-        font-size: 10px;
+        font-size: 9px;
         font-weight: 700;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.04em;
         text-transform: uppercase;
       }
 
@@ -759,6 +850,27 @@
         .hero-grid {
           grid-template-columns: 1.2fr 0.8fr;
         }
+      }
+
+      .app[data-orientation="landscape"] {
+        padding-bottom: env(safe-area-inset-bottom, 0);
+      }
+
+      .app[data-orientation="landscape"] .tabbar-wrap {
+        display: none;
+      }
+
+      .app[data-orientation="landscape"] .app-shell {
+        padding-bottom: 24px;
+      }
+
+      .app[data-orientation="landscape"] .grid-two,
+      .app[data-orientation="landscape"] .hero-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .app[data-orientation="landscape"] .summary-strip {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
 
       @media (max-width: 430px) and (orientation: portrait) {
@@ -794,12 +906,20 @@
         }
 
         .tabbar {
-          gap: 4px;
-          padding: 8px;
+          gap: 3px;
+          padding: 5px;
         }
 
         .tab-button strong {
-          font-size: 9px;
+          font-size: 8px;
+        }
+
+        .summary-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .summary-card {
+          min-height: auto;
         }
 
         .preview-pane,
@@ -827,6 +947,8 @@
       const params = new URLSearchParams(window.location.search);
       const injectedContext = window.__TIDB_COMPASS_CONTEXT__ || {};
       const locale = params.get("lang") || injectedContext.lang || "zh-CN";
+      const orientation = params.get("orientation") || injectedContext.orientation || "portrait";
+      const device = params.get("device") || injectedContext.device || "iphone";
 
       const messages = {
         "zh-CN": {
@@ -835,7 +957,11 @@
           ui: {
             scenarioMapping: "场景映射",
             competitiveRanking: "竞争定位",
-            fit: "适配"
+            fit: "适配",
+            storyBannerTitle: "设计模式",
+            introBanner: "先讲增长压力，再讲 TiDB 如何在线性扩展中承接增长。",
+            scenarioBanner: "把技术指标翻译成客户价值，帮助销售更快找到切入点。",
+            compareBanner: "先讲扩展性全局优势，再进入产品与架构的具体差异。"
           },
           tabs: ["导览", "核心", "场景", "对比", "AI"],
           intro: {
@@ -991,7 +1117,11 @@
           ui: {
             scenarioMapping: "Scenario Mapping",
             competitiveRanking: "Competitive Ranking",
-            fit: "Fit"
+            fit: "Fit",
+            storyBannerTitle: "Story Mode",
+            introBanner: "Start with growth pressure, then show how TiDB scales linearly with the business.",
+            scenarioBanner: "Translate technical metrics into customer value so sales can find the right opening faster.",
+            compareBanner: "Lead with the overall scalability edge before moving into product and architecture detail."
           },
           tabs: ["Intro", "Core", "Scenarios", "Compare", "AI"],
           intro: {
@@ -1150,7 +1280,11 @@
         ui: {
           scenarioMapping: "シナリオマッピング",
           competitiveRanking: "競争ポジション",
-          fit: "適合"
+          fit: "適合",
+          storyBannerTitle: "ストーリーモード",
+          introBanner: "まず成長圧力を示し、その後に TiDB がどう線形に拡張するかを説明します。",
+          scenarioBanner: "技術指標を顧客価値に翻訳し、営業がより早く切り口を見つけられるようにします。",
+          compareBanner: "製品差分に入る前に、まず拡張性全体での優位性を伝えます。"
         },
         tabs: ["イントロ", "コア", "シナリオ", "比較", "AI"],
         intro: {
@@ -1308,7 +1442,11 @@
         ui: {
           scenarioMapping: "Mapeamento",
           competitiveRanking: "Ranking competitivo",
-          fit: "Fit"
+          fit: "Fit",
+          storyBannerTitle: "Modo história",
+          introBanner: "Comece pela pressão de crescimento e depois mostre como o TiDB escala linearmente com o negócio.",
+          scenarioBanner: "Traduza métricas técnicas em valor para o cliente para que vendas encontre a melhor entrada mais rápido.",
+          compareBanner: "Comece pela vantagem geral de escalabilidade antes de entrar nos detalhes do produto e da arquitetura."
         },
         tabs: ["Intro", "Core", "Cenários", "Comparar", "AI"],
         intro: {
@@ -1466,7 +1604,11 @@
         ui: {
           scenarioMapping: "Mapeo",
           competitiveRanking: "Ranking competitivo",
-          fit: "Fit"
+          fit: "Fit",
+          storyBannerTitle: "Modo historia",
+          introBanner: "Empieza por la presión de crecimiento y luego muestra cómo TiDB escala linealmente con el negocio.",
+          scenarioBanner: "Traduce métricas técnicas en valor para el cliente para que ventas encuentre antes el punto de entrada correcto.",
+          compareBanner: "Empieza por la ventaja global de escalabilidad antes de entrar en detalles de producto y arquitectura."
         },
         tabs: ["Intro", "Core", "Escenarios", "Comparar", "AI"],
         intro: {
@@ -1744,6 +1886,32 @@
               </div>
             </header>
 
+            <div class="stage-banner">
+              <div>
+                <p class="eyebrow" style="margin-bottom:6px;">${copy.ui.storyBannerTitle}</p>
+                <h3>${copy.intro.innovation}</h3>
+              </div>
+              <p>${copy.ui.introBanner}</p>
+            </div>
+
+            <section class="summary-strip">
+              <article class="summary-card">
+                <p class="summary-label">Storage</p>
+                <p class="summary-value">∞</p>
+                <p class="summary-note">${copy.intro.cards[0][0]}</p>
+              </article>
+              <article class="summary-card">
+                <p class="summary-label">Tables</p>
+                <p class="summary-value">10K+</p>
+                <p class="summary-note">${copy.intro.cards[1][0]}</p>
+              </article>
+              <article class="summary-card">
+                <p class="summary-label">Concurrency</p>
+                <p class="summary-value">${copy.intro.leafValue}</p>
+                <p class="summary-note">${copy.intro.leafUnit}</p>
+              </article>
+            </section>
+
             <div class="hero-grid">
               <article class="hero-feature">
                 <div class="content">
@@ -1881,6 +2049,14 @@
               <p class="subtle" style="margin-top:12px;">${copy.scenarios.body}</p>
             </header>
 
+            <div class="stage-banner">
+              <div>
+                <p class="eyebrow" style="margin-bottom:6px;">${copy.ui.storyBannerTitle}</p>
+                <h3>${copy.scenarios.fintechBadge}</h3>
+              </div>
+              <p>${copy.ui.scenarioBanner}</p>
+            </div>
+
             <article class="hero-feature" style="background:var(--surface-low);">
               <div class="content">
                 <span class="badge primary">${copy.scenarios.fintechBadge}</span>
@@ -1967,6 +2143,32 @@
               <h2>${copy.compare.title}</h2>
               <p class="subtle" style="margin-top:12px;">${copy.compare.body}</p>
             </header>
+
+            <div class="stage-banner">
+              <div>
+                <p class="eyebrow" style="margin-bottom:6px;">${copy.ui.storyBannerTitle}</p>
+                <h3>${copy.compare.insightTitle}</h3>
+              </div>
+              <p>${copy.ui.compareBanner}</p>
+            </div>
+
+            <section class="summary-strip">
+              <article class="summary-card">
+                <p class="summary-label">Storage</p>
+                <p class="summary-value">∞</p>
+                <p class="summary-note">${copy.compare.rows[0][1]}</p>
+              </article>
+              <article class="summary-card">
+                <p class="summary-label">Tables</p>
+                <p class="summary-value">10K+</p>
+                <p class="summary-note">${copy.compare.rows[1][1]}</p>
+              </article>
+              <article class="summary-card">
+                <p class="summary-label">DDL</p>
+                <p class="summary-value">${copy.compare.leafValue}</p>
+                <p class="summary-note">${copy.compare.leafTitle}</p>
+              </article>
+            </section>
 
             <div class="grid-two">
               <article class="card">
@@ -2135,6 +2337,8 @@
 
       function renderApp() {
         const root = document.querySelector("#app");
+        root.dataset.orientation = orientation;
+        root.dataset.device = device;
         root.innerHTML = `
           <div class="app-shell">
             ${renderIntro()}
