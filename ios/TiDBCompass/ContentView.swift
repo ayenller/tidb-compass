@@ -8,31 +8,40 @@ struct ContentView: View {
 
     var body: some View {
         GeometryReader { proxy in
+            let isLandscape = proxy.size.width > proxy.size.height
             let context = PreviewContext(
                 lang: selectedLanguage,
                 device: UIDevice.current.userInterfaceIdiom == .pad ? "ipad" : "iphone",
-                orientation: proxy.size.width > proxy.size.height ? "landscape" : "portrait"
+                orientation: isLandscape ? "landscape" : "portrait"
             )
 
-            previewScreen(context: context, width: proxy.size.width)
+            previewScreen(context: context, width: proxy.size.width, isLandscape: isLandscape)
             .sheet(isPresented: $showingSettings) {
                 SettingsView(
                     selectedLanguage: $selectedLanguage,
                     reloadAction: { reloadKey = UUID() }
                 )
             }
+            .statusBarHidden(isLandscape)
         }
     }
 
     @ViewBuilder
-    private func previewScreen(context: PreviewContext, width: CGFloat) -> some View {
+    private func previewScreen(context: PreviewContext, width: CGFloat, isLandscape: Bool) -> some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                header(context: context, width: width)
-                Divider()
-                CompassWebView(context: context, reloadKey: reloadKey)
+            Group {
+                if isLandscape {
+                    CompassWebView(context: context, reloadKey: reloadKey)
+                        .ignoresSafeArea(.container, edges: .all)
+                } else {
+                    VStack(spacing: 0) {
+                        header(context: context, width: width)
+                        Divider()
+                        CompassWebView(context: context, reloadKey: reloadKey)
+                    }
+                }
             }
-            .background(Color(uiColor: .systemGroupedBackground))
+            .background(isLandscape ? Color.clear : Color(uiColor: .systemGroupedBackground))
             .navigationBarHidden(true)
         }
     }
