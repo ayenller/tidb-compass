@@ -832,111 +832,130 @@
         "zh-CN": {
           appName: "TiDB Compass",
           reviewer: "Digital Curator Mode",
+          ui: {
+            scenarioMapping: "场景映射",
+            competitiveRanking: "竞争定位",
+            fit: "适配"
+          },
           tabs: ["导览", "核心", "场景", "对比", "AI"],
           intro: {
             eyebrow: "Intro",
-            title: "下一代分布式数据库架构",
-            accent: "数据库",
+            title: "Scalability First 的分布式数据库",
+            accent: "扩展性",
             body:
-              "TiDB 是开源、云原生的分布式 SQL 数据库，兼顾 HTAP、弹性扩展与高可用，适合面向增长和现代化升级的关键业务。",
-            primary: "开始讲解",
-            secondary: "查看文档",
-            innovation: "创新能力",
-            featureTitle: "弹性扩展",
+              "TiDB 的最大卖点不是单点功能，而是线性扩展能力。面向业务增长、海量数据和高并发场景，TiDB 让存储、计算、连接数和 DDL 都能跟着业务一起放大。",
+            primary: "开始讲解扩展性",
+            secondary: "查看对比资料",
+            innovation: "Scalability First",
+            featureTitle: "业务增长多少倍，TiDB 就能扩展多少倍",
             featureBody:
-              "计算与存储可以独立扩展，业务增长时不必依赖停机扩容或复杂的分片治理。",
-            leafLabel: "核心可靠性",
-            leafValue: "99.99",
-            leafUnit: "% 可用性",
-            leafBody: "面向企业级核心负载的连续服务能力。",
+              "从无上限存储、100K+ 连接，到秒级 DDL 和并发在线变更，TiDB 把扩展性变成一条可直接对客户说明的产品主线。",
+            leafLabel: "扩展性主张",
+            leafValue: "100K+",
+            leafUnit: "并发连接",
+            leafBody: "大促、游戏开服、SaaS 多租户场景都能更从容地规划容量。",
             cards: [
-              ["企业安全", "细粒度权限、加密与合规能力内建在平台中。", "shield"],
-              ["标准 SQL", "兼容 MySQL 协议，迁移常常从连接串切换开始。", "database"],
-              ["云原生", "适合 Kubernetes 与多云部署的现代化平台架构。", "cloud"]
+              ["无上限存储", "水平扩展应对数据持续增长，不再被单实例容量拖住。", "shield"],
+              ["超大规模表支持", "多租户和 SaaS 场景下，表隔离方案更灵活。", "database"],
+              ["MySQL 兼容", "比 NoSQL 和部分分布式数据库更容易迁移与落地。", "cloud"]
             ],
-            insightsTitle: "最新能力",
-            insightsLink: "查看归档",
+            insightsTitle: "六大扩展性优势",
+            insightsLink: "查看完整摘要",
             insights: [
-              ["New", "HTAP 性能", "TiFlash 7.0：让实时分析更贴近业务动作。"],
-              ["Stable", "存储层", "TiKV 优化：P99 延迟进一步下降。"]
+              ["01", "海量存储", "理论无上限扩展，业务增长无需预设终点。"],
+              ["02", "DDL 性能", "常见 schema 变更可做到秒级甚至亚秒级。"]
             ]
           },
           core: {
             eyebrow: "Core Ecosystem",
-            title: "核心能力底座",
+            title: "六大扩展性能力底座",
             body:
-              "TiDB 的架构核心围绕分布式 SQL、事务一致性、HTAP 与云原生治理展开，适合作为统一的数据平台能力层。",
-            heroTitle: "分布式 SQL 存储",
+              "这不是单点 benchmark，而是一套能持续支撑增长的扩展体系。TiDB 把容量、表规模、连接数、DDL 和备份恢复统一进同一平台能力层。",
+            heroTitle: "从容量到 DDL，扩展性是完整体系",
             heroBody:
-              "TiKV 提供强一致的事务型 KV 存储层，可横向扩展到大规模节点，并保持统一的数据语义。",
+              "相比只在单一维度领先的方案，TiDB 的优势在于多个关键维度同时扩展，让技术团队不必在性能、灵活性和运维复杂度之间做交换。",
             stats: [
-              ["OLTP 延迟", "1ms"],
-              ["OLAP 吞吐", "10GB/s"]
+              ["连接能力", "100K+"],
+              ["索引创建", "5.53M/s"]
             ],
             cards: [
-              ["HTAP 引擎", "通过 TiFlash 在业务数据上做实时分析，无需额外 ETL。", "storage"],
-              ["Cloud Native", "借助 TiDB Operator 在 Kubernetes 上自动化运维。", "cloud"],
-              ["强一致", "Multi-Raft 架构帮助关键业务实现 RPO=0。", "shield"],
-              ["自动扩缩容", "按负载动态调度资源，降低人工干预。", "bolt"]
+              ["无上限存储", "应对海量数据增长，避免受单实例上限约束。", "storage"],
+              ["海量表支持", "适合多租户和 SaaS 的表隔离与持续扩展。", "cloud"],
+              ["秒级 DDL", "Drop、Alter、索引创建速度更适合快速迭代。", "shield"],
+              ["并发在线 DDL", "多团队并行改 schema，也尽量不干扰生产负载。", "bolt"]
             ],
-            toolingTitle: "生态工具链",
+            toolingTitle: "扩展性补充优势",
             tooling: [
-              ["TiCDC", "支持下游系统的增量复制。"],
-              ["Dumpling", "适合大规模逻辑导出场景。"],
-              ["Lightning", "帮助快速导入海量数据。"],
-              ["BR Tool", "提供分布式备份恢复能力。"]
+              ["大规模备份恢复", "面向 TB 到更大规模的数据保护与业务连续性。"],
+              ["SQL 兼容性", "对比部分 NoSQL 或专有分布式数据库，迁移成本更低。"],
+              ["弹性伸缩", "计算与存储按需扩展，峰值场景更好规划。"],
+              ["架构简化", "减少分库分表和多账户治理带来的长期复杂度。"]
             ]
           },
           scenarios: {
             eyebrow: "Solutions Ecosystem",
-            title: "行业与场景中心",
+            title: "客户场景映射",
             body:
-              "把 TiDB 讲成业务方案，而不只是数据库功能。围绕关键行业、高峰扩展、实时分析和数据主权组织讲法。",
-            fintechBadge: "FinTech",
-            fintechTitle: "金融交易与资产管理",
+              "把扩展性翻译成客户能直接理解的价值。不同客户关心的不是同一条指标，而是增长、并发、备份、合规和演进速度。",
+            fintechBadge: "Scalability Fit",
+            fintechTitle: "谁最容易被这套故事打动",
             fintechBody:
-              "适合全球交易系统的低延迟事务处理、强一致性要求与连续服务能力。",
-            fintechAction: "查看架构",
-            analyticsTitle: "实时分析",
-            analyticsBody: "在交易数据上直接获得实时经营分析，不再依赖长链路 ETL。",
-            analyticsMetric: "99.99",
-            analyticsMetricLabel: "Uptime SLA",
-            logTitle: "大规模日志分析",
-            logBody: "面向海量日志的索引与查询，支持更快的排障与运营洞察。",
-            sovereigntyTitle: "多云数据主权",
+              "SaaS、电商、游戏、金融、IoT 与日志场景，都可以从扩展性切入，而不是先陷入底层架构细节。",
+            fintechAction: "查看典型客户",
+            analyticsTitle: "SaaS / 多租户",
+            analyticsBody: "重点讲海量表支持、租户隔离灵活性，以及长期架构简化。",
+            analyticsMetric: "10000+",
+            analyticsMetricLabel: "表规模思路",
+            logTitle: "电商 / 高并发",
+            logBody: "重点讲 100K+ 连接与秒级 DDL，帮助团队同时应对大促和快速迭代。",
+            sovereigntyTitle: "金融 / 游戏 / IoT",
             sovereigntyBody:
-              "在跨区域和多云环境中维持统一访问、合规边界与业务连续性。",
+              "金融看大规模与备份恢复，游戏看索引与开服扩张，IoT 看弹性伸缩与 SQL 兼容。",
             sovereigntyStats: [
-              ["覆盖区域", "24+"],
-              ["典型延迟", "<10ms"]
+              ["推荐行业", "5 类"],
+              ["核心价值", "增长无忧"]
             ],
-            ctaTitle: "准备优化你的基础架构？",
-            ctaBody: "从一个关键 workload 开始验证，再逐步扩大 TiDB 的覆盖范围。",
-            ctaPrimary: "预约演示",
-            ctaSecondary: "下载白皮书"
+            ctaTitle: "客户聊到增长、并发或 schema 变更时，就该切 TiDB",
+            ctaBody: "建议从一个已经感受到扩展瓶颈的 workload 开始，用扩展性价值带动后续架构评估和 PoC。",
+            ctaPrimary: "开始客户映射",
+            ctaSecondary: "查看 PoC 线索",
+            mapCards: [
+              ["SaaS 厂商", "多租户表隔离、数据量增长快", "海量表支持 + 无上限存储"],
+              ["电商平台", "大促高并发、快速迭代", "100K+ 连接 + 秒级 DDL"],
+              ["游戏公司", "开服合服、索引与备份压力", "快速索引创建 + 大规模备份恢复"],
+              ["金融客户", "数据量大、合规要求高", "水平扩展 + 完整备份能力"],
+              ["IoT / 日志", "写入量大、查询复杂", "弹性伸缩 + SQL 兼容性"]
+            ]
           },
           compare: {
             eyebrow: "Architecture Rivalry",
-            title: "竞争对比",
+            title: "扩展性竞争定位",
             body:
-              "从架构路径、扩展模式和总拥有成本三条主线切入，帮助销售在客户面前快速建立差异化。",
-            heroTitle: "Shared-Nothing vs. Cloud-Native",
+              "和客户聊 TiDB 时，不必一次把所有数据库讲完。先抓住扩展性维度：容量、表数、连接数、DDL 和备份恢复。",
+            heroTitle: "TiDB 在扩展性上不是单点领先，而是全维度更均衡",
             heroBody:
-              "TiDB 的计算存储分离和云原生扩展方式，在峰值扩容与长期运维上通常更具成本效率。",
-            statA: ["0ms", "读取抖动"],
-            statB: ["99.999%", "可用性目标"],
-            leafValue: "3.2x",
-            leafTitle: "更快吞吐",
-            leafBody: "复杂分析查询下对比传统 NewSQL 的参考结果。",
+              "面对 Aurora、Spanner、DynamoDB、CRDB 等方案，TiDB 更适合讲成一套兼顾容量、连接能力、DDL 效率和迁移友好度的增长平台。",
+            statA: ["6 项", "扩展优势"],
+            statB: ["100K+", "连接支持"],
+            leafValue: "秒级",
+            leafTitle: "DDL 体验",
+            leafBody: "常见 schema 变更可更快完成，帮助业务连续迭代。",
             tableHeaders: ["能力项", "TiDB", "传统 NewSQL", "Legacy RDBMS"],
             rows: [
-              ["自动扩展", "即时扩展", "人工分区", "主要依赖副本"],
-              ["HTAP", "原生 TiFlash", "有限支持", "通常依赖 ETL"],
-              ["事务一致性", "外部一致快照", "Serializable", "传统 MVCC"]
+              ["存储容量", "理论无上限", "通常有实例或平台约束", "主要依赖单实例升级"],
+              ["表规模", "更适合多租户扩展", "常受配置或单节点资源影响", "治理复杂度持续上升"],
+              ["连接数", "100K+ 连接支持", "常需要更谨慎的容量规划", "连接瓶颈更早出现"]
             ],
-            insightTitle: "TCO 优势",
+            insightTitle: "竞争定位一句话",
             insightBody:
-              "从分库分表 MySQL 迁移后，3 年期总拥有成本可显著下降，尤其体现在运维与扩容效率上。"
+              "TiDB 是少数能把存储、计算、连接数、DDL 性能和迁移友好度放进同一条扩展性叙事里的分布式数据库。",
+            ranking: [
+              "存储容量：TiDB ≥ Spanner > Aurora > CRDB > DynamoDB",
+              "表数量：TiDB > CRDB ≥ Spanner > DynamoDB",
+              "连接数：TiDB ≥ Aurora > CRDB > Spanner",
+              "DDL 性能：TiDB >> CRDB > Aurora > Spanner",
+              "备份恢复：TiDB ≥ CRDB > DynamoDB > Spanner"
+            ]
           },
           ai: {
             eyebrow: "Intelligence Layer",
@@ -969,111 +988,130 @@
         "en-US": {
           appName: "TiDB Compass",
           reviewer: "Digital Curator Mode",
+          ui: {
+            scenarioMapping: "Scenario Mapping",
+            competitiveRanking: "Competitive Ranking",
+            fit: "Fit"
+          },
           tabs: ["Intro", "Core", "Scenarios", "Compare", "AI"],
           intro: {
             eyebrow: "Intro",
-            title: "The Next Generation Distributed Database",
-            accent: "Database",
+            title: "A Distributed Database Built with Scalability First",
+            accent: "Scalability",
             body:
-              "TiDB is an open-source, cloud-native distributed SQL database built for HTAP, elastic scale, and high availability in modern business-critical workloads.",
-            primary: "Start Exploring",
-            secondary: "View Docs",
-            innovation: "Innovation",
-            featureTitle: "Elastic Scalability",
+              "TiDB’s biggest story is not a single feature. It is linear scalability across storage, compute, connections, and schema change velocity for modern growth-stage systems.",
+            primary: "Start the Scalability Story",
+            secondary: "View Compare Notes",
+            innovation: "Scalability First",
+            featureTitle: "If the business scales up, TiDB scales with it",
             featureBody:
-              "Scale compute and storage independently as demand grows, without relying on downtime or heavy sharding governance.",
-            leafLabel: "Core Reliability",
-            leafValue: "99.99",
-            leafUnit: "% Uptime",
-            leafBody: "Continuity for enterprise-grade mission-critical systems.",
+              "From practically unlimited storage and 100K+ connections to second-level DDL and concurrent online schema change, TiDB turns scalability into a customer-ready story.",
+            leafLabel: "Scalability Claim",
+            leafValue: "100K+",
+            leafUnit: "Connections",
+            leafBody: "A stronger fit for traffic spikes, launch events, and multi-tenant workloads.",
             cards: [
-              ["Enterprise Security", "Fine-grained access control, encryption, and compliance-ready platform controls.", "shield"],
-              ["Standard SQL", "MySQL protocol compatibility keeps migration friction low for most teams.", "database"],
-              ["Cloud Native", "Built for Kubernetes and multi-cloud deployment flexibility.", "cloud"]
+              ["Practically Unlimited Storage", "Keep growing without planning around a hard single-instance ceiling.", "shield"],
+              ["Large Table Count", "A cleaner option for SaaS and tenant isolation at scale.", "database"],
+              ["MySQL Compatibility", "Lower migration friction than many NoSQL or proprietary distributed options.", "cloud"]
             ],
-            insightsTitle: "Latest Capabilities",
-            insightsLink: "View Archive",
+            insightsTitle: "Six Scalability Advantages",
+            insightsLink: "Open Full Summary",
             insights: [
-              ["New", "HTAP Performance", "TiFlash 7.0 brings real-time analytics closer to operational action."],
-              ["Stable", "Storage Layer", "TiKV optimizations continue to improve P99 latency."]
+              ["01", "Massive Storage", "Scale without an artificial endpoint for data growth."],
+              ["02", "DDL Performance", "Common schema changes can complete in seconds or even sub-seconds."]
             ]
           },
           core: {
             eyebrow: "Core Ecosystem",
-            title: "Architectural Backbone",
+            title: "The Six-Part Scalability Backbone",
             body:
-              "TiDB’s core story is built on distributed SQL, transactional consistency, HTAP, and cloud-native operations as one coherent platform layer.",
-            heroTitle: "Distributed SQL Storage",
+              "This is not one benchmark win. It is a full scalability system that spans capacity, table count, connection volume, DDL speed, and backup recovery in one platform.",
+            heroTitle: "Scalability as a complete system",
             heroBody:
-              "TiKV provides the strongly consistent transactional KV layer that scales horizontally while preserving a unified SQL experience.",
+              "TiDB’s advantage is not limited to one metric. It gives teams more room to grow without trading off flexibility, speed of change, and operational simplicity.",
             stats: [
-              ["OLTP Latency", "1ms"],
-              ["OLAP Throughput", "10GB/s"]
+              ["Connection Support", "100K+"],
+              ["Index Build Rate", "5.53M/s"]
             ],
             cards: [
-              ["HTAP Engine", "Use TiFlash for real-time analytics on operational data without extra ETL.", "storage"],
-              ["Cloud Native", "Operate with TiDB Operator and Kubernetes-native orchestration.", "cloud"],
-              ["Strong Consistency", "Multi-Raft helps critical systems target RPO=0.", "shield"],
-              ["Auto Scaling", "Balance resources dynamically across the cluster.", "bolt"]
+              ["Unlimited-Scale Storage", "Handle fast data growth without hard instance ceilings.", "storage"],
+              ["Large Table Support", "A better fit for SaaS and tenant-heavy data models.", "cloud"],
+              ["Second-Level DDL", "Move schema changes faster during product iteration.", "shield"],
+              ["Concurrent Online DDL", "Run schema work in parallel with less production disruption.", "bolt"]
             ],
-            toolingTitle: "Ecosystem Tooling",
+            toolingTitle: "Supporting Scale Advantages",
             tooling: [
-              ["TiCDC", "Incremental replication for downstream systems."],
-              ["Dumpling", "Logical export for large dataset migration."],
-              ["Lightning", "High-speed import for bulk data onboarding."],
-              ["BR Tool", "Distributed backup and restore for enterprise safety."]
+              ["Large-Scale Backup & Restore", "Protect business continuity even at TB-scale and beyond."],
+              ["SQL Compatibility", "Easier migration path than many NoSQL or closed distributed systems."],
+              ["Elastic Expansion", "Scale compute and storage when the workload changes."],
+              ["Architecture Simplification", "Reduce the long-term overhead of sharding-heavy designs."]
             ]
           },
           scenarios: {
             eyebrow: "Solutions Ecosystem",
-            title: "Enterprise Solutions",
+            title: "Customer Scenario Mapping",
             body:
-              "Frame TiDB as a business solution, not just a database feature set. Organize the story around industry pressure, operational insight, and data sovereignty.",
-            fintechBadge: "FinTech",
-            fintechTitle: "Financial Trading & Asset Management",
+              "Translate scalability into customer language. Different accounts do not buy the same metric; they buy growth safety, concurrency headroom, backup confidence, and faster schema evolution.",
+            fintechBadge: "Scalability Fit",
+            fintechTitle: "Who responds fastest to this story",
             fintechBody:
-              "A strong fit for low-latency transactions, ACID guarantees, and operational continuity in global exchange systems.",
-            fintechAction: "Explore Architecture",
-            analyticsTitle: "Real-time Analytics",
-            analyticsBody: "Turn operational data into insight without long ETL chains.",
-            analyticsMetric: "99.99",
-            analyticsMetricLabel: "Uptime SLA",
-            logTitle: "Large Scale Log Analysis",
-            logBody: "Index and query massive log workloads with faster troubleshooting and response.",
-            sovereigntyTitle: "Multi-Cloud Data Sovereignty",
+              "SaaS, ecommerce, gaming, financial services, IoT, and log-heavy platforms can all start with scalability before diving into architecture details.",
+            fintechAction: "View Customer Types",
+            analyticsTitle: "SaaS / Multi-Tenant",
+            analyticsBody: "Lead with large table support, flexible tenant isolation, and simpler long-term architecture.",
+            analyticsMetric: "10000+",
+            analyticsMetricLabel: "Table-scale mindset",
+            logTitle: "Ecommerce / High Concurrency",
+            logBody: "Lead with 100K+ connections and second-level DDL for peak traffic and fast iteration.",
+            sovereigntyTitle: "Finance / Gaming / IoT",
             sovereigntyBody:
-              "Maintain unified access, compliance boundaries, and continuity across regions and cloud providers.",
+              "Finance values backup and scale, gaming values indexing and launch bursts, and IoT values elasticity plus SQL compatibility.",
             sovereigntyStats: [
-              ["Regions", "24+"],
-              ["Latency", "<10ms"]
+              ["Best-fit verticals", "5"],
+              ["Core promise", "Growth without fear"]
             ],
-            ctaTitle: "Ready to optimize your infrastructure?",
-            ctaBody: "Start with one workload where growth or complexity is already visible, then expand from proof.",
-            ctaPrimary: "Schedule Demo",
-            ctaSecondary: "White Paper"
+            ctaTitle: "When customers mention growth, concurrency, or schema friction, switch to TiDB",
+            ctaBody: "Start with one workload that already feels the scaling pressure, then use that proof point to expand the conversation.",
+            ctaPrimary: "Start Mapping",
+            ctaSecondary: "View PoC Triggers",
+            mapCards: [
+              ["SaaS Vendors", "Tenant isolation and rapidly growing data", "Large table support + practically unlimited storage"],
+              ["Ecommerce Platforms", "Peak events and fast release cycles", "100K+ connections + second-level DDL"],
+              ["Gaming Companies", "Launch merges and backup pressure", "Fast index build + large-scale backup recovery"],
+              ["Financial Services", "Massive data and compliance expectations", "Horizontal scale + stronger recovery posture"],
+              ["IoT / Logging", "Heavy ingestion and complex queries", "Elastic scale + SQL compatibility"]
+            ]
           },
           compare: {
             eyebrow: "Architecture Rivalry",
-            title: "Competitive Compare",
+            title: "Scalability Positioning",
             body:
-              "Lead with architecture path, scaling behavior, and TCO so sales teams can create a faster differentiation story in customer conversations.",
-            heroTitle: "Shared-Nothing vs. Cloud-Native",
+              "Do not compare every database at once. Start with the scalability dimensions that matter most: storage, table count, connection capacity, DDL velocity, and backup recovery.",
+            heroTitle: "TiDB is not just strong at one metric. It scales across the whole growth path",
             heroBody:
-              "Compute-storage separation and cloud-native expansion often make TiDB more efficient during peak scaling and long-term operations.",
-            statA: ["0ms", "Read Jitter"],
-            statB: ["99.999%", "Availability SLI"],
-            leafValue: "3.2x",
-            leafTitle: "Faster Throughput",
-            leafBody: "Reference result on complex analytical workloads versus traditional NewSQL paths.",
+              "Against Aurora, Spanner, DynamoDB, and CRDB, TiDB is easier to frame as one platform balancing capacity, connection scale, DDL speed, and migration friendliness.",
+            statA: ["6", "Scale advantages"],
+            statB: ["100K+", "Connections"],
+            leafValue: "Seconds",
+            leafTitle: "DDL Experience",
+            leafBody: "Common schema changes can finish fast enough to support continuous product change.",
             tableHeaders: ["Capability", "TiDB", "Traditional NewSQL", "Legacy RDBMS"],
             rows: [
-              ["Auto Scaling", "Instant", "Manual partitioning", "Replica-led scaling"],
-              ["HTAP", "Native TiFlash", "Limited support", "Usually ETL-based"],
-              ["Consistency", "External snapshot", "Serializable", "Traditional MVCC"]
+              ["Storage Capacity", "Practically unlimited", "Often bounded by instance or service shape", "Mostly scale-up first"],
+              ["Table Scale", "Stronger fit for tenant-heavy models", "Often constrained by config or node resources", "Governance grows complex"],
+              ["Connections", "100K+ supported", "Usually needs tighter sizing discipline", "Connection ceilings appear earlier"]
             ],
-            insightTitle: "TCO Advantage",
+            insightTitle: "Positioning in one sentence",
             insightBody:
-              "Migrating from legacy sharded MySQL can materially lower three-year ownership cost, especially in operations and scale events."
+              "TiDB is one of the few distributed databases that can tell a unified story across storage, compute, connections, DDL performance, and migration practicality.",
+            ranking: [
+              "Storage: TiDB ≥ Spanner > Aurora > CRDB > DynamoDB",
+              "Table count: TiDB > CRDB ≥ Spanner > DynamoDB",
+              "Connections: TiDB ≥ Aurora > CRDB > Spanner",
+              "DDL speed: TiDB >> CRDB > Aurora > Spanner",
+              "Backup & restore: TiDB ≥ CRDB > DynamoDB > Spanner"
+            ]
           },
           ai: {
             eyebrow: "Intelligence Layer",
@@ -1109,6 +1147,11 @@
         ...messages["en-US"],
         appName: "TiDB Compass",
         reviewer: "Digital Curator Mode",
+        ui: {
+          scenarioMapping: "シナリオマッピング",
+          competitiveRanking: "競争ポジション",
+          fit: "適合"
+        },
         tabs: ["イントロ", "コア", "シナリオ", "比較", "AI"],
         intro: {
           eyebrow: "Intro",
@@ -1166,54 +1209,68 @@
         },
         scenarios: {
           eyebrow: "Solutions Ecosystem",
-          title: "業界ソリューション",
+          title: "顧客シナリオマッピング",
           body:
-            "単なる機能説明ではなく、業界課題、運用分析、データ主権の観点から TiDB を説明します。",
-          fintechBadge: "FinTech",
-          fintechTitle: "金融取引と資産管理",
+            "拡張性を顧客の言葉に翻訳して伝えるためのページです。顧客が買うのは単なる指標ではなく、成長余地、同時接続、バックアップ安心感、そして schema 変更の速さです。",
+          fintechBadge: "Scalability Fit",
+          fintechTitle: "この話に最も反応しやすい顧客",
           fintechBody:
-            "低遅延取引、ACID、一貫したサービス継続性が求められるグローバル取引基盤に適しています。",
-          fintechAction: "アーキテクチャを見る",
-          analyticsTitle: "リアルタイム分析",
-          analyticsBody: "長い ETL チェーンを待たずに運用データを分析へつなげます。",
-          analyticsMetric: "99.99",
-          analyticsMetricLabel: "Uptime SLA",
-          logTitle: "大規模ログ分析",
-          logBody: "膨大なログを高速に検索し、障害対応と運用判断を支援します。",
-          sovereigntyTitle: "マルチクラウドデータ主権",
+            "SaaS、EC、ゲーム、金融、IoT、ログ系プラットフォームは、アーキテクチャ詳細より先に拡張性の話から入りやすい顧客です。",
+          fintechAction: "顧客タイプを見る",
+          analyticsTitle: "SaaS / マルチテナント",
+          analyticsBody: "大量テーブル、柔軟なテナント分離、長期的な構成簡素化を中心に話します。",
+          analyticsMetric: "10000+",
+          analyticsMetricLabel: "テーブル規模の発想",
+          logTitle: "EC / 高同時接続",
+          logBody: "100K+ 接続と秒級 DDL を中心に、大規模トラフィックと高速リリースを両立できる点を伝えます。",
+          sovereigntyTitle: "金融 / ゲーム / IoT",
           sovereigntyBody:
-            "地域やクラウドを跨いでも、一貫したアクセス、コンプライアンス、継続性を保ちます。",
+            "金融はバックアップと拡張、ゲームは索引とローンチ、IoT は弾性と SQL 互換性が刺さります。",
           sovereigntyStats: [
-            ["リージョン", "24+"],
-            ["遅延", "<10ms"]
+            ["適合業種", "5"],
+            ["主メッセージ", "成長を止めない"]
           ],
-          ctaTitle: "インフラ最適化を始めますか？",
-          ctaBody: "成長や複雑性が見え始めた workload から小さく検証し、そこから広げます。",
-          ctaPrimary: "デモを予約",
-          ctaSecondary: "ホワイトペーパー"
+          ctaTitle: "成長、同時接続、schema 変更の摩擦が出たら TiDB の出番です",
+          ctaBody: "すでに拡張圧力が見えている workload から始めると、PoC と後続提案につなげやすくなります。",
+          ctaPrimary: "マッピングを始める",
+          ctaSecondary: "PoC の糸口を見る",
+          mapCards: [
+            ["SaaS 事業者", "テナント分離と急速なデータ増加", "大量テーブル + 実質無制限ストレージ"],
+            ["EC プラットフォーム", "大促の高同時接続と高速リリース", "100K+ 接続 + 秒級 DDL"],
+            ["ゲーム会社", "開服・統合・バックアップ負荷", "高速索引作成 + 大規模バックアップ復旧"],
+            ["金融顧客", "大規模データと高いコンプライアンス要件", "水平拡張 + 強い復旧力"],
+            ["IoT / ログ", "大量書き込みと複雑クエリ", "弾性拡張 + SQL 互換性"]
+          ]
         },
         compare: {
           eyebrow: "Architecture Rivalry",
-          title: "競争比較",
+          title: "拡張性ポジショニング",
           body:
-            "アーキテクチャ、拡張方式、TCO から説明を始めることで、顧客との会話で差別化を作りやすくします。",
-          heroTitle: "Shared-Nothing vs. Cloud-Native",
+            "すべての DB を一度に比較する必要はありません。まずは容量、表数、接続数、DDL 速度、バックアップという拡張性の軸から入ります。",
+          heroTitle: "TiDB は単一指標ではなく、成長全体を支える拡張性を持つ",
           heroBody:
-            "計算とストレージの分離、そしてクラウドネイティブな拡張により、ピーク時と長期運用の両方で効率を出しやすくなります。",
-          statA: ["0ms", "読み取り揺らぎ"],
-          statB: ["99.999%", "可用性指標"],
-          leafValue: "3.2x",
-          leafTitle: "高いスループット",
-          leafBody: "複雑分析ワークロードにおける参考比較値です。",
+            "Aurora、Spanner、DynamoDB、CRDB と比べても、TiDB は容量、接続数、DDL 速度、移行しやすさを 1 つのストーリーとして説明しやすいのが強みです。",
+          statA: ["6", "拡張優位"],
+          statB: ["100K+", "接続数"],
+          leafValue: "秒級",
+          leafTitle: "DDL 体験",
+          leafBody: "schema 変更を素早く終え、製品開発の速度を落としにくくします。",
           tableHeaders: ["能力項目", "TiDB", "Traditional NewSQL", "Legacy RDBMS"],
           rows: [
-            ["自動拡張", "即時", "手動分割", "レプリカ中心"],
-            ["HTAP", "Native TiFlash", "限定的", "通常は ETL"],
-            ["整合性", "外部一貫スナップショット", "Serializable", "Traditional MVCC"]
+            ["ストレージ容量", "実質無制限", "サービスや構成に制約が出やすい", "まずは scale-up に依存"],
+            ["表規模", "マルチテナントに強い", "構成やノード資源の制約を受けやすい", "運用複雑度が増え続ける"],
+            ["接続数", "100K+ を支援", "より厳密な容量設計が必要", "上限が早く見えやすい"]
           ],
-          insightTitle: "TCO 優位性",
+          insightTitle: "一言での競争定位",
           insightBody:
-            "分庫分表した MySQL からの移行では、特に運用と拡張イベントで 3 年 TCO を下げやすくなります。"
+            "TiDB は、ストレージ、計算、接続数、DDL 性能、移行現実性を同じ拡張性ストーリーで語れる数少ない分散データベースです。",
+          ranking: [
+            "ストレージ容量：TiDB ≥ Spanner > Aurora > CRDB > DynamoDB",
+            "表数：TiDB > CRDB ≥ Spanner > DynamoDB",
+            "接続数：TiDB ≥ Aurora > CRDB > Spanner",
+            "DDL 性能：TiDB >> CRDB > Aurora > Spanner",
+            "バックアップ復旧：TiDB ≥ CRDB > DynamoDB > Spanner"
+          ]
         },
         ai: {
           eyebrow: "Intelligence Layer",
@@ -1248,6 +1305,11 @@
         ...messages["en-US"],
         appName: "TiDB Compass",
         reviewer: "Modo Curadoria Digital",
+        ui: {
+          scenarioMapping: "Mapeamento",
+          competitiveRanking: "Ranking competitivo",
+          fit: "Fit"
+        },
         tabs: ["Intro", "Core", "Cenários", "Comparar", "AI"],
         intro: {
           eyebrow: "Intro",
@@ -1305,54 +1367,68 @@
         },
         scenarios: {
           eyebrow: "Ecossistema de Soluções",
-          title: "Cenários empresariais",
+          title: "Mapeamento de cenários de clientes",
           body:
-            "Posicione o TiDB como solução de negócio, e não apenas como conjunto de funções de banco de dados.",
-          fintechBadge: "FinTech",
-          fintechTitle: "Trading financeiro e gestão de ativos",
+            "Traduza escalabilidade para a linguagem do cliente. O que cada conta compra não é só um número, mas margem para crescer, folga de concorrência, confiança em backup e agilidade de schema.",
+          fintechBadge: "Scalability Fit",
+          fintechTitle: "Quem responde mais rápido a essa história",
           fintechBody:
-            "Boa aderência para transações de baixa latência, consistência ACID e continuidade operacional em ambientes globais.",
-          fintechAction: "Ver arquitetura",
-          analyticsTitle: "Análise em tempo real",
-          analyticsBody: "Transforme dados operacionais em insight sem cadeias longas de ETL.",
-          analyticsMetric: "99.99",
-          analyticsMetricLabel: "SLA de uptime",
-          logTitle: "Análise massiva de logs",
-          logBody: "Indexe e consulte grandes volumes de logs com troubleshooting mais rápido.",
-          sovereigntyTitle: "Soberania de dados em multi-cloud",
+            "SaaS, ecommerce, games, finanças, IoT e plataformas de logs costumam entrar bem pela narrativa de escalabilidade antes da discussão arquitetural profunda.",
+          fintechAction: "Ver tipos de cliente",
+          analyticsTitle: "SaaS / Multi-tenant",
+          analyticsBody: "Abra com suporte a muitas tabelas, isolamento flexível de tenants e arquitetura mais simples no longo prazo.",
+          analyticsMetric: "10000+",
+          analyticsMetricLabel: "Mentalidade de escala",
+          logTitle: "Ecommerce / Alta concorrência",
+          logBody: "Abra com 100K+ conexões e DDL em segundos para suportar pico e iteração rápida.",
+          sovereigntyTitle: "Finanças / Games / IoT",
           sovereigntyBody:
-            "Mantenha acesso unificado, fronteiras de compliance e continuidade entre regiões e nuvens.",
+            "Finanças valorizam backup e escala, games valorizam índice e pico de lançamento, IoT valoriza elasticidade e compatibilidade SQL.",
           sovereigntyStats: [
-            ["Regiões", "24+"],
-            ["Latência", "<10ms"]
+            ["Verticais-chave", "5"],
+            ["Promessa central", "crescer sem travar"]
           ],
-          ctaTitle: "Pronto para otimizar sua infraestrutura?",
-          ctaBody: "Comece por um workload onde crescimento ou complexidade já estejam visíveis e amplie a partir da prova.",
-          ctaPrimary: "Agendar demo",
-          ctaSecondary: "White paper"
+          ctaTitle: "Quando o cliente fala de crescimento, concorrência ou schema, é hora de puxar TiDB",
+          ctaBody: "Comece por um workload que já sente pressão de escala e use essa prova para abrir PoC e avaliação mais ampla.",
+          ctaPrimary: "Começar mapeamento",
+          ctaSecondary: "Ver gatilhos de PoC",
+          mapCards: [
+            ["Fornecedores SaaS", "Isolamento de tenants e rápido crescimento de dados", "Muitas tabelas + armazenamento praticamente ilimitado"],
+            ["Plataformas de ecommerce", "Picos sazonais e releases rápidos", "100K+ conexões + DDL em segundos"],
+            ["Empresas de games", "Launches, merges e pressão de backup", "Índice rápido + recuperação em grande escala"],
+            ["Serviços financeiros", "Dados massivos e compliance forte", "Escala horizontal + postura melhor de recuperação"],
+            ["IoT / Logs", "Ingestão pesada e consultas complexas", "Escala elástica + compatibilidade SQL"]
+          ]
         },
         compare: {
           eyebrow: "Rivalidade Arquitetural",
-          title: "Comparativo competitivo",
+          title: "Posicionamento de escalabilidade",
           body:
-            "Comece por arquitetura, comportamento de escala e TCO para criar diferenciação mais rapidamente na conversa comercial.",
-          heroTitle: "Shared-Nothing vs. Cloud-Native",
+            "Não é preciso comparar todos os bancos de uma vez. Comece pelas dimensões de escala que importam mais: armazenamento, número de tabelas, conexões, velocidade de DDL e backup.",
+          heroTitle: "TiDB não é forte em um único indicador; ele escala ao longo de toda a jornada de crescimento",
           heroBody:
-            "A separação entre computação e armazenamento e a expansão cloud-native costumam tornar o TiDB mais eficiente em picos e na operação contínua.",
-          statA: ["0ms", "Jitter de leitura"],
-          statB: ["99.999%", "Meta de disponibilidade"],
-          leafValue: "3.2x",
-          leafTitle: "Mais throughput",
-          leafBody: "Resultado de referência em workloads analíticos complexos.",
+            "Contra Aurora, Spanner, DynamoDB e CRDB, o TiDB é mais fácil de posicionar como uma plataforma única que equilibra capacidade, conexões, DDL e migração viável.",
+          statA: ["6", "vantagens de escala"],
+          statB: ["100K+", "conexões"],
+          leafValue: "Segundos",
+          leafTitle: "Experiência DDL",
+          leafBody: "Mudanças comuns de schema podem terminar rápido o bastante para manter a velocidade do produto.",
           tableHeaders: ["Capacidade", "TiDB", "NewSQL tradicional", "RDBMS legado"],
           rows: [
-            ["Escala automática", "Instantânea", "Particionamento manual", "Escala por réplica"],
-            ["HTAP", "TiFlash nativo", "Suporte limitado", "Normalmente via ETL"],
-            ["Consistência", "Snapshot externo", "Serializable", "MVCC tradicional"]
+            ["Capacidade de armazenamento", "Praticamente ilimitada", "Geralmente limitada por formato de serviço", "Escala vertical primeiro"],
+            ["Escala de tabelas", "Melhor para modelos multi-tenant", "Mais sensível a configuração e recursos por nó", "Complexidade operacional cresce"],
+            ["Conexões", "100K+ suportadas", "Exige sizing mais rígido", "Tetos aparecem mais cedo"]
           ],
-          insightTitle: "Vantagem de TCO",
+          insightTitle: "Posicionamento em uma frase",
           insightBody:
-            "Migrar de MySQL shardeado pode reduzir de forma relevante o custo total de propriedade em três anos, principalmente em operação e expansão."
+            "TiDB é um dos poucos bancos distribuídos que consegue contar uma história única de escalabilidade cobrindo armazenamento, computação, conexões, DDL e praticidade de migração.",
+          ranking: [
+            "Armazenamento: TiDB ≥ Spanner > Aurora > CRDB > DynamoDB",
+            "Número de tabelas: TiDB > CRDB ≥ Spanner > DynamoDB",
+            "Conexões: TiDB ≥ Aurora > CRDB > Spanner",
+            "DDL: TiDB >> CRDB > Aurora > Spanner",
+            "Backup e restore: TiDB ≥ CRDB > DynamoDB > Spanner"
+          ]
         },
         ai: {
           eyebrow: "Camada de Inteligência",
@@ -1387,6 +1463,11 @@
         ...messages["en-US"],
         appName: "TiDB Compass",
         reviewer: "Modo Curaduría Digital",
+        ui: {
+          scenarioMapping: "Mapeo",
+          competitiveRanking: "Ranking competitivo",
+          fit: "Fit"
+        },
         tabs: ["Intro", "Core", "Escenarios", "Comparar", "AI"],
         intro: {
           eyebrow: "Intro",
@@ -1444,54 +1525,68 @@
         },
         scenarios: {
           eyebrow: "Ecosistema de Soluciones",
-          title: "Escenarios empresariales",
+          title: "Mapeo de escenarios de cliente",
           body:
-            "Presenta TiDB como una solución de negocio, no solo como una lista de funciones de base de datos.",
-          fintechBadge: "FinTech",
-          fintechTitle: "Trading financiero y gestión de activos",
+            "Traduce la escalabilidad al lenguaje del cliente. Lo que cada cuenta compra no es solo una métrica, sino margen para crecer, holgura de concurrencia, confianza en backup y velocidad de cambio de schema.",
+          fintechBadge: "Scalability Fit",
+          fintechTitle: "Quién responde mejor a esta historia",
           fintechBody:
-            "Buen encaje para transacciones de baja latencia, consistencia ACID y continuidad operativa en entornos globales.",
-          fintechAction: "Ver arquitectura",
-          analyticsTitle: "Analítica en tiempo real",
-          analyticsBody: "Convierte datos operativos en insight sin largas cadenas ETL.",
-          analyticsMetric: "99.99",
-          analyticsMetricLabel: "SLA de uptime",
-          logTitle: "Análisis masivo de logs",
-          logBody: "Indexa y consulta grandes volúmenes de logs con troubleshooting más rápido.",
-          sovereigntyTitle: "Soberanía de datos multi-cloud",
+            "SaaS, ecommerce, gaming, finanzas, IoT y plataformas de logs suelen entrar mejor por la narrativa de escalabilidad antes de bajar a detalle arquitectónico.",
+          fintechAction: "Ver tipos de cliente",
+          analyticsTitle: "SaaS / Multi-tenant",
+          analyticsBody: "Empieza con soporte para muchas tablas, aislamiento flexible de tenants y simplificación arquitectónica a largo plazo.",
+          analyticsMetric: "10000+",
+          analyticsMetricLabel: "Mentalidad de escala",
+          logTitle: "Ecommerce / Alta concurrencia",
+          logBody: "Empieza con 100K+ conexiones y DDL en segundos para soportar picos y releases rápidos.",
+          sovereigntyTitle: "Finanzas / Gaming / IoT",
           sovereigntyBody:
-            "Mantén acceso unificado, límites de compliance y continuidad entre regiones y nubes.",
+            "Finanzas valora backup y escala, gaming valora índices y picos de lanzamiento, IoT valora elasticidad y compatibilidad SQL.",
           sovereigntyStats: [
-            ["Regiones", "24+"],
-            ["Latencia", "<10ms"]
+            ["Verticales clave", "5"],
+            ["Promesa central", "crecer sin fricción"]
           ],
-          ctaTitle: "¿Listo para optimizar tu infraestructura?",
-          ctaBody: "Empieza con un workload donde el crecimiento o la complejidad ya sean visibles y amplía desde esa prueba.",
-          ctaPrimary: "Agendar demo",
-          ctaSecondary: "White paper"
+          ctaTitle: "Cuando el cliente menciona crecimiento, concurrencia o schema, es momento de hablar de TiDB",
+          ctaBody: "Empieza con un workload que ya siente presión de escala y usa esa prueba para abrir PoC y evaluación más amplia.",
+          ctaPrimary: "Empezar mapeo",
+          ctaSecondary: "Ver disparadores de PoC",
+          mapCards: [
+            ["Proveedores SaaS", "Aislamiento de tenants y rápido crecimiento de datos", "Muchas tablas + almacenamiento prácticamente ilimitado"],
+            ["Plataformas ecommerce", "Picos estacionales y releases rápidos", "100K+ conexiones + DDL en segundos"],
+            ["Empresas de gaming", "Launches, merges y presión de backup", "Índices rápidos + recuperación a gran escala"],
+            ["Servicios financieros", "Datos masivos y compliance fuerte", "Escala horizontal + mejor postura de recuperación"],
+            ["IoT / Logs", "Ingesta pesada y consultas complejas", "Escala elástica + compatibilidad SQL"]
+          ]
         },
         compare: {
           eyebrow: "Rivalidad Arquitectónica",
-          title: "Comparativa competitiva",
+          title: "Posicionamiento de escalabilidad",
           body:
-            "Empieza por arquitectura, patrón de escalado y TCO para diferenciar más rápido en la conversación con el cliente.",
-          heroTitle: "Shared-Nothing vs. Cloud-Native",
+            "No hace falta comparar todas las bases de datos a la vez. Empieza por las dimensiones de escala que más importan: almacenamiento, tablas, conexiones, velocidad DDL y backup.",
+          heroTitle: "TiDB no destaca solo en una métrica; escala a lo largo de toda la trayectoria de crecimiento",
           heroBody:
-            "La separación de cómputo y almacenamiento y la expansión cloud-native suelen hacer que TiDB sea más eficiente en picos y en operación continua.",
-          statA: ["0ms", "Jitter de lectura"],
-          statB: ["99.999%", "Objetivo de disponibilidad"],
-          leafValue: "3.2x",
-          leafTitle: "Más throughput",
-          leafBody: "Resultado de referencia en cargas analíticas complejas.",
+            "Frente a Aurora, Spanner, DynamoDB y CRDB, TiDB es más fácil de presentar como una plataforma única que equilibra capacidad, conexiones, DDL y practicidad de migración.",
+          statA: ["6", "ventajas de escala"],
+          statB: ["100K+", "conexiones"],
+          leafValue: "Segundos",
+          leafTitle: "Experiencia DDL",
+          leafBody: "Cambios comunes de schema pueden terminar lo bastante rápido como para no frenar el ritmo del producto.",
           tableHeaders: ["Capacidad", "TiDB", "NewSQL tradicional", "RDBMS legado"],
           rows: [
-            ["Escalado automático", "Instantáneo", "Particionado manual", "Escalado por réplicas"],
-            ["HTAP", "TiFlash nativo", "Soporte limitado", "Normalmente con ETL"],
-            ["Consistencia", "Snapshot externo", "Serializable", "MVCC tradicional"]
+            ["Capacidad de almacenamiento", "Prácticamente ilimitada", "Suele depender del formato del servicio", "Escala vertical primero"],
+            ["Escala de tablas", "Mejor para modelos multi-tenant", "Más sensible a configuración y recursos por nodo", "La complejidad operativa crece"],
+            ["Conexiones", "100K+ soportadas", "Requiere sizing más estricto", "Los techos aparecen antes"]
           ],
-          insightTitle: "Ventaja de TCO",
+          insightTitle: "Posicionamiento en una frase",
           insightBody:
-            "Migrar desde MySQL shardeado puede reducir de forma importante el costo total de propiedad a tres años, especialmente en operación y crecimiento."
+            "TiDB es una de las pocas bases distribuidas que puede contar una sola historia de escalabilidad sobre almacenamiento, cómputo, conexiones, DDL y migración realista.",
+          ranking: [
+            "Almacenamiento: TiDB ≥ Spanner > Aurora > CRDB > DynamoDB",
+            "Número de tablas: TiDB > CRDB ≥ Spanner > DynamoDB",
+            "Conexiones: TiDB ≥ Aurora > CRDB > Spanner",
+            "DDL: TiDB >> CRDB > Aurora > Spanner",
+            "Backup y restore: TiDB ≥ CRDB > DynamoDB > Spanner"
+          ]
         },
         ai: {
           eyebrow: "Capa de Inteligencia",
@@ -1840,6 +1935,26 @@
                 <button class="button-secondary">${copy.scenarios.ctaSecondary}</button>
               </div>
             </article>
+
+            <section style="margin-top:18px;">
+              <p class="eyebrow">${copy.ui.scenarioMapping}</p>
+              <div class="grid-two">
+                ${copy.scenarios.mapCards
+                  .map(
+                    (item) => `
+                      <article class="list-row">
+                        <div class="list-row-top">
+                          <h3 style="font-size:1rem;">${item[0]}</h3>
+                          <span class="badge tertiary">${copy.ui.fit}</span>
+                        </div>
+                        <p>${item[1]}</p>
+                        <p class="good">${item[2]}</p>
+                      </article>
+                    `
+                  )
+                  .join("")}
+              </div>
+            </section>
           </section>
         `;
       }
@@ -1913,6 +2028,24 @@
               </article>
               <article class="compare-image">${renderPreviewPane("compare")}</article>
             </div>
+
+            <section style="margin-top:18px;">
+              <p class="eyebrow">${copy.ui.competitiveRanking}</p>
+              <div class="list">
+                ${copy.compare.ranking
+                  .map(
+                    (item, index) => `
+                      <article class="list-row">
+                        <div class="list-row-top">
+                          <span class="badge soft">0${index + 1}</span>
+                          <h3 style="font-size:1rem;">${item}</h3>
+                        </div>
+                      </article>
+                    `
+                  )
+                  .join("")}
+              </div>
+            </section>
           </section>
         `;
       }
